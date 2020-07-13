@@ -1,0 +1,3 @@
+#macro BOARD_WIDTH 640
+#macro BOARD_HEIGHT 640
+#macro SQUARE_SIZE 80
