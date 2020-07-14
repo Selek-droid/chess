@@ -96,6 +96,52 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						}
 					}
 					
+					case ROOK:
+					{
+						if ((newX != gridX) && (newY != gridY))
+						{
+						break;
+						}
+						var rangeX = abs (newX - gridX);
+						var rangeY = abs (newY - gridY);
+						var minX = min(gridX, newX);
+						var minY = min(gridY, newY);
+						if (newX == gridX)
+						{
+							for (var i = 1; i < rangeY; i += 1;)
+							{
+							if array_equals(global.grid[newX, minY + i],[0 , 0])
+								{
+									var clearPath = true;  // unused var for now
+								}
+							else 
+								{					
+								exit;
+								}
+							}
+						}
+						if (newY == gridY)
+						{
+							for (var i = 1; i < rangeX; i += 1;)
+							{
+							if array_equals(global.grid[minX + i, newY],[0 , 0])
+								{
+									var clearPath = true;
+								}
+							else 
+								{
+								exit;
+								}
+							}
+						}
+						
+						global.grid[newX, newY] = selectedPiece;
+						pickedUp = false;
+						selectedPiece = [0 , 0];
+						turnOver = true;
+						break;
+					}
+					
 				}
 			}
 			
