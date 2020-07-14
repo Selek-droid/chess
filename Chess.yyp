@@ -55,6 +55,14 @@
             }
         },
         {
+            "Key": "10940569-293c-4b4e-9519-9083cb43a6af",
+            "Value": {
+                "id": "931b3fc4-93b9-47d3-99b0-bddddc853b09",
+                "resourcePath": "sprites\\black_pawn_sprite\\black_pawn_sprite.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "11c66d97-4416-4743-b220-6cedcbc3f2cd",
             "Value": {
                 "id": "c574ee58-cd86-4ae0-b82a-d5846c70b83f",
@@ -95,6 +103,14 @@
             }
         },
         {
+            "Key": "4b6c80de-bb76-4fc9-9021-6aa07ad87399",
+            "Value": {
+                "id": "ba8118de-cab9-40bf-9fe0-a5ae9a588740",
+                "resourcePath": "sprites\\black_knight_sprite\\black_knight_sprite.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "4bd7788b-c4e7-4254-9a36-469d0bc3d83c",
             "Value": {
                 "id": "8f1db5a1-5d94-43f9-a88f-f16758da6f9d",
@@ -124,6 +140,14 @@
                 "id": "125666bb-7edf-4d6a-96a5-b5b6f125fab7",
                 "resourcePath": "views\\7e88e939-816e-493d-a05d-a4b5263900bd.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "802fe3da-1e81-4168-9cdf-a9910d27423b",
+            "Value": {
+                "id": "a9c88b6d-ea5e-4eb5-abe9-ccf26050581d",
+                "resourcePath": "sprites\\white_pawn_sprite\\white_pawn_sprite.yy",
+                "resourceType": "GMSprite"
             }
         },
         {

@@ -18,6 +18,27 @@ for (xx = 0; xx <= 7; xx += 1;)
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
+		
+		if array_equals( global.grid[xx, yy] , [KNIGHT, BLACK] )
+		{
+			draw_sprite(black_knight_sprite, -1, 
+				floor(x + (xx * SQUARE_SIZE)), 
+				floor(y + (yy * SQUARE_SIZE)));
+		}
+		
+		if array_equals( global.grid[xx, yy] , [PAWN, BLACK] )
+		{
+			draw_sprite(black_pawn_sprite, -1, 
+				floor(x + (xx * SQUARE_SIZE)), 
+				floor(y + (yy * SQUARE_SIZE)));
+		}
+		
+		if array_equals( global.grid[xx, yy] , [PAWN, WHITE] )
+		{
+			draw_sprite(white_pawn_sprite, -1, 
+				floor(x + (xx * SQUARE_SIZE)), 
+				floor(y + (yy * SQUARE_SIZE)));
+		}
 
 	}
 }
