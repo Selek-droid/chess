@@ -5,8 +5,12 @@ y = (room_height/2) - (BOARD_HEIGHT/2);
 
 contents[1] = 0;
 contents[0] = 0;
+selectedPiece[1] = 0;
+selectedPiece[0] = 0;
 var xx;
 var yy;
+
+// Populate board.
 
 for (xx = 0; xx < 8; xx += 1;)
 {
@@ -43,4 +47,3 @@ global.grid[2, 7] = [BISHOP, WHITE];
 global.grid[5, 7] = [BISHOP, WHITE];
 global.grid[3, 7] = [QUEEN, WHITE];
 global.grid[4, 7] = [KING, WHITE];
-
