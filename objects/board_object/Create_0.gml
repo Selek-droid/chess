@@ -8,6 +8,10 @@ contents[0] = 0;
 selectedPiece[1] = 0;
 selectedPiece[0] = 0;
 pickedUp = false;
+turnOver = false;
+
+gridX = 0;
+gridY = 0;
 
 var xx;
 var yy;
