@@ -143,6 +143,22 @@
             }
         },
         {
+            "Key": "6f49bcc7-10db-4ad8-b279-10b903ac117a",
+            "Value": {
+                "id": "b7fcca78-6710-47a5-91ab-9beba48344b3",
+                "resourcePath": "sprites\\white_rook_sprite\\white_rook_sprite.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "73f8a1c1-5a6d-46b4-9997-b52e6bcce606",
+            "Value": {
+                "id": "a52bc37e-94fb-40d0-b153-3cd6df6ab319",
+                "resourcePath": "sprites\\white_queen_sprite\\white_queen_sprite.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "767032b1-3d38-474e-b97c-8ad11924496b",
             "Value": {
                 "id": "fc4b893d-4f6c-41c1-95c9-2574ebc20dff",
@@ -180,6 +196,14 @@
                 "id": "2fdef5ea-738b-41d7-9532-f0bd2a910836",
                 "resourcePath": "views\\962b8977-5bea-4775-af26-6e61d59b9feb.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "991ae91c-fa40-41ad-9e4f-c367f3825f7b",
+            "Value": {
+                "id": "c121c0c9-0570-428d-9093-dc6bb1d7e867",
+                "resourcePath": "sprites\\white_king_sprite\\white_king_sprite.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -236,6 +260,14 @@
                 "id": "644b4692-24cb-433c-8907-739941bcbf97",
                 "resourcePath": "options\\windows\\options_windows.yy",
                 "resourceType": "GMWindowsOptions"
+            }
+        },
+        {
+            "Key": "dab8a0ff-53fa-4617-9866-e3170af28d80",
+            "Value": {
+                "id": "3395ba95-3197-471e-b33b-f4361535b227",
+                "resourcePath": "sprites\\white_bishop_sprite\\white_bishop_sprite.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
