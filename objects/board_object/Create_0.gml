@@ -7,6 +7,8 @@ contents[1] = 0;
 contents[0] = 0;
 selectedPiece[1] = 0;
 selectedPiece[0] = 0;
+pickedUp = false;
+
 var xx;
 var yy;
 
