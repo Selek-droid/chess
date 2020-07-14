@@ -111,6 +111,14 @@
             }
         },
         {
+            "Key": "578f1017-932e-4ee0-bf59-68a080b21e54",
+            "Value": {
+                "id": "1692fe43-477b-4084-a782-214f3857e1df",
+                "resourcePath": "sprites\\white_knight_sprite\\white_knight_sprite.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "7e88e939-816e-493d-a05d-a4b5263900bd",
             "Value": {
                 "id": "125666bb-7edf-4d6a-96a5-b5b6f125fab7",
