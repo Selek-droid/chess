@@ -5,3 +5,5 @@ switch (PieceType)
 		if board_object.gridX
 	break;
 }
+
+// deletable, I think.

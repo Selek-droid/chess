@@ -47,6 +47,14 @@
             }
         },
         {
+            "Key": "0a7cc55f-2c54-4947-8670-844fe93ded61",
+            "Value": {
+                "id": "023354bb-0306-4603-8163-a7024085a5de",
+                "resourcePath": "objects\\oGame\\oGame.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "0c95c4de-3766-46ac-b0da-485a5872caa0",
             "Value": {
                 "id": "a869f5cc-2f58-4a7e-a0b6-306388cc66f3",
@@ -279,6 +287,14 @@
             }
         },
         {
+            "Key": "e0c3f900-676c-4a88-b270-c068efb6fe92",
+            "Value": {
+                "id": "96a9d528-8894-43a3-a1a1-6399f62c7199",
+                "resourcePath": "scripts\\AIscript\\AIscript.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "ea298490-edbd-4588-b510-11683d7cfa7d",
             "Value": {
                 "id": "4ec31863-c2bb-4fa1-ba9f-688f2879aa49",
@@ -321,7 +337,8 @@
     ],
     "script_order": [
         "a4873a40-0eb7-4657-9745-1eb581b65674",
-        "a66f790c-97aa-49a7-8c98-f7531ffb01db"
+        "a66f790c-97aa-49a7-8c98-f7531ffb01db",
+        "e0c3f900-676c-4a88-b270-c068efb6fe92"
     ],
     "tutorial": ""
 }

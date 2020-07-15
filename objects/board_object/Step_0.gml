@@ -1,3 +1,13 @@
+switch (oGame.state)
+{
+	case ("AI Turn"):
+	{
+		AIscript();
+		break;
+	}
+}
+
+
 
 var newX = 0;
 var newY = 0;
@@ -56,7 +66,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						global.grid[newX, newY] = selectedPiece;
 						pickedUp = false;
 						selectedPiece = [0 , 0];
-						turnOver = true;
+						oGame.state = "AI Turn";
 						break;
 					}
 						
@@ -66,7 +76,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						global.grid[newX, newY] = selectedPiece;
 						pickedUp = false;
 						selectedPiece = [0 , 0];
-						turnOver = true;
+						oGame.state = "AI Turn";
 						break;
 					} 
 						
@@ -77,7 +87,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						global.grid[newX, newY] = selectedPiece;
 						pickedUp = false;
 						selectedPiece = [0 , 0];
-						turnOver = true;
+						oGame.state = "AI Turn";
 						break;
 						}
 						
@@ -91,7 +101,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					global.grid[newX, newY] = selectedPiece;
 					pickedUp = false;
 					selectedPiece = [0 , 0];
-					turnOver = true;
+					oGame.state = "AI Turn";
 					break;
 					}
 				}
@@ -138,7 +148,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					global.grid[newX, newY] = selectedPiece;
 					pickedUp = false;
 					selectedPiece = [0 , 0];
-					turnOver = true;
+					oGame.state = "AI Turn";
 					break;
 				}
 				
@@ -150,7 +160,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						global.grid[newX, newY] = selectedPiece;
 						pickedUp = false;
 						selectedPiece = [0 , 0];
-						turnOver = true;
+						oGame.state = "AI Turn";
 						break;
 					}
 				}
@@ -190,7 +200,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						global.grid[newX, newY] = selectedPiece;
 						pickedUp = false;
 						selectedPiece = [0 , 0];
-						turnOver = true;
+						oGame.state = "AI Turn";
 						break;
 					}
 					
@@ -213,7 +223,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						global.grid[newX, newY] = selectedPiece;
 						pickedUp = false;
 						selectedPiece = [0 , 0];
-						turnOver = true;
+						oGame.state = "AI Turn";
 						break;
 				}
 				
@@ -241,7 +251,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					global.grid[newX, newY] = selectedPiece;
 					pickedUp = false;
 					selectedPiece = [0 , 0];
-					turnOver = true;
+					oGame.state = "AI Turn";
 					exit;
 					}
 					
@@ -262,7 +272,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					global.grid[newX, newY] = selectedPiece;
 					pickedUp = false;
 					selectedPiece = [0 , 0];
-					turnOver = true;
+					oGame.state = "AI Turn";
 					exit;
 					}
 // now bishop-like movement, first positive slope:
@@ -286,7 +296,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						global.grid[newX, newY] = selectedPiece;
 						pickedUp = false;
 						selectedPiece = [0 , 0];
-						turnOver = true;
+						oGame.state = "AI Turn";
 						break;
 					}
 					
@@ -309,7 +319,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						global.grid[newX, newY] = selectedPiece;
 						pickedUp = false;
 						selectedPiece = [0 , 0];
-						turnOver = true;
+						oGame.state = "AI Turn";
 						break;
 					}
 				}
