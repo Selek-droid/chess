@@ -42,6 +42,12 @@ if (!pickedUp) && (mouse_check_button_released(mb_left))  // pickup
 if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 	{	newX = floor( ( mouse_x - x ) / SQUARE_SIZE );  // check if empty or enemy
 		newY = floor( ( mouse_y - y ) / SQUARE_SIZE );  // ... and if piece capable...
+		
+		if (newX < 0) || (newX > 7) || (newY < 0) || (newY > 7)
+		{
+			exit;
+		}
+		
 		targetID = global.grid[newX, newY];
 		
 		if array_equals([newX, newY],[gridX, gridY])  // check whether dest = origin.
