@@ -203,51 +203,37 @@ for (xx = 0; xx < 8; xx += 1;)
 			
 			if (xx > 0) && (xx < 7) && (yy > 0) && (yy < 7)    // King not on any edge
 			{
-				var targetID = global.grid[xx - 1, yy];  // offset -1, 0
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx - 1, yy); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx - 1, yy)) )
-				{
+				var targetID = global.grid[xx - 1, yy];  // offset -1, 0. Prevent moving into check.
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx - 1, yy)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
-				}
-				
+								
 				var targetID = global.grid[xx - 1, yy + 1];  // offset -1, 1
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx - 1, yy + 1)) )
-				{
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx - 1, yy + 1)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);
-				}
-				
+								
 				var targetID = global.grid[xx, yy + 1];  // offset 0, 1
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx, yy + 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx, yy + 1)) )
-				{
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx, yy + 1)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy + 1);
-				}
-				
+								
 				var targetID = global.grid[xx + 1, yy + 1];  // offset 1, 1
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx + 1, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx + 1, yy + 1)) )
 						ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);
 						
 				var targetID = global.grid[xx + 1, yy];  // offset 1, 0
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx + 1, yy); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx + 1, yy)) )
-						ds_list_add(legalMoves, xx, yy, xx + 1, yy);
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx + 1, yy)) )
+					ds_list_add(legalMoves, xx, yy, xx + 1, yy);
 						
 				var targetID = global.grid[xx + 1, yy - 1];  // offset 1, -1
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx + 1, yy - 1)) )
-						ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1);	
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx + 1, yy - 1)) )
+					ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1);	
 						
 				var targetID = global.grid[xx, yy - 1];  // offset 0, -1
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx, yy - 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx, yy - 1)) )
-						ds_list_add(legalMoves, xx, yy, xx, yy - 1);	
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx, yy - 1)) )
+					ds_list_add(legalMoves, xx, yy, xx, yy - 1);	
 						
 				var targetID = global.grid[xx - 1, yy - 1];  // offset -1, -1
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx - 1, yy - 1)) )
-						ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);		
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx - 1, yy - 1)) )
+					ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);		
 			}
 			
 			if (xx == 0) &&  (yy > 0) && (yy < 7)    // King on left edge, not corners
@@ -262,7 +248,7 @@ for (xx = 0; xx < 8; xx += 1;)
 					
 				var targetID = global.grid[xx + 1, yy];  // offset 1, 0
 				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx + 1, yy)) )
-					ds_list_add(legalMoves, xx, yy, xx, yy - 1);
+					ds_list_add(legalMoves, xx, yy, xx + 1, yy);
 					
 				var targetID = global.grid[xx + 1, yy + 1];  // offset 1, 1
 				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx + 1, yy + 1)) )
