@@ -134,71 +134,56 @@ for (xx = 0; xx < 8; xx += 1;)
 			if (yy == 0) && (xx > 0) && (xx < 7)  // King on starting rank, not corners.
 			{
 				var targetID = global.grid[xx - 1, yy];  // offset -1, 0
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx - 1, yy); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx - 1, yy)) )
-				{
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx - 1, yy)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
-				}
-				
+								
 				var targetID = global.grid[xx - 1, yy + 1];  // offset -1, 1
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx - 1, yy + 1)) )
-				{
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx - 1, yy + 1)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);
-				}
+				
 				
 				var targetID = global.grid[xx, yy + 1];  // offset 0, 1
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx, yy + 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx, yy + 1)) )
-				{
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx, yy + 1)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy + 1);
-				}
+				
 				
 				var targetID = global.grid[xx + 1, yy + 1];  // offset 1, 1
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx + 1, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx + 1, yy + 1)) )
 						ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);
 						
 				var targetID = global.grid[xx + 1, yy];  // offset 1, 0
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx + 1, yy); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx + 1, yy)) )
-						ds_list_add(legalMoves, xx, yy, xx + 1, yy);		
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx + 1, yy)) )
+					ds_list_add(legalMoves, xx, yy, xx + 1, yy);		
 			}
 			
 			if (yy == 0) && (xx == 0)  // King on starting rank, top leftcorner.
 			{
 				var targetID = global.grid[1, 0];  // offset 1, 0
-				if (targetID[1] == 0) ds_list_add(legalMoves, 0, 0, 1, 0); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(1, 0)) )
-						ds_list_add(legalMoves, 0, 0, 1, 0);
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(1, 0)) )
+					ds_list_add(legalMoves, 0, 0, 1, 0);
 						
 				var targetID = global.grid[1, 1];  // offset 1, 1
-				if (targetID[1] == 0) ds_list_add(legalMoves, 0, 0, 1, 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(1, 1)) )
-						ds_list_add(legalMoves, 0, 0, 1, 1);	
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(1, 1)) )
+					ds_list_add(legalMoves, 0, 0, 1, 1);	
 						
 				var targetID = global.grid[0, 1];  // offset 0, 1
-				if (targetID[1] == 0) ds_list_add(legalMoves, 0, 0, 0, 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(0, 1)) )
-						ds_list_add(legalMoves, 0, 0, 0, 1);	
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(0, 1)) )
+					ds_list_add(legalMoves, 0, 0, 0, 1);	
 			}
 			
-			if (yy == 0) && (xx == 7)  // King on starting rank, top right corner.
+			if (xx == 7) && (yy == 0) // King on starting rank, top right corner.
 			{
-				var targetID = global.grid[6, 0];  // offset -1, 0
-				if (targetID[1] == 0) ds_list_add(legalMoves, 7, 0, 6, 0); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(6, 0)) )
-						ds_list_add(legalMoves, 0, 0, 6, 0);
+				var targetID = global.grid[xx - 1, yy];  // offset -1, 0
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx - 1, yy)) )
+					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
 						
-				var targetID = global.grid[6, 1];  // offset -1, 1
-				if (targetID[1] == 0) ds_list_add(legalMoves, 7, 0, 6, 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(6, 1)) )
-						ds_list_add(legalMoves, 7, 0, 6, 1);
+				var targetID = global.grid[xx - 1, yy + 1];  // offset -1, 1
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx - 1, yy + 1)) )
+					ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);
 						
-				var targetID = global.grid[xx, yy + 1];  // offset 0, 1 - stopped hardcoding lol
-				if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx, yy + 1); // add exposed check
-				if (targetID[1] == WHITE) && !((protectedSquare_scr(xx, yy + 1)) )
-						ds_list_add(legalMoves, xx, yy, xx, yy + 1);	
+				var targetID = global.grid[xx, yy + 1];  // offset 0, 1 
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx, yy + 1)) )
+					ds_list_add(legalMoves, xx, yy, xx, yy + 1);	
 			}
 			
 			if (xx > 0) && (xx < 7) && (yy > 0) && (yy < 7)    // King not on any edge
@@ -265,7 +250,7 @@ for (xx = 0; xx < 8; xx += 1;)
 				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx, yy - 1)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy - 1);
 					
-				var targetID = global.grid[xx, yy + 1];  // offset -1, -1
+				var targetID = global.grid[xx - 1, yy - 1];  // offset -1, -1
 				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx - 1, yy - 1)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);
 					
@@ -334,6 +319,69 @@ for (xx = 0; xx < 8; xx += 1;)
 				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((protectedSquare_scr(xx + 1, yy)) )
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy);	
 			}		
+		}
+		
+		if array_equals(global.grid[xx, yy],[ROOK, BLACK])
+		{		// Look left, first measuring room to maneuver, then iterate until hit obstacle
+			if (xx > 0)
+			{	var availableSpace = xx;
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx - i, yy];  // offset -i, 0
+					if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx - i, yy); // empty; keep looking
+					if (targetID[1] == WHITE)  // record move and stop.
+					{
+						ds_list_add(legalMoves, xx, yy, xx - i, yy);
+						break;
+					}
+					if (targetID[1] == BLACK) break;
+				}
+			}
+			
+			if (xx < 7)  // now look right
+			{	var availableSpace = 7 - xx;
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx + i, yy];  // offset i, 0
+					if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx + i, yy);
+					if (targetID[1] == WHITE)
+					{
+						ds_list_add(legalMoves, xx, yy, xx + i, yy);
+						break;
+					}
+					if (targetID[1] == BLACK) break;
+				}
+			}
+			
+			if (yy > 0)  // now look up
+			{	var availableSpace = yy;
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx, yy - i];  // offset 0, -i
+					if (targetID[1] == 0)  ds_list_add(legalMoves, xx, yy, xx, yy - i);
+					if (targetID[1] == WHITE)
+					{
+						ds_list_add(legalMoves, xx, yy, xx, yy - i);
+						break;
+					}	
+					if (targetID[1] == BLACK) break;
+				}
+			}
+			
+			if (yy < 7)  // now look down
+			{	var availableSpace = 7 - yy;
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx, yy + i];  // offset 0, +i
+					if (targetID[1] == 0)  ds_list_add(legalMoves, xx, yy, xx, yy + i);
+					if (targetID[1] == WHITE)
+					{
+						ds_list_add(legalMoves, xx, yy, xx, yy + i);
+						break;
+					}	
+					if (targetID[1] == BLACK) break;
+				}
+			}
 		}
 	}
 }
