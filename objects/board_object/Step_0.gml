@@ -216,10 +216,106 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						turnOver = true;
 						break;
 				}
+				
+				case QUEEN:
+				{
+					var rangeX = abs (newX - gridX);
+					var rangeY = abs (newY - gridY);
+					var minX = min(gridX, newX);
+					var minY = min(gridY, newY);
+					var maxY = max(gridY, newY);
+					
+					if (newX == gridX)  // check moving straight up or down
+					{
+						for (var i = 1; i < rangeY; i += 1;)
+						{
+						if array_equals(global.grid[newX, minY + i],[0 , 0])
+							{
+								var clearPath = true;  // unused var for now
+							}
+						else 
+							{					
+							exit;
+							}
+						}
+					global.grid[newX, newY] = selectedPiece;
+					pickedUp = false;
+					selectedPiece = [0 , 0];
+					turnOver = true;
+					exit;
+					}
+					
+					else if (newY == gridY)   // check moving horizontally
+					{
+						for (var i = 1; i < rangeX; i += 1;)
+						{
+							if array_equals(global.grid[minX + i, newY],[0 , 0])
+							{
+								var clearPath = true;
+							}
+							else 
+							{
+								exit;
+							}
+						}
+						
+					global.grid[newX, newY] = selectedPiece;
+					pickedUp = false;
+					selectedPiece = [0 , 0];
+					turnOver = true;
+					exit;
+					}
+// now bishop-like movement, first positive slope:
+					
+					else if  ( ((newX > gridX) && (newY > gridY))
+					|| ((newX < gridX) && (newY < gridY)) )
+							
+					{
+						for (var i = 1; i < rangeX; i += 1;)
+						{
+							if array_equals(global.grid[minX + i, minY + i],[0 , 0])
+								{
+								var clearPath = true;  // unused var for now
+								}
+							else 
+							{	
+								clearPath = false;
+								exit;
+							}
+						}
+						global.grid[newX, newY] = selectedPiece;
+						pickedUp = false;
+						selectedPiece = [0 , 0];
+						turnOver = true;
+						break;
+					}
+					
+					// now negative slope; again start with small x and add, but sub from max y
+					else
+					{
+					for (var i = 1; i < rangeX; i += 1;)
+						{
+							if array_equals(global.grid[minX + i, maxY - i],[0 , 0])
+								{
+								var clearPath = true;  // unused var for now
+								}
+							else 
+							{	
+								clearPath = false;
+								exit;
+							}
+						}
+					
+						global.grid[newX, newY] = selectedPiece;
+						pickedUp = false;
+						selectedPiece = [0 , 0];
+						turnOver = true;
+						break;
+					}
+				}
 			}
 		}
 	}
-		
 	
 		
 if (pickedUp) && (keyboard_check_pressed(vk_escape))   // user aborts move
