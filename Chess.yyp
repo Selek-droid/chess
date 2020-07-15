@@ -258,7 +258,7 @@
             "Key": "c555a7e5-65bd-4a69-a61c-3d84a8c2924c",
             "Value": {
                 "id": "32c8d2d4-c145-4293-82a1-c504fa22ce72",
-                "resourcePath": "scripts\\possiblePawnMoves_scr\\possiblePawnMoves_scr.yy",
+                "resourcePath": "scripts\\possibleMoves_scr\\possibleMoves_scr.yy",
                 "resourceType": "GMScript"
             }
         },
