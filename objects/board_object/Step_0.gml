@@ -157,7 +157,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 				
 				case BISHOP:
 				{
-					if ((abs (newX - gridX)) != abs (newY - gridY ))
+					if ((abs (newX - gridX)) != (abs (newY - gridY )))
 					{
 						exit;
 					}
@@ -166,22 +166,61 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					var rangeY = abs (newY - gridY);
 					var minX = min(gridX, newX);
 					var minY = min(gridY, newY);
+					var maxY = max(gridY, newY);
 					
+					// upward sloping, both x and y rising
+					// search from lowest to highest coords
 					
+					if  ( ((newX > gridX) && (newY > gridY))
+					|| ((newX < gridX) && (newY < gridY)) )
+							
 					{
+						for (var i = 1; i < rangeX; i += 1;)
+						{
+							if array_equals(global.grid[minX + i, minY + i],[0 , 0])
+								{
+								var clearPath = true;  // unused var for now
+								}
+							else 
+							{	
+								clearPath = false;
+								exit;
+							}
+						}
 						global.grid[newX, newY] = selectedPiece;
 						pickedUp = false;
 						selectedPiece = [0 , 0];
 						turnOver = true;
 						break;
 					}
-				
+					
+					// now negative slope; again start with small x and add, but sub from max y
+					
+					for (var i = 1; i < rangeX; i += 1;)
+						{
+							if array_equals(global.grid[minX + i, maxY - i],[0 , 0])
+								{
+								var clearPath = true;  // unused var for now
+								}
+							else 
+							{	
+								clearPath = false;
+								exit;
+							}
+						}
+					
+					
+						global.grid[newX, newY] = selectedPiece;
+						pickedUp = false;
+						selectedPiece = [0 , 0];
+						turnOver = true;
+						break;
 				}
-				
-				
 			}
 		}
 	}
+		
+	
 		
 if (pickedUp) && (keyboard_check_pressed(vk_escape))   // user aborts move
 {
