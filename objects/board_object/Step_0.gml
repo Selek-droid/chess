@@ -52,7 +52,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 		
 		if array_equals([newX, newY],[gridX, gridY])  // check whether dest = origin.
 		{
-			global.grid[newX, newY] = selectedPiece;
+			global.grid[newX, newY] = selectedPiece; // maybe CHANGE THIS CODE.  BUG???
 			pickedUp = false;
 			selectedPiece = [0 , 0]
 			turnOver = false;   // Eventually this variable will change state to AI.

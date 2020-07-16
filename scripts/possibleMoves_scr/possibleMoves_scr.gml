@@ -444,6 +444,71 @@ for (xx = 0; xx < 8; xx += 1;)
 				}
 			}
 		}
+		
+		if array_equals(global.grid[xx, yy],[QUEEN, BLACK])
+		{
+			if (xx > 0)
+			{	var availableSpace = xx;
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx - i, yy];  // offset -i, 0
+					if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx - i, yy); // empty; keep looking
+					if (targetID[1] == WHITE)  // record move and stop.
+					{
+						ds_list_add(legalMoves, xx, yy, xx - i, yy);
+						break;
+					}
+					if (targetID[1] == BLACK) break;
+				}
+			}
+			
+			if (xx < 7)  // now look right
+			{	var availableSpace = 7 - xx;
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx + i, yy];  // offset i, 0
+					if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx + i, yy);
+					if (targetID[1] == WHITE)
+					{
+						ds_list_add(legalMoves, xx, yy, xx + i, yy);
+						break;
+					}
+					if (targetID[1] == BLACK) break;
+				}
+			}
+			
+			if (yy > 0)  // now look up
+			{	var availableSpace = yy;
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx, yy - i];  // offset 0, -i
+					if (targetID[1] == 0)  ds_list_add(legalMoves, xx, yy, xx, yy - i);
+					if (targetID[1] == WHITE)
+					{
+						ds_list_add(legalMoves, xx, yy, xx, yy - i);
+						break;
+					}	
+					if (targetID[1] == BLACK) break;
+				}
+			}
+			
+			if (yy < 7)  // now look down
+			{	var availableSpace = 7 - yy;
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx, yy + i];  // offset 0, +i
+					if (targetID[1] == 0)  ds_list_add(legalMoves, xx, yy, xx, yy + i);
+					if (targetID[1] == WHITE)
+					{
+						ds_list_add(legalMoves, xx, yy, xx, yy + i);
+						break;
+					}	
+					if (targetID[1] == BLACK) break;
+				}
+			}
+	
+		}
+	
 	}
 }
 
