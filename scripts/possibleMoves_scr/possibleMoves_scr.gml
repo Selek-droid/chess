@@ -506,9 +506,67 @@ for (xx = 0; xx < 8; xx += 1;)
 					if (targetID[1] == BLACK) break;
 				}
 			}
-	
+			
+			if (xx > 0) && (yy > 0) // start looking NW
+			{	var availableSpace = min(xx, yy);  // has less space than a rook!
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx - i, yy - i];  // offset -i, -i
+					if (targetID[1] == 0)  ds_list_add(legalMoves, xx, yy, xx - i, yy - i);
+					if (targetID[1] == WHITE)  // record move and stop.
+					{
+						ds_list_add(legalMoves, xx, yy, xx - i, yy - i);
+						break;
+					}
+					if (targetID[1] == BLACK) break;
+				}
+			}
+			
+			if (xx < 7) && (yy < 7)  // next looking SE
+			{	var availableSpace = min ((7 - xx), (7 - yy));
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx + i, yy + i];  // offset i, i
+					if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx + i, yy + i); // empty; keep looking
+					if (targetID[1] == WHITE)  // record move and stop.
+					{
+						ds_list_add(legalMoves, xx, yy, xx + i, yy + i);
+						break;
+					}
+					if (targetID[1] == BLACK) break;
+				}
+			}
+			
+			if (xx > 0) && (yy < 7) // now look SW
+			{	var availableSpace = min(xx, (7 - yy));  // has less space than a rook!
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx - i, yy + i];  // offset -i, +i
+					if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx - i, yy + i); // empty; keep looking
+					if (targetID[1] == WHITE)  // record move and stop.
+					{
+						ds_list_add(legalMoves, xx, yy, xx - i, yy + i);
+						break;
+					}
+					if (targetID[1] == BLACK) break;
+				}
+			}
+			
+			if (xx < 7) && (yy > 0) // end by looking NE
+			{	var availableSpace = min((7 - xx), yy);  // has less space than a rook!
+				for (var i = 1; i <= availableSpace; i += 1;)
+				{
+					var targetID = global.grid[xx + i, yy - i];  // offset +i, -i
+					if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx + i, yy - i); // empty; keep looking
+					if (targetID[1] == WHITE)  // record move and stop.
+					{
+						ds_list_add(legalMoves, xx, yy, xx + i, yy - i);
+						break;
+					}
+					if (targetID[1] == BLACK) break;
+				}
+			}
 		}
-	
 	}
 }
 
