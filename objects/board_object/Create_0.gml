@@ -9,6 +9,8 @@ selectedPiece[1] = 0;
 selectedPiece[0] = 0;
 pickedUp = false;
 turnOver = false;
+canCastleLeft = true;
+canCastleRight = true;
 
 gridX = 0;
 gridY = 0;

@@ -112,11 +112,54 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					if  ((abs (newX - gridX) <= 1) && (abs (newY - gridY) <= 1))
 					{
 					global.grid[newX, newY] = selectedPiece;
+					canCastleLeft = false;
+					canCastleRight = false;
 					pickedUp = false;
 					selectedPiece = [0 , 0];
 					oGame.state = "AI Turn";
 					break;
 					}
+// Castling code. Will work for white and black, in theory!		
+					if (canCastleRight) && (newX == gridX + 2) 
+					{
+						if array_equals(global.grid[gridX + 1, 7],[0, 0]) &&
+						array_equals(global.grid[gridX + 2, 7],[0, 0]) &&
+						array_equals(global.grid[6, 7],[0, 0]) &&
+						!protectedSquare_scr(gridX + 1, 7) &&
+						!protectedSquare_scr(gridX + 2, 7) &&
+						{
+							global.grid[gridX + 2, 7] = [KING, WHITE];
+							global.grid[gridX + 1, 7] = [ROOK, WHITE];
+							global.grid[7, 7] = [0 , 0];
+							canCastleLeft = false;
+							canCastleRight = false;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						}
+					} 
+					
+					if (canCastleLeft) && (newX == gridX - 2)
+					{
+						if array_equals(global.grid[gridX - 1, 7],[0, 0]) &&
+						array_equals(global.grid[gridX - 2, 7],[0, 0]) &&
+						array_equals(global.grid[1, 7],[0, 0]) &&
+						!protectedSquare_scr(gridX - 1, 7) &&
+						!protectedSquare_scr(gridX - 2, 7) 						
+						{
+							global.grid[gridX - 2, 7] = [KING, WHITE];
+							global.grid[gridX - 1, 7] = [ROOK, WHITE];
+							global.grid[0, 7] = [0 , 0];
+							canCastleLeft = false;
+							canCastleRight = false;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						}
+					}
+					break;
 				}
 					
 				case ROOK:
@@ -159,6 +202,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					}
 						
 					global.grid[newX, newY] = selectedPiece;
+					if (gridX == 0) && (gridY == 7) canCastleLeft = false;
+					if (gridX == 7) && (gridY == 7) canCastleRight = false;
 					pickedUp = false;
 					selectedPiece = [0 , 0];
 					oGame.state = "AI Turn";
@@ -176,15 +221,6 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						oGame.state = "AI Turn";
 						break;
 					}
-					
-					//if (((abs (newX - gridX)) == 2) && ((abs (newY - gridY)) == 1))
-					//{
-					//	global.grid[newX, newY] = selectedPiece;
-					//	pickedUp = false;
-					//	selectedPiece = [0 , 0];
-					//	oGame.state = "AI Turn";
-					//	break;
-					//}
 					break;
 				}
 				
