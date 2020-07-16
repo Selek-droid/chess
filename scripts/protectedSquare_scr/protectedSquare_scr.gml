@@ -28,6 +28,8 @@ if (xx == 7) && (yy < 7) // right edge, but not bottom-right corner
 	}
 }
 
+
+
 if (xx < 7 ) && ( xx > 0 ) && (yy < 7) // most other cases?
 {
 	var targetID = global.grid[xx - 1, yy + 1];  // check for below-left pawn, king, queen, bishop
@@ -36,6 +38,7 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) // most other cases?
 		if (targetID[0] == PAWN) || (targetID[0] == BISHOP) 
 			|| (targetID[0] == KING) || (targetID[0] == QUEEN)	
 		{
+			show_debug_message("King could not capture a guarded piece");
 			return true;
 		}
 	}
@@ -46,6 +49,7 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) // most other cases?
 		if (targetID[0] == PAWN) || (targetID[0] == BISHOP) 
 			|| (targetID[0] == KING) || (targetID[0] == QUEEN)	
 		{
+			show_debug_message("King could not capture a guarded piece");
 			return true;
 		}
 	}

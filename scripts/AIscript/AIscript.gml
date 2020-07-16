@@ -10,6 +10,7 @@ possibleMoves = possibleMoves_scr();
 var numberOfMoves = floor((ds_list_size(possibleMoves) / 4));
 if (numberOfMoves == 0)   // Check for stalemate/checkmate eventually. For now, revert to player. 
 	{
+		show_debug_message("AI can't find a move")
 	oGame.state = "Player Turn";
 	exit;
 	}
