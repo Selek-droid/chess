@@ -29,11 +29,15 @@ if (!pickedUp) && (mouse_check_button_released(mb_left))  // pickup
 	{
 		gridX = floor( ( mouse_x - x ) / SQUARE_SIZE );
 		gridY = floor( ( mouse_y - y ) / SQUARE_SIZE );
-		if (global.grid[gridX, gridY] != 0)
+		mouse_clear(mb_left);
+//		if (global.grid[gridX, gridY] != 0)  // THURSDAY ATTEMPTED FIX BELOW
+		if ! ( array_equals(global.grid[gridX, gridY], [0 , 0]) )
 		{
 			selectedPiece = global.grid[gridX, gridY];
 			global.grid[gridX, gridY] = [0 , 0]; 
-			alarm[0] = room_speed / 5;  // alarm sets pickedUp to true
+			pickedUp = true;
+	//		alarm[0] = room_speed / 5;  // alarm sets pickedUp to true
+//			mouse_clear(mb_left); // NEW TRY
 			
 		}
 	}
@@ -42,9 +46,10 @@ if (!pickedUp) && (mouse_check_button_released(mb_left))  // pickup
 if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 	{	newX = floor( ( mouse_x - x ) / SQUARE_SIZE );  // check if empty or enemy
 		newY = floor( ( mouse_y - y ) / SQUARE_SIZE );  // ... and if piece capable...
-		
+		mouse_clear(mb_left);
 		if (newX < 0) || (newX > 7) || (newY < 0) || (newY > 7)
 		{
+//			mouse_clear(mb_left);
 			exit;
 		}
 		
@@ -56,6 +61,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 			pickedUp = false;
 			selectedPiece = [0 , 0]
 			turnOver = false;   // Eventually this variable will change state to AI.
+			oGame.state = "Player Turn";
+//			mouse_clear(mb_left);
 		}
 			
 			
@@ -161,7 +168,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 				case KNIGHT:
 				{
 					if (((abs (newX - gridX)) == 1) && ((abs (newY - gridY)) == 2))
-					|| (((abs (newX - gridX)) == 2) && ((abs (newY - gridY)) == 1))
+					|| (((abs (newX - gridX)) == 2) && ((abs (newY - gridY)) == 1)) 
 					{
 						global.grid[newX, newY] = selectedPiece;
 						pickedUp = false;
@@ -169,6 +176,16 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						oGame.state = "AI Turn";
 						break;
 					}
+					
+					//if (((abs (newX - gridX)) == 2) && ((abs (newY - gridY)) == 1))
+					//{
+					//	global.grid[newX, newY] = selectedPiece;
+					//	pickedUp = false;
+					//	selectedPiece = [0 , 0];
+					//	oGame.state = "AI Turn";
+					//	break;
+					//}
+					break;
 				}
 				
 				case BISHOP:
