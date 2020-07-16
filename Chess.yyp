@@ -258,7 +258,7 @@
             "Key": "c8192428-b2b7-4615-a8c3-210ee9841135",
             "Value": {
                 "id": "eb7608f0-d60a-4fad-9fab-0feb0deb566b",
-                "resourcePath": "scripts\\protectedSquare_scr\\protectedSquare_scr.yy",
+                "resourcePath": "scripts\\threatenedSquare_scr\\threatenedSquare_scr.yy",
                 "resourceType": "GMScript"
             }
         },

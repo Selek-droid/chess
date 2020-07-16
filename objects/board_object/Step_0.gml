@@ -111,13 +111,13 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 				{
 					if  ((abs (newX - gridX) <= 1) && (abs (newY - gridY) <= 1))
 					{
-					global.grid[newX, newY] = selectedPiece;
-					canCastleLeft = false;
-					canCastleRight = false;
-					pickedUp = false;
-					selectedPiece = [0 , 0];
-					oGame.state = "AI Turn";
-					break;
+						global.grid[newX, newY] = selectedPiece;
+						canCastleLeft = false;
+						canCastleRight = false;
+						pickedUp = false;
+						selectedPiece = [0 , 0];
+						oGame.state = "AI Turn";
+						break;
 					}
 // Castling code. Will work for white and black, in theory!		
 					if (canCastleRight) && (newX == gridX + 2) 
@@ -125,8 +125,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						if array_equals(global.grid[gridX + 1, 7],[0, 0]) &&
 						array_equals(global.grid[gridX + 2, 7],[0, 0]) &&
 						array_equals(global.grid[6, 7],[0, 0]) &&
-						!protectedSquare_scr(gridX + 1, 7) &&
-						!protectedSquare_scr(gridX + 2, 7) &&
+						!threatenedSquare_scr(gridX + 1, 7) &&
+						!threatenedSquare_scr(gridX + 2, 7) 
 						{
 							global.grid[gridX + 2, 7] = [KING, WHITE];
 							global.grid[gridX + 1, 7] = [ROOK, WHITE];
@@ -145,8 +145,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						if array_equals(global.grid[gridX - 1, 7],[0, 0]) &&
 						array_equals(global.grid[gridX - 2, 7],[0, 0]) &&
 						array_equals(global.grid[1, 7],[0, 0]) &&
-						!protectedSquare_scr(gridX - 1, 7) &&
-						!protectedSquare_scr(gridX - 2, 7) 						
+						!threatenedSquare_scr(gridX - 1, 7) &&
+						!threatenedSquare_scr(gridX - 2, 7) 						
 						{
 							global.grid[gridX - 2, 7] = [KING, WHITE];
 							global.grid[gridX - 1, 7] = [ROOK, WHITE];
