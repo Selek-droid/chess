@@ -36,7 +36,7 @@ for (var i = 0; i < numberOfMoves; i += 1;)
 // "Make" the move, and see if king is on a "threatenedSquare"
 	proposedState[oldX, oldY] = [newX, newY];
 	if !threatenedSquare_scr(targetID[0],targetID[1], proposedState)
-		ds_list_add(legalMoves,[oldX,oldY,newX,newY]);
+		ds_list_add(legalMoves,oldX,oldY,newX,newY);
 }
 	return legalMoves;
 	
