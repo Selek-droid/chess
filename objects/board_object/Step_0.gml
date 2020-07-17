@@ -13,7 +13,22 @@ var newX = 0;
 var newY = 0;
 var targetID = [0 , 0];
 var pieceType;
+// var kingPosition;
+var proposedState;
 
+// Find King position. Before moving any piece, check to see if proposed move leaves King threatened.
+
+//for (var xx = 0; xx < 8; xx += 1;)
+//{
+//	for (var yy = 0; yy < 8; yy += 1;)
+//	{
+//		if array_equals(boardState[xx, yy],[KING, WHITE])
+//		{
+//			var kingPosition = [xx , yy];
+//			break;
+//		}
+//	}
+//}
 
 // look for mouse click on a piece. If something there,
 // store it, then clear its space, then put it on mouse cursor.
@@ -34,7 +49,7 @@ if (!pickedUp) && (mouse_check_button_released(mb_left))  // pickup
 		if ! ( array_equals(global.grid[gridX, gridY], [0 , 0]) )
 		{
 			selectedPiece = global.grid[gridX, gridY];
-			global.grid[gridX, gridY] = [0 , 0]; 
+			global.grid[gridX, gridY] = [0 , 0];   // clear vacated square
 			pickedUp = true;
 	//		alarm[0] = room_speed / 5;  // alarm sets pickedUp to true
 //			mouse_clear(mb_left); // NEW TRY
@@ -113,6 +128,10 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 				{
 					if  ((abs (newX - gridX) <= 1) && (abs (newY - gridY) <= 1))
 					{
+						proposedState = global.grid;
+						proposedState[newX, newY] = selectedPiece;
+						if PlayerAvoidsCheck_scr(proposedState)
+						{
 						global.grid[newX, newY] = selectedPiece;
 						canCastleLeft = false;
 						canCastleRight = false;
@@ -120,6 +139,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						selectedPiece = [0 , 0];
 						oGame.state = "AI Turn";
 						break;
+						}
 					}
 // Castling code. Will work for white and black, in theory!		
 					if (canCastleRight) && (newX == gridX + 2) 
