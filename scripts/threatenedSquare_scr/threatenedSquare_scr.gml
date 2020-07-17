@@ -7,7 +7,8 @@ var friend;
 var availableSpace;
 var xx = argument0;
 var yy = argument1;
-var boardState = global.grid; 
+// var boardState = global.grid; 
+var boardState = argument2; 
 
 if (oGame.state == "AI Turn") 
 {

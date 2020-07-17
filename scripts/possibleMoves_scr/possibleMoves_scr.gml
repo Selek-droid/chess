@@ -1,6 +1,7 @@
 var xx;
 var yy;
 var legalMoves = ds_list_create();
+var boardState = global.grid;
 
 for (xx = 0; xx < 8; xx += 1;)
 {
@@ -134,187 +135,187 @@ for (xx = 0; xx < 8; xx += 1;)
 			if (yy == 0) && (xx > 0) && (xx < 7)  // King on starting rank, not corners.
 			{
 				var targetID = global.grid[xx - 1, yy];  // offset -1, 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
 								
 				var targetID = global.grid[xx - 1, yy + 1];  // offset -1, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);
 								
 				var targetID = global.grid[xx, yy + 1];  // offset 0, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy + 1);
 				
 				var targetID = global.grid[xx + 1, yy + 1];  // offset 1, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy + 1, boardState) ))
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);
 						
 				var targetID = global.grid[xx + 1, yy];  // offset 1, 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy);		
 			}
 			
 			if (yy == 0) && (xx == 0)  // King on starting rank, top leftcorner.
 			{
 				var targetID = global.grid[1, 0];  // offset 1, 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(1, 0)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(1, 0, boardState)) )
 					ds_list_add(legalMoves, 0, 0, 1, 0);
 						
 				var targetID = global.grid[1, 1];  // offset 1, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(1, 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(1, 1, boardState)) )
 					ds_list_add(legalMoves, 0, 0, 1, 1);	
 						
 				var targetID = global.grid[0, 1];  // offset 0, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(0, 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(0, 1, boardState)) )
 					ds_list_add(legalMoves, 0, 0, 0, 1);	
 			}
 			
 			if (xx == 7) && (yy == 0) // King on starting rank, top right corner.
 			{
 				var targetID = global.grid[xx - 1, yy];  // offset -1, 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
 						
 				var targetID = global.grid[xx - 1, yy + 1];  // offset -1, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);
 						
 				var targetID = global.grid[xx, yy + 1];  // offset 0, 1 
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy + 1);	
 			}
 			
 			if (xx > 0) && (xx < 7) && (yy > 0) && (yy < 7)    // King not on any edge
 			{
 				var targetID = global.grid[xx - 1, yy];  // offset -1, 0. Prevent moving into check.
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
 								
 				var targetID = global.grid[xx - 1, yy + 1];  // offset -1, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);
 								
 				var targetID = global.grid[xx, yy + 1];  // offset 0, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy + 1);
 								
 				var targetID = global.grid[xx + 1, yy + 1];  // offset 1, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy + 1, boardState)) )
 						ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);
 						
 				var targetID = global.grid[xx + 1, yy];  // offset 1, 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy);
 						
 				var targetID = global.grid[xx + 1, yy - 1];  // offset 1, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1);	
 						
 				var targetID = global.grid[xx, yy - 1];  // offset 0, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy - 1);	
 						
 				var targetID = global.grid[xx - 1, yy - 1];  // offset -1, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);		
 			}
 			
 			if (xx == 0) &&  (yy > 0) && (yy < 7)    // King on left edge, not corners
 			{
 				var targetID = global.grid[xx, yy - 1];  // offset 0, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy - 1);	
 					
 				var targetID = global.grid[xx + 1, yy - 1];  // offset 1, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1);
 					
 				var targetID = global.grid[xx + 1, yy];  // offset 1, 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy);
 					
 				var targetID = global.grid[xx + 1, yy + 1];  // offset 1, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy + 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);
 					
 				var targetID = global.grid[xx, yy + 1];  // offset 0, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy + 1);
 			}
 			
 			if (xx == 7) &&  (yy > 0) && (yy < 7)    // King on right edge, not corners
 			{
 				var targetID = global.grid[xx, yy - 1];  // offset 0, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy - 1);
 					
 				var targetID = global.grid[xx - 1, yy - 1];  // offset -1, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);
 					
 				var targetID = global.grid[xx - 1, yy];  // offset -1, 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
 					
 				var targetID = global.grid[xx - 1, yy + 1];  // offset -1 , 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);	
 					
 				var targetID = global.grid[xx, yy + 1];  // offset 0, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy + 1);
 			}
 			
 			if (xx == 0) && (yy == 7)    // King on lower left corner
 			{
 				var targetID = global.grid[xx, yy - 1];  // offset 0, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy - 1);
 					
 				var targetID = global.grid[xx + 1, yy - 1];  // offset 1 , -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1);
 					
 				var targetID = global.grid[xx + 1, yy];  // offset 1 , 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy);	
 			}
 			
 			if (xx == 7) && (yy == 7)    // King on lower right corner
 			{
 				var targetID = global.grid[xx, yy - 1];  // offset 0, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy - 1);
 					
 				var targetID = global.grid[xx - 1, yy];  // offset -1, 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
 					
 				var targetID = global.grid[xx - 1, yy - 1];  // offset -1, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);
 			}
 			
 			if (xx >= 1) && (xx <= 6) && (yy == 7)    // King on bottom edge, not in corners
 			{
 				var targetID = global.grid[xx - 1, yy];  // offset -1, 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
 					
 				var targetID = global.grid[xx, yy - 1];  // offset -1, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);
 				
 				var targetID = global.grid[xx, yy - 1];  // offset 0, -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx, yy - 1);
 			
 				var targetID = global.grid[xx + 1, yy - 1];  // offset 1 , -1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1);
 					
 				var targetID = global.grid[xx + 1, yy];  // offset 1 , 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy)) )
+				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )
 					ds_list_add(legalMoves, xx, yy, xx + 1, yy);	
 			}		
 		}

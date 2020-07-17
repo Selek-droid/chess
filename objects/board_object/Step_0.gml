@@ -125,8 +125,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						if array_equals(global.grid[gridX + 1, 7],[0, 0]) &&
 						array_equals(global.grid[gridX + 2, 7],[0, 0]) &&
 						array_equals(global.grid[6, 7],[0, 0]) &&
-						!threatenedSquare_scr(gridX + 1, 7) &&
-						!threatenedSquare_scr(gridX + 2, 7) 
+						!threatenedSquare_scr(gridX + 1, 7, global.grid) &&
+						!threatenedSquare_scr(gridX + 2, 7, global.grid) 
 						{
 							global.grid[gridX + 2, 7] = [KING, WHITE];
 							global.grid[gridX + 1, 7] = [ROOK, WHITE];
@@ -145,8 +145,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						if array_equals(global.grid[gridX - 1, 7],[0, 0]) &&
 						array_equals(global.grid[gridX - 2, 7],[0, 0]) &&
 						array_equals(global.grid[1, 7],[0, 0]) &&
-						!threatenedSquare_scr(gridX - 1, 7) &&
-						!threatenedSquare_scr(gridX - 2, 7) 						
+						!threatenedSquare_scr(gridX - 1, 7, global.grid) &&
+						!threatenedSquare_scr(gridX - 2, 7, global.grid) 						
 						{
 							global.grid[gridX - 2, 7] = [KING, WHITE];
 							global.grid[gridX - 1, 7] = [ROOK, WHITE];
