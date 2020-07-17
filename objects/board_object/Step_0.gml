@@ -73,10 +73,11 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 			{
 				case PAWN: 
 				{
-					if ( (targetID[1] == BLACK) && ((abs (newX - gridX)) == 1 ) 
+					if ( (targetID[1] == BLACK) && ((abs (newX - gridX)) == 1 ) // captures
 						&& (gridY - newY == 1) ) 
 					{
 						global.grid[newX, newY] = selectedPiece;
+						if (newY == 0) global.grid[newX, newY] = [QUEEN, WHITE];  // code user choice later
 						pickedUp = false;
 						selectedPiece = [0 , 0];
 						oGame.state = "AI Turn";
@@ -84,9 +85,10 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					}
 						
 					else if ((gridY - newY == 1) && (gridX == newX)) 
-						&& (array_equals(global.grid[newX, newY],[0, 0]))
+						&& (array_equals(global.grid[newX, newY],[0, 0]))  // one-square moves forward
 					{
 						global.grid[newX, newY] = selectedPiece;
+						if (newY == 0) global.grid[newX, newY] = [QUEEN, WHITE];  // code user choice later
 						pickedUp = false;
 						selectedPiece = [0 , 0];
 						oGame.state = "AI Turn";

@@ -40,4 +40,9 @@ show_debug_message("newY is " + string(newY));
 global.grid[newX, newY] = global.grid[xx, yy];   // move piece to new square
 global.grid[xx, yy] = [0, 0];    // delete piece from old square
 
+if (newY == 7) && (array_equals(global.grid[newX, newY],[PAWN, BLACK])) // check for pawn promotion 
+{
+	global.grid[newX, newY] = [QUEEN, BLACK];
+}
+
 oGame.state = "Player Turn";
