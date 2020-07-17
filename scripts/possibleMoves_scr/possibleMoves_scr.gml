@@ -290,7 +290,7 @@ for (xx = 0; xx < 8; xx += 1;)
 				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
 					
-				var targetID = global.grid[xx, yy + 1];  // offset -1, -1
+				var targetID = global.grid[xx - 1, yy - 1];  // offset -1, -1
 				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);
 			}
