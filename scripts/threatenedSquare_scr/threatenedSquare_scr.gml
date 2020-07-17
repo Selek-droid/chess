@@ -286,10 +286,14 @@ if (xx > 0)
 		{
 			if (targetID[0] != KING) break;    // friendly non-king blocks enemy fire; 
 		}
-		if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
+		if (targetID[1] == enemy) 
 		{
-			show_debug_message("R or Q protected piece right  of them")
-			return true;
+			if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
+			{
+				show_debug_message("R or Q protected piece right of them")
+				return true;
+			}
+			else break;  // even enemy piece shields AI king
 		}
 	}
 }			
@@ -304,10 +308,14 @@ var availableSpace = 7 - xx;
 		{
 			if (targetID[0] != KING) break;    // friendly non-king blocks enemy fire; 
 		}									  //  if it is king keep looping past king to distant Q/R
-		if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
+		if (targetID[1] == enemy) 
 		{
-			show_debug_message("R or Q protected piece left of them")
-			return true;
+			if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
+			{
+				show_debug_message("R or Q protected piece left of them")
+				return true;
+			}
+			else break;  // even enemy piece shields AI king. Keep looking
 		}
 	}
 }
@@ -322,10 +330,14 @@ var availableSpace = yy;
 		{
 			if (targetID[0] != KING) break;    // friendly non-king blocks enemy fire; 
 		}
-		if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
+		if (targetID[1] == enemy) 
 		{
-			show_debug_message("R or Q protected piece below them")
-			return true;
+			if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
+			{
+				show_debug_message("R or Q protected piece below them")
+				return true;
+			}
+			else break;  // even enemy piece shields AI king; keep looking for threats
 		}
 	}
 }
@@ -338,13 +350,189 @@ var availableSpace = 7 - yy;
 		var targetID = boardState[xx, yy + i];  // offset 0, i
 		if (targetID[1] == friend) 
 		{
-			if (targetID[0] != KING) break;    // friendly non-king blocks enemy fire; 
-		}		
-		if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
-		{
-			show_debug_message("R or Q protected piece above them")
-			return true;
+			if (targetID[0] != KING) break;    // friendly OR ENEMY non-king blocks enemy fire; 
 		}
+		if (targetID[1] == enemy) 
+		{
+			if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
+			{
+				show_debug_message("R or Q protected piece above them")
+				return true;
+			}
+			else break;  // even enemy piece shields AI king
+		}
+		
+	}
+}
+
+// ============= BISHOP & QUEEN as distant threats ====================================
+
+if (xx > 0) && (yy > 0) // start looking NW
+{	var availableSpace = min(xx, yy);  // has less space than a rook!
+	for (var i = 1; i <= availableSpace; i += 1;)
+	{
+		var targetID = boardState[xx - i, yy - i];  // offset -i, -i
+		if (targetID[1] == friend) 
+		{
+			if (targetID[0] != KING) break;    // friendly OR ENEMY non-king blocks enemy fire; 
+		}
+		if (targetID[1] == enemy) 
+		{
+			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			{
+				show_debug_message("B or Q protected piece SE of them")
+				return true;
+			}
+			else break;  // even enemy piece shields AI king
+		}
+	}
+}
+
+if (xx < 7) && (yy < 7)  // next looking SE
+{	
+	var availableSpace = min ((7 - xx), (7 - yy));
+	for (var i = 1; i <= availableSpace; i += 1;)
+	{
+		var targetID = boardState[xx + i, yy + i];  // offset i, i
+		if (targetID[1] == friend) 
+		{
+			if (targetID[0] != KING) break;    // friendly OR ENEMY non-king blocks enemy fire; 
+		}
+		if (targetID[1] == enemy) 
+		{
+			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			{
+				show_debug_message("B or Q protected piece NW of them")
+				return true;
+			}
+			else break;  // even enemy piece shields AI king
+		}
+	}
+}	
+
+if (xx > 0) && (yy < 7) // now look SW
+{	
+	var availableSpace = min(xx, (7 - yy));  // has less space than a rook!
+	for (var i = 1; i <= availableSpace; i += 1;)
+	{
+		var targetID = boardState[xx - i, yy + i];  // offset -i, +i
+		if (targetID[1] == friend) 
+		{
+			if (targetID[0] != KING) break;    // friendly OR ENEMY non-king blocks enemy fire; 
+		}
+		if (targetID[1] == enemy) 
+		{
+			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			{
+				show_debug_message("B or Q protected piece NE of them")
+				return true;
+			}
+			else break;  // even enemy piece shields AI king
+		}
+	}
+}
+			
+if (xx < 7) && (yy > 0) // end by looking NE
+{	
+	var availableSpace = min((7 - xx), yy);  // has less space than a rook!
+	for (var i = 1; i <= availableSpace; i += 1;)
+	{
+		var targetID = boardState[xx + i, yy - i];  // offset +i, -i
+		if (targetID[1] == friend) 
+		{
+			if (targetID[0] != KING) break;    // friendly OR ENEMY non-king blocks enemy fire; 
+		}
+		if (targetID[1] == enemy) 
+		{
+			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			{
+				show_debug_message("B or Q protected piece NE of them")
+				return true;
+			}
+			else break;  // even enemy piece shields AI king
+		}
+	}
+}
+
+// -------------- KNIGHT threats ----------------------
+
+if (xx <= 6) && (yy <= 5) // offset 1, 2
+{
+	var targetID = boardState[xx + 1, yy + 2];
+	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	{
+		show_debug_message("Knight protecting a space");
+		return true;
+	}
+}
+			
+if (xx <= 5) && (yy <= 6) // offset 2, 1
+{
+	var targetID = boardState[xx + 2, yy + 1];
+	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	{
+		show_debug_message("Knight protecting a space");
+		return true;
+	}
+}
+			
+if (xx <= 5) && (yy >= 1) // offset 2, -1
+{
+	var targetID = boardState[xx + 2, yy - 1];
+	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	{
+		show_debug_message("Knight protecting a space");
+		return true;
+	}
+}
+				
+if (xx <= 6) && (yy >= 2) // offset 1, -2
+{
+	var targetID = boardState[xx + 1, yy - 2];
+	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	{
+		show_debug_message("Knight protecting a space");
+		return true;
+	}
+}
+				
+if (xx >= 2) && (yy >= 1) // offset -2, -1
+{
+	var targetID = boardState[xx - 2, yy - 1];
+	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	{
+		show_debug_message("Knight protecting a space");
+		return true;
+	}
+}
+			
+if (xx >= 2) && (yy <= 6) // offset -2, 1
+{
+	var targetID = boardState[xx - 2, yy + 1];
+	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	{
+		show_debug_message("Knight protecting a space");
+		return true;
+	}
+}
+		
+if (xx >= 1) && (yy <= 5) // offset -1, 2
+{
+	var targetID = boardState[xx - 1, yy + 2];
+	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	{
+		show_debug_message("Knight protecting a space");
+		return true;
+	}
+}
+			
+if (xx >= 1) && (yy >= 2) // offset -1, -2
+{
+	var targetID = boardState[xx - 1, yy - 2];
+	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	{
+		show_debug_message("Knight protecting a space");
+		return true;
 	}
 }
 
