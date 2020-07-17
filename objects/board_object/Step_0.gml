@@ -132,13 +132,13 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						proposedState[newX, newY] = selectedPiece;
 						if PlayerAvoidsCheck_scr(proposedState)
 						{
-						global.grid[newX, newY] = selectedPiece;
-						canCastleLeft = false;
-						canCastleRight = false;
-						pickedUp = false;
-						selectedPiece = [0 , 0];
-						oGame.state = "AI Turn";
-						break;
+							global.grid[newX, newY] = selectedPiece;
+							canCastleLeft = false;
+							canCastleRight = false;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
 						}
 					}
 // Castling code. Will work for white and black, in theory!		
@@ -222,14 +222,18 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 							}
 						}
 					}
-						
-					global.grid[newX, newY] = selectedPiece;
-					if (gridX == 0) && (gridY == 7) canCastleLeft = false;
-					if (gridX == 7) && (gridY == 7) canCastleRight = false;
-					pickedUp = false;
-					selectedPiece = [0 , 0];
-					oGame.state = "AI Turn";
-					break;
+					proposedState = global.grid;
+					proposedState[newX, newY] = selectedPiece;
+					if PlayerAvoidsCheck_scr(proposedState)
+					{
+						global.grid[newX, newY] = selectedPiece;
+						if (gridX == 0) && (gridY == 7) canCastleLeft = false;
+						if (gridX == 7) && (gridY == 7) canCastleRight = false;
+						pickedUp = false;
+						selectedPiece = [0 , 0];
+						oGame.state = "AI Turn";
+						break;
+					}
 				}
 				
 				case KNIGHT:
@@ -237,11 +241,16 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					if (((abs (newX - gridX)) == 1) && ((abs (newY - gridY)) == 2))
 					|| (((abs (newX - gridX)) == 2) && ((abs (newY - gridY)) == 1)) 
 					{
-						global.grid[newX, newY] = selectedPiece;
-						pickedUp = false;
-						selectedPiece = [0 , 0];
-						oGame.state = "AI Turn";
-						break;
+						proposedState = global.grid;
+						proposedState[newX, newY] = selectedPiece;
+						if PlayerAvoidsCheck_scr(proposedState)
+						{
+							global.grid[newX, newY] = selectedPiece;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						}
 					}
 					break;
 				}
@@ -278,11 +287,16 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 								exit;
 							}
 						}
-						global.grid[newX, newY] = selectedPiece;
-						pickedUp = false;
-						selectedPiece = [0 , 0];
-						oGame.state = "AI Turn";
-						break;
+						proposedState = global.grid;
+						proposedState[newX, newY] = selectedPiece;
+						if PlayerAvoidsCheck_scr(proposedState)
+						{
+							global.grid[newX, newY] = selectedPiece;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						}
 					}
 					
 					// now negative slope; again start with small x and add, but sub from max y
@@ -299,13 +313,16 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 								exit;
 							}
 						}
-					
-					
-						global.grid[newX, newY] = selectedPiece;
-						pickedUp = false;
-						selectedPiece = [0 , 0];
-						oGame.state = "AI Turn";
-						break;
+						proposedState = global.grid;
+						proposedState[newX, newY] = selectedPiece;
+						if PlayerAvoidsCheck_scr(proposedState)
+						{
+							global.grid[newX, newY] = selectedPiece;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						}
 				}
 				
 				case QUEEN:
@@ -320,22 +337,26 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					{
 						for (var i = 1; i < rangeY; i += 1;)
 						{
-						if array_equals(global.grid[newX, minY + i],[0 , 0])
+							if array_equals(global.grid[newX, minY + i],[0 , 0])
 							{
 								var clearPath = true;  // unused var for now
 							}
-						else 
+							else 
 							{					
-							exit;
+								exit;
 							}
 						}
-					global.grid[newX, newY] = selectedPiece;
-					pickedUp = false;
-					selectedPiece = [0 , 0];
-					oGame.state = "AI Turn";
-					exit;
+						proposedState = global.grid;
+						proposedState[newX, newY] = selectedPiece;
+						if PlayerAvoidsCheck_scr(proposedState)
+						{	
+							global.grid[newX, newY] = selectedPiece;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							exit;
+						}
 					}
-					
 					else if (newY == gridY)   // check moving horizontally
 					{
 						for (var i = 1; i < rangeX; i += 1;)
@@ -349,12 +370,16 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 								exit;
 							}
 						}
-						
-					global.grid[newX, newY] = selectedPiece;
-					pickedUp = false;
-					selectedPiece = [0 , 0];
-					oGame.state = "AI Turn";
-					exit;
+						proposedState = global.grid;
+						proposedState[newX, newY] = selectedPiece;
+						if PlayerAvoidsCheck_scr(proposedState)
+						{
+							global.grid[newX, newY] = selectedPiece;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							exit;
+						}
 					}
 // now bishop-like movement, first positive slope:
 					
@@ -374,11 +399,16 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 								exit;
 							}
 						}
-						global.grid[newX, newY] = selectedPiece;
-						pickedUp = false;
-						selectedPiece = [0 , 0];
-						oGame.state = "AI Turn";
-						break;
+						proposedState = global.grid;
+						proposedState[newX, newY] = selectedPiece;
+						if PlayerAvoidsCheck_scr(proposedState)
+						{
+							global.grid[newX, newY] = selectedPiece;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						}
 					}
 					
 					// now negative slope; again start with small x and add, but sub from max y
@@ -396,12 +426,16 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 								exit;
 							}
 						}
-					
-						global.grid[newX, newY] = selectedPiece;
-						pickedUp = false;
-						selectedPiece = [0 , 0];
-						oGame.state = "AI Turn";
-						break;
+						proposedState = global.grid;
+						proposedState[newX, newY] = selectedPiece;
+						if PlayerAvoidsCheck_scr(proposedState)
+						{
+							global.grid[newX, newY] = selectedPiece;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						}
 					}
 				}
 			}
