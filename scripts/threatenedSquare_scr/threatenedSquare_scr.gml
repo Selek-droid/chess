@@ -33,11 +33,22 @@ if (xx == 0) && (yy < 7) && (yy > 0) // LEFT EDGE but not corners
 	}
 	
 	var targetID = boardState[xx + 1, yy - 1];  // king, Q, B directly NE
-	if (targetID[1] == enemy)
+	if oGame.state == "AI Turn"
 	{
+		if (targetID[1] == enemy)
+		{
 		if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		}
 	}
 	
+	else if oGame.state == "Player Turn"
+	{	if (targetID[1] == enemy)
+			{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			|| (targetID[0] == PAWN) return true;
+			}
+		}
+		
 	var targetID = boardState[xx + 1, yy];  // King, Q, R directly E
 	if (targetID[1] == enemy)
 	{
@@ -45,11 +56,24 @@ if (xx == 0) && (yy < 7) && (yy > 0) // LEFT EDGE but not corners
 	}
 	
 	var targetID = boardState[xx + 1, yy + 1];  // King, Q, B, P directly SE
-	if (targetID[1] == enemy)
+	if oGame.state == "AI Turn"
 	{
-		if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
-		|| (targetID[0] == PAWN) return true;
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			|| (targetID[0] == PAWN) return true;
+		}
 	}
+	else if oGame.state == "Player Turn"
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			return true;
+		}
+	}
+	
+	
 	
 	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
 	if (targetID[1] == enemy)
@@ -71,9 +95,18 @@ if (xx == 7) && (yy < 7) && (yy > 0 )  // RIGHT EDGE, but not corners, range 1
 	}
 	
 	var targetID = boardState[xx - 1, yy - 1];  // King, Q, B directly NW
-	if (targetID[1] == enemy)
-	{
-		if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+	if oGame.state == "AI Turn"
+	{	if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		}
+	}
+	else if oGame.state == "Player Turn"
+	{	if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			|| (targetID[0] == PAWN) return true;
+		}
 	}
 	
 	var targetID = boardState[xx = 1, yy];  // King, Q, R directly W
@@ -82,13 +115,21 @@ if (xx == 7) && (yy < 7) && (yy > 0 )  // RIGHT EDGE, but not corners, range 1
 		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
 	}
 	
-	var targetID = boardState[xx - 1, yy + 1];  // King, Q, B directly SW
-	if (targetID[1] == enemy)
-	{
-		if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
-		|| (targetID[0] == PAWN) return true;
-	}
-	
+	var targetID = boardState[xx - 1, yy + 1];  // King, Q, B, P directly SW
+	if oGame.state == "AI Turn"
+	{	if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			|| (targetID[0] == PAWN) return true;
+		}
+	} 
+	else if oGame.state = "Player Turn"
+	{	if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		}
+	} 
+		
 	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
 	if (targetID[1] == enemy)
 	{
@@ -108,10 +149,20 @@ if (xx > 0) && (xx < 7 ) && (yy == 0)  // TOP EDGE, range 1
 	}
 	
 	var targetID = boardState[xx + 1, yy + 1];  // King, Q, B, P directly SE
-	if (targetID[1] == enemy)
+	if oGame.state == "AI Turn"
 	{
-		if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
-		|| (targetID[0] == PAWN) return true;
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
+			|| (targetID[0] == PAWN) return true;
+		}
+	}
+	else if oGame.state == "Player Turn"
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		}
 	}
 	
 	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
@@ -127,10 +178,20 @@ if (xx > 0) && (xx < 7 ) && (yy == 0)  // TOP EDGE, range 1
 	}
 	
 	var targetID = boardState[xx - 1, yy + 1];  // King, Q, B or P directly SW
-	if (targetID[1] == enemy)
+	if oGame.state == "AI Turn"
 	{
-		if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
-		|| (targetID[0] == PAWN) return true;
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
+			|| (targetID[0] == PAWN) return true;
+		}
+	}
+	else if oGame.state == "Player Turn"
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		}
 	}
 
 }
@@ -146,9 +207,21 @@ if (xx < 7 ) && (xx > 0 ) && (yy == 7)  // BOTTOM EDGE, range 1
 	}
 	
 	var targetID = boardState[xx + 1, yy - 1];  // king, Q, B directly NE
-	if (targetID[1] == enemy)
+	if oGame.state == "AI Turn"
 	{
-		if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
+			return true;
+		}
+	}
+	else if oGame.state == "Player Turn"
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			|| (targetID[0] == PAWN) return true;
+		}
 	}
 	
 	var targetID = boardState[xx + 1, yy];  // King, Q, R directly E
@@ -158,9 +231,21 @@ if (xx < 7 ) && (xx > 0 ) && (yy == 7)  // BOTTOM EDGE, range 1
 	}
 	
 	var targetID = boardState[xx - 1, yy - 1];  // King, Q, B directly NW
-	if (targetID[1] == enemy)
+	if oGame.state == "AI Turn"
 	{
-		if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
+			return true;
+		}
+	}
+	else if oGame.state == "Player Turn"
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			|| (targetID[0] == PAWN) return true;
+		}
 	}
 	
 	var targetID = boardState[xx = 1, yy];  // King, Q, R directly W
@@ -170,54 +255,6 @@ if (xx < 7 ) && (xx > 0 ) && (yy == 7)  // BOTTOM EDGE, range 1
 	}
 
 } 
-
-// -----------=============================
-
-//if (xx == 0) && (yy == 0)   // TOP LEFT CORNER
-//{
-//	var targetID = boardState[xx + 1, yy];  // King, Q, R directly E
-//	if (targetID[1] == enemy)
-//	{
-//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
-//	}
-	
-//	var targetID = boardState[xx + 1, yy + 1];  // King, Q, R directly SE
-//	if (targetID[1] == enemy)
-//	{
-//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
-//	}
-	
-//	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
-//	if (targetID[1] == enemy)
-//	{
-//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
-//	}
-//}
-
-//if (xx == 7 ) && ( yy == 0 )  // TOP RIGHT CORNER
-//{
-//	var targetID = boardState[xx = 1, yy];  // King, Q, R directly W -- only Rook really possible
-//	if (targetID[1] == enemy)
-//	{
-//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
-//	}
-	
-//	var targetID = boardState[xx = 1, yy + 1];  // King, Q, R directly SW
-//	if (targetID[1] == enemy)
-//	{
-//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
-//	}
-		
-//	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
-//	if (targetID[1] == enemy)
-//	{
-//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
-//	}
-//}
-
-
-// SE and SW corners later
-
 
 
 // =================================================================================================
@@ -231,9 +268,21 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 	}
 	
 	var targetID = boardState[xx + 1, yy - 1];  // king, Q, B directly NE
-	if (targetID[1] == enemy)
+	if oGame.state == "AI Turn"
 	{
-		if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
+			return true;
+		}
+	}
+	else if oGame.state == "Player Turn"
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			|| (targetID[0] == PAWN) return true;
+		}
 	}
 	
 	var targetID = boardState[xx + 1, yy];  // King, Q, R directly E
@@ -243,10 +292,20 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 	}
 	
 	var targetID = boardState[xx + 1, yy + 1];  // King, Q, B, P directly SE
-	if (targetID[1] == enemy)
+	if oGame.state == "AI Turn"
 	{
-		if (targetID[0] == KING) ||  (targetID[0] == QUEEN) 
-			|| (targetID[0] == PAWN) || (targetID[0] == BISHOP) return true;
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
+			|| (targetID[0] == PAWN) return true;
+		}
+	}
+	else if oGame.state == "Player Turn"
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		}
 	}
 	
 	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
@@ -256,9 +315,21 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 	}
 	
 	var targetID = boardState[xx - 1, yy - 1];  // King, Q, B directly NW
-	if (targetID[1] == enemy)
+	if oGame.state == "AI Turn"
 	{
-		if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
+			return true;
+		}
+	}
+	else if oGame.state == "Player Turn"
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
+			|| (targetID[0] == PAWN) return true;
+		}
 	}
 	
 	var targetID = boardState[xx - 1, yy];  // King, Q, R directly W
@@ -268,10 +339,20 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 	}
 	
 	var targetID = boardState[xx - 1, yy + 1];  // King, Q, B, P directly SW
-	if (targetID[1] == enemy)
+	if oGame.state == "AI Turn"
 	{
-		if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
 			|| (targetID[0] == PAWN) return true;
+		}
+	}
+	else if oGame.state == "Player Turn"
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		}
 	}
 }
 
