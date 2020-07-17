@@ -459,7 +459,7 @@ if (xx < 7) && (yy > 0) // end by looking NE
 if (xx <= 6) && (yy <= 5) // offset 1, 2
 {
 	var targetID = boardState[xx + 1, yy + 2];
-	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
 		show_debug_message("Knight protecting a space");
 		return true;
@@ -469,7 +469,7 @@ if (xx <= 6) && (yy <= 5) // offset 1, 2
 if (xx <= 5) && (yy <= 6) // offset 2, 1
 {
 	var targetID = boardState[xx + 2, yy + 1];
-	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
 		show_debug_message("Knight protecting a space");
 		return true;
@@ -479,7 +479,7 @@ if (xx <= 5) && (yy <= 6) // offset 2, 1
 if (xx <= 5) && (yy >= 1) // offset 2, -1
 {
 	var targetID = boardState[xx + 2, yy - 1];
-	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
 		show_debug_message("Knight protecting a space");
 		return true;
@@ -489,7 +489,8 @@ if (xx <= 5) && (yy >= 1) // offset 2, -1
 if (xx <= 6) && (yy >= 2) // offset 1, -2
 {
 	var targetID = boardState[xx + 1, yy - 2];
-	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	show_debug_message("Searching for a knight");
+	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
 		show_debug_message("Knight protecting a space");
 		return true;
@@ -499,7 +500,7 @@ if (xx <= 6) && (yy >= 2) // offset 1, -2
 if (xx >= 2) && (yy >= 1) // offset -2, -1
 {
 	var targetID = boardState[xx - 2, yy - 1];
-	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
 		show_debug_message("Knight protecting a space");
 		return true;
@@ -509,7 +510,7 @@ if (xx >= 2) && (yy >= 1) // offset -2, -1
 if (xx >= 2) && (yy <= 6) // offset -2, 1
 {
 	var targetID = boardState[xx - 2, yy + 1];
-	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
 		show_debug_message("Knight protecting a space");
 		return true;
@@ -519,7 +520,7 @@ if (xx >= 2) && (yy <= 6) // offset -2, 1
 if (xx >= 1) && (yy <= 5) // offset -1, 2
 {
 	var targetID = boardState[xx - 1, yy + 2];
-	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
+	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
 		show_debug_message("Knight protecting a space");
 		return true;
