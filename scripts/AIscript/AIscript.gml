@@ -3,7 +3,7 @@
 randomize();
 var possibleMoves = ds_list_create();
 possibleMoves = possibleMoves_scr();
-// possibleMoves = avoidCheck_scr(possibleMoves);
+possibleMoves = avoidCheck_scr(possibleMoves);
 
 // show_debug_message("value of possibleMoves is " + string(possibleMoves));
 // show_debug_message("possMoves contains " + ds_list_write(possibleMoves));

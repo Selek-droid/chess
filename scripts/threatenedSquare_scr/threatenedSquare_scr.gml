@@ -381,7 +381,7 @@ if (xx > 0) && (yy > 0) // start looking NW
 		{
 			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("B or Q protected piece SE of them")
+				show_debug_message("enemy B or Q targeting square SE of them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king
@@ -403,7 +403,7 @@ if (xx < 7) && (yy < 7)  // next looking SE
 		{
 			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("B or Q protected piece NW of them")
+				show_debug_message("enemy B or Q targeting square NW of them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king
@@ -425,7 +425,7 @@ if (xx > 0) && (yy < 7) // now look SW
 		{
 			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("B or Q protected piece NE of them")
+				show_debug_message("B or Q targeting square NE of them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king
@@ -447,7 +447,7 @@ if (xx < 7) && (yy > 0) // end by looking NE
 		{
 			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("B or Q protected piece NE of them")
+				show_debug_message("enemy B or Q targeting square NE of them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king
@@ -490,7 +490,6 @@ if (xx <= 5) && (yy >= 1) // offset 2, -1
 if (xx <= 6) && (yy >= 2) // offset 1, -2
 {
 	var targetID = boardState[xx + 1, yy - 2];
-	show_debug_message("Searching for a knight");
 	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
 		show_debug_message("Knight protecting a space");
