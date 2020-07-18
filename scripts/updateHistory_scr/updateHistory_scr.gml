@@ -34,19 +34,41 @@ switch (piece[0])
 {
 	case PAWN: 
 	{
-		formattedMove = string(notationX[newX]) + string(notationY[newY]);
+		if (capture)
+		{
+			formattedMove = string(notationX[oldX]) + string("x") + string(notationX[newX]) 
+				+ string(notationY[newY]);
+			break;
+		}
+		else
+		{
+			formattedMove = string(notationX[newX]) + string(notationY[newY]);
+			break;
+		}
+	}
+	
+	case KING:
+	{ 
+		if (abs(newX - oldX) == 2) 
+			{
+				if (newX == 6) 
+				{
+					formattedMove = "0-0";
+					break;
+				}
+				else
+				{
+					formattedMove = "0-0-0";
+					break;
+				}
+			}
+		formattedMove = string("K") + string(notationX[newX]) + string(notationY[newY]);
 		break;
 	}
 	
 	case BISHOP:
 	{
 		formattedMove = string("B") + string(notationX[newX]) + string(notationY[newY]);
-		break;
-	}
-	
-	case ROOK:
-	{
-		formattedMove = string("R") + string(notationX[newX]) + string(notationY[newY]);
 		break;
 	}
 	
@@ -62,10 +84,11 @@ switch (piece[0])
 		break;
 	}
 	
-	case KING:
+	case ROOK:
 	{
-		formattedMove = string("K") + string(notationX[newX]) + string(notationY[newY]);
+		formattedMove = string("R") + string(notationX[newX]) + string(notationY[newY]);
 	}
+		
 }
 
 ds_list_add(oGame.formattedHistory,formattedMove);
