@@ -16,4 +16,78 @@ Also, for our videoconference (this coming Tuesday at noon), you need to install
 Love,
 
 Geoff	
+
+
+
+// -----------=============================
+
+//if (xx == 0) && (yy == 0)   // TOP LEFT CORNER
+//{
+//	var targetID = boardState[xx + 1, yy];  // King, Q, R directly E
+//	if (targetID[1] == enemy)
+//	{
+//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
+//	}
+	
+//	var targetID = boardState[xx + 1, yy + 1];  // King, Q, R directly SE
+//	if (targetID[1] == enemy)
+//	{
+//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
+//	}
+	
+//	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
+//	if (targetID[1] == enemy)
+//	{
+//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
+//	}
+//}
+
+//if (xx == 7 ) && ( yy == 0 )  // TOP RIGHT CORNER
+//{
+//	var targetID = boardState[xx = 1, yy];  // King, Q, R directly W -- only Rook really possible
+//	if (targetID[1] == enemy)
+//	{
+//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
+//	}
+	
+//	var targetID = boardState[xx = 1, yy + 1];  // King, Q, R directly SW
+//	if (targetID[1] == enemy)
+//	{
+//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
+//	}
+		
+//	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
+//	if (targetID[1] == enemy)
+//	{
+//		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
+//	}
+//}
+
+
+// SE and SW corners laterr
+
+---- from step event board 0bject:
+
+// Find King position. Before moving any piece, check to see if proposed move leaves King threatened.
+
+//for (var xx = 0; xx < 8; xx += 1;)
+//{
+//	for (var yy = 0; yy < 8; yy += 1;)
+//	{
+//		if array_equals(boardState[xx, yy],[KING, WHITE])
+//		{
+//			var kingPosition = [xx , yy];
+//			break;
+//		}
+//	}
+//}
+
+// look for mouse click on a piece. If something there,
+// store it, then clear its space, then put it on mouse cursor.
+// Then look for second click. If valid, move piece there.
+// If not valid, keep piece on cursor.
+// If user hits ESC, cancel move, restore saved selection.
+
+
+
 		
