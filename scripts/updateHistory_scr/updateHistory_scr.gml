@@ -5,7 +5,6 @@ var newX = argument3;
 var newY = argument4;
 var capture = argument5;
 
-var pieceMoved;
 var formattedMove;
 
 notationX[7] = "h";
@@ -68,4 +67,6 @@ switch (piece[0])
 		formattedMove = string("K") + string(notationX[newX]) + string(notationY[newY]);
 	}
 }
+
+ds_list_add(oGame.formattedHistory,formattedMove);
 show_debug_message(formattedMove);

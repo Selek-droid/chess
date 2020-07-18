@@ -17,25 +17,6 @@ var pieceType;
 var proposedState;
 var capture = false;
 
-// Find King position. Before moving any piece, check to see if proposed move leaves King threatened.
-
-//for (var xx = 0; xx < 8; xx += 1;)
-//{
-//	for (var yy = 0; yy < 8; yy += 1;)
-//	{
-//		if array_equals(boardState[xx, yy],[KING, WHITE])
-//		{
-//			var kingPosition = [xx , yy];
-//			break;
-//		}
-//	}
-//}
-
-// look for mouse click on a piece. If something there,
-// store it, then clear its space, then put it on mouse cursor.
-// Then look for second click. If valid, move piece there.
-// If not valid, keep piece on cursor.
-// If user hits ESC, cancel move, restore saved selection.
 
 
 if (!pickedUp) && (mouse_check_button_released(mb_left))  // pickup

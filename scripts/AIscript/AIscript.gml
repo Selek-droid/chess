@@ -1,6 +1,27 @@
 // Find universe of possible moves.  Evaluate them.
 
 randomize();
+
+if oGame.AIOpening
+{
+	if (ds_list_find_value(oGame.formattedHistory,0) == "e4") && (oGame.turn == 1)
+	{
+		animate(PAWN,2,1,2,3);
+		global.grid[2, 3] = global.grid[2, 1];   // Sicilian defense
+		global.grid[2, 1] = [0, 0]; 
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		exit;
+	}
+	if (oGame.turn == 2)
+		global.grid[2, 2] = global.grid[1, 0];   // Sicilian defense
+		global.grid[1, 0] = [0, 0]; 
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIOpening = false;
+		exit;
+}
+
 var possibleMoves = ds_list_create();
 possibleMoves = possibleMoves_scr();
 possibleMoves = avoidCheck_scr(possibleMoves);

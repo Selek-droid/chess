@@ -1,5 +1,14 @@
 draw_self();
 
+if (animateSprite) 
+{
+	
+	draw_sprite(movingSprite,-1,(oldX + ((loc * deltaX)/ 20)),(oldY + ((loc * deltaY)/ 20)));
+	loc += 1;
+	if (loc > 19) animateSprite = false;
+	
+}
+
 var xx;
 var yy;
 

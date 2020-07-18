@@ -1,6 +1,14 @@
 x = (room_width/2) - (BOARD_WIDTH/2);
 y = (room_height/2) - (BOARD_HEIGHT/2);
 
+animateSprite = false;
+movingSprite = PAWN;
+oldX = 0;
+oldY = 0;
+deltaX = 0;
+deltaY = 0;
+loc = 0;
+
 // contents of squares: Piece, Color.
 
 contents[1] = 0;

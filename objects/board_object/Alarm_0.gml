@@ -1,1 +1,0 @@
-pickedUp = true;
