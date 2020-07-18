@@ -4,8 +4,8 @@ randomize();
 
 if oGame.AIOpening
 {
-	AIOpeningsScript();
-	exit;
+	AIOpeningsScript();  // returns true if able to move
+	if (oGame.AIMadeScriptedMove) exit;  // bypass AI if AI made scripted move. Else on to AI.
 }
 
 var capture = false;
