@@ -2,9 +2,15 @@ x = (room_width/2) - (BOARD_WIDTH/2);
 y = (room_height/2) - (BOARD_HEIGHT/2);
 
 animateSprite = false;
+spriteInMotion = false;
 movingSprite = PAWN;
+movingPiece = [PAWN, BLACK];
 oldX = 0;
 oldY = 0;
+newX = 0;
+newY = 0;
+spriteX = 0;
+spriteY = 0;
 deltaX = 0;
 deltaY = 0;
 loc = 0;

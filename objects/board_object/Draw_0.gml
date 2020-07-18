@@ -2,11 +2,21 @@ draw_self();
 
 if (animateSprite) 
 {
-	
-	draw_sprite(movingSprite,-1,(oldX + ((loc * deltaX)/ 20)),(oldY + ((loc * deltaY)/ 20)));
+	// boardState = global.grid;
+	// boardState[newX, newY] = global.grid[oldX, oldY];
+	if ! (spriteInMotion)
+	{
+		global.grid[oldX, oldY] = [0, 0];
+		spriteInMotion = true;
+	}
+	draw_sprite(movingSprite,-1,(spriteX + ((loc * deltaX)/ 20)),(spriteY + ((loc * deltaY)/ 20)));
 	loc += 1;
-	if (loc > 19) animateSprite = false;
-	
+	if (loc > 19) 
+	{		
+		global.grid[newX, newY] = movingPiece;   // Sicilian defense		
+		animateSprite = false;
+		spriteInMotion = false;
+	}	 
 }
 
 var xx;

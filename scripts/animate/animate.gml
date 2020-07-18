@@ -1,13 +1,19 @@
 piece = argument0;
-board_object.oldX = board_object.x + (SQUARE_SIZE * argument1);
-board_object.oldY = board_object.y + (SQUARE_SIZE * argument2);
-var newX = board_object.x + (SQUARE_SIZE * argument3);
-var newY = board_object.y + (SQUARE_SIZE * argument4);
+board_object.movingPiece = argument0;
+board_object.oldX = argument1;
+board_object.oldY = argument2;
+board_object.newX = argument3;
+board_object.newY = argument4;
 
-board_object.deltaX = newX - oldX;
-board_object.deltaY = newY - oldY;
+board_object.spriteX = board_object.x + (SQUARE_SIZE * argument1);
+board_object.spriteY = board_object.y + (SQUARE_SIZE * argument2);
+var newSpriteX = board_object.x + (SQUARE_SIZE * argument3);
+var newSpriteY = board_object.y + (SQUARE_SIZE * argument4);
 
-switch (piece)
+board_object.deltaX = newSpriteX - board_object.spriteX;
+board_object.deltaY = newSpriteY - board_object.spriteY;
+
+switch (piece[0])
 {
 	case PAWN:
 	{
@@ -45,13 +51,5 @@ switch (piece)
 	}
 }
 
-board_object.animateSprite = true;
-
-//for (var i = 0; i < 100; i += 1;)
-//{
-//	draw_sprite(movingSprite,-1,(oldX + ((i * deltaX)/ 100)),(oldY + ((i * deltaY)/ 100)));
-	
-//}
-
-		  
+board_object.animateSprite = true; 
 		  

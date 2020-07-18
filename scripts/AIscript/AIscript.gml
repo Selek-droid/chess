@@ -6,9 +6,9 @@ if oGame.AIOpening
 {
 	if (ds_list_find_value(oGame.formattedHistory,0) == "e4") && (oGame.turn == 1)
 	{
-		animate(PAWN,2,1,2,3);
-		global.grid[2, 3] = global.grid[2, 1];   // Sicilian defense
-		global.grid[2, 1] = [0, 0]; 
+		animate([PAWN, BLACK],2,1,2,3);
+		//global.grid[2, 3] = global.grid[2, 1];   // Sicilian defense
+		//global.grid[2, 1] = [0, 0]; 
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
 		exit;
