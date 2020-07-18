@@ -74,8 +74,17 @@ switch (piece[0])
 	
 	case KNIGHT:
 	{
-		formattedMove = string("N") + string(notationX[newX]) + string(notationY[newY]);
-		break;
+		if (capture)
+		{
+			formattedMove = string("N") + string("x") + string(notationX[newX]) 
+				+ string(notationY[newY]);
+			break;
+		}
+		else
+		{
+			formattedMove = string("N") + string(notationX[newX]) + string(notationY[newY]);
+			break;
+		}
 	}
 	
 	case QUEEN:

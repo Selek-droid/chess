@@ -234,7 +234,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						proposedState = global.grid;
 						proposedState[newX, newY] = selectedPiece;
 						if PlayerAvoidsCheck_scr(proposedState)
-						{
+						{ 
+							if !(array_equals(global.grid[newX, newY], [0, 0])) capture = true; 
 							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[newX, newY] = selectedPiece;
 							pickedUp = false;
