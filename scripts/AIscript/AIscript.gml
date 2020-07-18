@@ -14,8 +14,9 @@ if oGame.AIOpening
 		exit;
 	}
 	if (oGame.turn == 2)
-		global.grid[2, 2] = global.grid[1, 0];   // Sicilian defense
-		global.grid[1, 0] = [0, 0]; 
+		animate([KNIGHT, BLACK],1,0,2,2);
+		//global.grid[2, 2] = global.grid[1, 0];   // Sicilian defense
+		//global.grid[1, 0] = [0, 0]; 
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
 		oGame.AIOpening = false;
@@ -57,13 +58,15 @@ show_debug_message("value of start yy is " + string(yy));
 show_debug_message("newX is " + string(newX));
 show_debug_message("newY is " + string(newY));
 
-
-global.grid[newX, newY] = global.grid[xx, yy];   // move piece to new square
-global.grid[xx, yy] = [0, 0];    // delete piece from old square
+var chosenPiece = global.grid[xx, yy];
+animate(chosenPiece, xx, yy, newX, newY);
+//global.grid[newX, newY] = global.grid[xx, yy];   // move piece to new square
+//global.grid[xx, yy] = [0, 0];    // delete piece from old square
 
 if (newY == 7) && (array_equals(global.grid[newX, newY],[PAWN, BLACK])) // check for pawn promotion 
 {
 	global.grid[newX, newY] = [QUEEN, BLACK];
 }
 
+oGame.turn += 1;
 oGame.state = "Player Turn";

@@ -8,14 +8,17 @@ if (animateSprite)
 	{
 		global.grid[oldX, oldY] = [0, 0];
 		spriteInMotion = true;
+		show_debug_message("deleted old piece, sprite should be in motion");
 	}
 	draw_sprite(movingSprite,-1,(spriteX + ((loc * deltaX)/ 20)),(spriteY + ((loc * deltaY)/ 20)));
 	loc += 1;
+	show_debug_message("sprite moving in theory");
 	if (loc > 19) 
 	{		
 		global.grid[newX, newY] = movingPiece;   // Sicilian defense		
 		animateSprite = false;
 		spriteInMotion = false;
+		loc = 0;
 	}	 
 }
 
