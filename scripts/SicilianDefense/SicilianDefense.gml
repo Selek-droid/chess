@@ -140,7 +140,7 @@ if (oGame.turn == 7)
 	if (ds_list_find_value(oGame.formattedHistory,10) == "Be3") &&
 	(ds_list_find_value(oGame.formattedHistory,12) == "Nb3")
 	{
-		animate([BISHOP, BLACK],2,0,4,2);  // Najdorf variation, classical attack. Response: 7...Be6
+		animate([BISHOP, BLACK],2,0,4,2);  // Najdorf variation, English attack. Response: 7...Be6
 		updateHistory_scr([BISHOP, BLACK], 2, 0, 4, 2, false);
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
@@ -151,11 +151,11 @@ if (oGame.turn == 7)
 	else if (ds_list_find_value(oGame.formattedHistory,10) == "Bg5") &&
 	(ds_list_find_value(oGame.formattedHistory,12) == "f4")
 	{
-		animate([BISHOP, BLACK],5,0,4,1);  // Najdorf variation, classical attack. Response: 7...Be6
+		animate([BISHOP, BLACK],5,0,4,1);  // Najdorf variation, classical attack. Response: 7...Be7
 		updateHistory_scr([BISHOP, BLACK], 5, 0, 4, 1, false);
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
-		oGame.AIOpening = false;
+		oGame.AIOpening = true;
 		exit;
 	}
 	
@@ -173,14 +173,28 @@ if (oGame.turn == 8)
 	(ds_list_find_value(oGame.formattedHistory,12) == "Nb3") &&
 	(ds_list_find_value(oGame.formattedHistory,14) == "f3")
 	{
-		animate([BISHOP, BLACK],5,0,4,1);  // Response: 7...Be7
+		animate([BISHOP, BLACK],5,0,4,1);  // Response: 8...Be7
 		updateHistory_scr([BISHOP, BLACK], 5, 0, 4, 1, false);
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
-		oGame.AIOpening = false;
+		oGame.AIOpening = true;
 		oGame.AIMadeScriptedMove = true;
 		exit;
 	}
+	
+	else if (ds_list_find_value(oGame.formattedHistory,10) == "Bg5") &&
+	(ds_list_find_value(oGame.formattedHistory,12) == "f4") &&
+	(ds_list_find_value(oGame.formattedHistory,14) == "Qf3")
+	{
+		animate([QUEEN, BLACK],3,0,2,1);  // Response: 8...Qc7. 
+		updateHistory_scr([QUEEN, BLACK], 3, 0, 2, 1, false);
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIOpening = true;
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}	
+	
 	else   // let AI evaluate
 	{
 		oGame.AIOpening = false;
@@ -188,4 +202,84 @@ if (oGame.turn == 8)
 		exit;
 	}
 }
+	
+if (oGame.turn == 9) 
+{
+	if (ds_list_find_value(oGame.formattedHistory,10) == "Be3") &&
+	(ds_list_find_value(oGame.formattedHistory,12) == "Nb3") &&
+	(ds_list_find_value(oGame.formattedHistory,14) == "f3") &&
+	(ds_list_find_value(oGame.formattedHistory,16) == "Qd2") 
+	
+	{
+		animate([KNIGHT, BLACK],1,0,3,1);  // Response: 9...N(b)d7
+		updateHistory_scr([KNIGHT, BLACK], 1, 0, 3, 1, false);
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIOpening = false;
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}
+					// classical variation
+	else if (ds_list_find_value(oGame.formattedHistory,10) == "Bg5") &&
+	(ds_list_find_value(oGame.formattedHistory,12) == "f4") &&
+	(ds_list_find_value(oGame.formattedHistory,14) == "Qf3") &&
+		(ds_list_find_value(oGame.formattedHistory,16) == "Qd2") 
+	{
+		animate([KNIGHT, BLACK],1,0,3,1);  // Response: 9...N(b)d7
+		updateHistory_scr([KNIGHT, BLACK], 1, 0, 3, 1, false);
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIOpening = false;
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}
+	
+	else   // let AI evaluate
+	{
+		oGame.AIOpening = false;
+		oGame.AIMadeScriptedMove = false;
+		exit;
+	}
+}
+	
+//if (oGame.turn == 10) 
+//{
+//	if (ds_list_find_value(oGame.formattedHistory,10) == "Be3") &&
+//	(ds_list_find_value(oGame.formattedHistory,12) == "Nb3") &&
+//	(ds_list_find_value(oGame.formattedHistory,14) == "f3") &&
+//	(ds_list_find_value(oGame.formattedHistory,16) == "Qd2") &&
+//	(ds_list_find_value(oGame.formattedHistory,18) == "0-0-0") 
+	
+//	{
+//		animate([KNIGHT, BLACK],1,0,3,1);  // Response: 10...N(b)d7
+//		updateHistory_scr([KNIGHT, BLACK], 1, 0, 3, 1, false);
+//		oGame.turn += 1;
+//		oGame.state = "Player Turn";
+//		oGame.AIOpening = true;
+//		oGame.AIMadeScriptedMove = true;
+//		exit;
+//	}
+//					// classical variation
+//	else if (ds_list_find_value(oGame.formattedHistory,10) == "Bg5") &&
+//	(ds_list_find_value(oGame.formattedHistory,12) == "f4") &&
+//	(ds_list_find_value(oGame.formattedHistory,14) == "Qf3") &&
+//		(ds_list_find_value(oGame.formattedHistory,16) == "Qd2") &&
+//			(ds_list_find_value(oGame.formattedHistory,18) == "0-0-0") 
+//	{
+//		animate([KNIGHT, BLACK],1,0,3,1);  // Response: 10...N(b)d7
+//		updateHistory_scr([KNIGHT, BLACK], 1, 0, 3, 1, false);
+//		oGame.turn += 1;
+//		oGame.state = "Player Turn";
+//		oGame.AIOpening = true;
+//		oGame.AIMadeScriptedMove = true;
+//		exit;
+//	}
+	
+//	else   // let AI evaluate
+//	{
+//		oGame.AIOpening = false;
+//		oGame.AIMadeScriptedMove = false;
+//		exit;
+//	}
+//}
 	
