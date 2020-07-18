@@ -15,6 +15,7 @@ var targetID = [0 , 0];
 var pieceType;
 // var kingPosition;
 var proposedState;
+var capture = false;
 
 // Find King position. Before moving any piece, check to see if proposed move leaves King threatened.
 
@@ -92,6 +93,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						&& (gridY - newY == 1) ) 
 					{
 						global.grid[newX, newY] = selectedPiece;
+						capture = true;
+						updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 						if (newY == 0) global.grid[newX, newY] = [QUEEN, WHITE];  // code user choice later
 						pickedUp = false;
 						selectedPiece = [0 , 0];
@@ -103,6 +106,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						&& (array_equals(global.grid[newX, newY],[0, 0]))  // one-square moves forward
 					{
 						global.grid[newX, newY] = selectedPiece;
+						updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 						if (newY == 0) global.grid[newX, newY] = [QUEEN, WHITE];  // code user choice later
 						pickedUp = false;
 						selectedPiece = [0 , 0];
@@ -114,6 +118,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						&& (array_equals(global.grid[newX, newY],[0, 0]))
 						&& (array_equals(global.grid[gridX, gridY - 1],[0 , 0]) ) )
 						{
+						updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 						global.grid[newX, newY] = selectedPiece;
 						pickedUp = false;
 						selectedPiece = [0 , 0];
@@ -132,6 +137,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						proposedState[newX, newY] = selectedPiece;
 						if PlayerAvoidsCheck_scr(proposedState)
 						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[newX, newY] = selectedPiece;
 							canCastleLeft = false;
 							canCastleRight = false;
@@ -150,6 +156,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						!threatenedSquare_scr(gridX + 1, 7, global.grid) &&
 						!threatenedSquare_scr(gridX + 2, 7, global.grid) 
 						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[gridX + 2, 7] = [KING, WHITE];
 							global.grid[gridX + 1, 7] = [ROOK, WHITE];
 							global.grid[7, 7] = [0 , 0];
@@ -170,6 +177,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						!threatenedSquare_scr(gridX - 1, 7, global.grid) &&
 						!threatenedSquare_scr(gridX - 2, 7, global.grid) 						
 						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[gridX - 2, 7] = [KING, WHITE];
 							global.grid[gridX - 1, 7] = [ROOK, WHITE];
 							global.grid[0, 7] = [0 , 0];
@@ -226,6 +234,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					proposedState[newX, newY] = selectedPiece;
 					if PlayerAvoidsCheck_scr(proposedState)
 					{
+						updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 						global.grid[newX, newY] = selectedPiece;
 						if (gridX == 0) && (gridY == 7) canCastleLeft = false;
 						if (gridX == 7) && (gridY == 7) canCastleRight = false;
@@ -245,6 +254,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						proposedState[newX, newY] = selectedPiece;
 						if PlayerAvoidsCheck_scr(proposedState)
 						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[newX, newY] = selectedPiece;
 							pickedUp = false;
 							selectedPiece = [0 , 0];
@@ -291,6 +301,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						proposedState[newX, newY] = selectedPiece;
 						if PlayerAvoidsCheck_scr(proposedState)
 						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);								
 							global.grid[newX, newY] = selectedPiece;
 							pickedUp = false;
 							selectedPiece = [0 , 0];
@@ -317,6 +328,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						proposedState[newX, newY] = selectedPiece;
 						if PlayerAvoidsCheck_scr(proposedState)
 						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[newX, newY] = selectedPiece;
 							pickedUp = false;
 							selectedPiece = [0 , 0];
@@ -350,6 +362,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						proposedState[newX, newY] = selectedPiece;
 						if PlayerAvoidsCheck_scr(proposedState)
 						{	
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[newX, newY] = selectedPiece;
 							pickedUp = false;
 							selectedPiece = [0 , 0];
@@ -374,6 +387,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						proposedState[newX, newY] = selectedPiece;
 						if PlayerAvoidsCheck_scr(proposedState)
 						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[newX, newY] = selectedPiece;
 							pickedUp = false;
 							selectedPiece = [0 , 0];
@@ -403,6 +417,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						proposedState[newX, newY] = selectedPiece;
 						if PlayerAvoidsCheck_scr(proposedState)
 						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[newX, newY] = selectedPiece;
 							pickedUp = false;
 							selectedPiece = [0 , 0];
@@ -430,6 +445,7 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						proposedState[newX, newY] = selectedPiece;
 						if PlayerAvoidsCheck_scr(proposedState)
 						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[newX, newY] = selectedPiece;
 							pickedUp = false;
 							selectedPiece = [0 , 0];
