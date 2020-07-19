@@ -9,3 +9,12 @@
 #macro ROOK 4
 #macro QUEEN 5
 #macro KING 6
+
+#macro VKING 20000
+#macro VQUEEN 1000
+#macro VROOK 550
+#macro VBISHOP 350
+#macro VKNIGHT 350
+#macro VPAWN 100
+
+

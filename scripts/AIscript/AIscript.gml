@@ -13,10 +13,8 @@ var possibleMoves = ds_list_create();
 possibleMoves = possibleMoves_scr();
 possibleMoves = avoidCheck_scr(possibleMoves);
 
-// show_debug_message("value of possibleMoves is " + string(possibleMoves));
-// show_debug_message("possMoves contains " + ds_list_write(possibleMoves));
+evaluate();
 
-// var listSize = ds_list_size(possibleMoves) - 1;
 var numberOfMoves = floor((ds_list_size(possibleMoves) / 4));
 if (numberOfMoves == 0)   // Check for stalemate/checkmate eventually. For now, revert to player. 
 	{
@@ -50,15 +48,6 @@ if (newY == 0) && (newX - xx == 2)
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
 		exit;
-		//animate(chosenPiece, xx, yy, newX, newY);
-		//updateHistory_scr(chosenPiece, xx, yy, newX, newY, capture);
-		//var chosenPiece = global.grid[7, 0];   // move rook too
-		//animate(chosenPiece, 7, 0, 5, 0);
-		//board_object.AICanCastleLeft = false;
-		//board_object.AICanCastleRight = false;
-		//oGame.turn += 1;
-		//oGame.state = "Player Turn";
-		//exit;
 	}
 }
 
@@ -67,17 +56,6 @@ if (newY == 0) && (xx - newX == 2)   // left side now
 	var chosenPiece = global.grid[xx, yy];
 	if (chosenPiece[0] == KING)
 	{
-		//animate(chosenPiece, xx, yy, newX, newY);
-		//updateHistory_scr(chosenPiece, xx, yy, newX, newY, capture);
-		//var chosenPiece = global.grid[0, 0];   // move rook too
-		//animate(chosenPiece, 0, 0, newX + 1, 0);
-		//if (newX > xx) 	
-		//{
-		//	ds_list_add(oGame.formattedHistory,"O-O");
-		//	show_debug_message("0-0");
-		//}
-		//else 
-		//{
 		ds_list_add(oGame.formattedHistory,"O-O-0");
 		show_debug_message("0-0-0");
 //		animateCastling(xx, newX); DELETE THIS ENTIRE FUNCTION? PFFT
@@ -97,8 +75,15 @@ if (newY == 0) && (xx - newX == 2)   // left side now
 
 var chosenPiece = global.grid[xx, yy];
 if !(array_equals(global.grid[newX, newY], [0, 0])) capture = true;
-animate(chosenPiece, xx, yy, newX, newY);
+animate(chosenPiece, xx, yy, newX, newY); 
 
+if (chosenPiece[0] == ROOK) && ( xx == 0 ) && ( yy == 0 ) board_object.AICanCastleLeft = false;
+if (chosenPiece[0] == ROOK) && ( xx == 7 ) && ( yy == 0 ) board_object.AICanCastleRight = false;
+if (chosenPiece[0] == KING) && ( (abs(newX - xx)) == 1 ) 
+{
+	board_object.AICanCastleLeft = false;
+	board_object.AICanCastleRight = false;
+}
 
 if (newY == 7) && (array_equals(global.grid[newX, newY],[PAWN, BLACK])) // check for pawn promotion 
 {

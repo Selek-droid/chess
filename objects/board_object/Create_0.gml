@@ -14,8 +14,8 @@ spriteY = 0;
 deltaX = 0;
 deltaY = 0;
 loc = 0;
-kingDoneCastling = true;
-displayCastling = false;
+// kingDoneCastling = true;  // prolly will delete castle-animate code?
+// displayCastling = false;
 
 // contents of squares: Piece, Color.
 
