@@ -215,6 +215,52 @@ if (oGame.turn == 9)
 		updateHistory_scr([KNIGHT, BLACK], 1, 0, 3, 1, false);
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
+		oGame.AIOpening = true;
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}
+					// classical variation
+	else if (ds_list_find_value(oGame.formattedHistory,10) == "Bg5") &&
+	(ds_list_find_value(oGame.formattedHistory,12) == "f4") &&
+	(ds_list_find_value(oGame.formattedHistory,14) == "Qf3") &&
+		(ds_list_find_value(oGame.formattedHistory,16) == "0-0-0") 
+	{
+		animate([KNIGHT, BLACK],1,0,3,1);  // Response: 9...N(b)d7
+		updateHistory_scr([KNIGHT, BLACK], 1, 0, 3, 1, false);
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIOpening = true;
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}
+	
+	else   // let AI evaluate
+	{
+		oGame.AIOpening = true;
+		oGame.AIMadeScriptedMove = false;
+		exit;
+	}
+}
+	
+if (oGame.turn == 10) 
+{
+	if (ds_list_find_value(oGame.formattedHistory,10) == "Be3") &&
+	(ds_list_find_value(oGame.formattedHistory,12) == "Nb3") &&
+	(ds_list_find_value(oGame.formattedHistory,14) == "f3") &&
+	(ds_list_find_value(oGame.formattedHistory,16) == "Qd2") &&
+	(ds_list_find_value(oGame.formattedHistory,18) == "0-0-0") 
+	
+	{
+		ds_list_add(oGame.formattedHistory,"O-O");
+		show_debug_message("0-0");
+		global.grid[4, 0] = [0, 0];
+		global.grid[7, 0] = [0, 0];
+		global.grid[6, 0] = [KING, BLACK];
+		global.grid[5, 0] = [ROOK, BLACK];
+		board_object.AICanCastleLeft = false;
+		board_object.AICanCastleRight = false;
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
 		oGame.AIOpening = false;
 		oGame.AIMadeScriptedMove = true;
 		exit;
@@ -223,10 +269,19 @@ if (oGame.turn == 9)
 	else if (ds_list_find_value(oGame.formattedHistory,10) == "Bg5") &&
 	(ds_list_find_value(oGame.formattedHistory,12) == "f4") &&
 	(ds_list_find_value(oGame.formattedHistory,14) == "Qf3") &&
-		(ds_list_find_value(oGame.formattedHistory,16) == "Qd2") 
+		(ds_list_find_value(oGame.formattedHistory,16) == "0-0-0") &&
+		(ds_list_find_value(oGame.formattedHistory,18) != "Nxe6")
+		
+		// ignore next white move (unless Nxe6 check) & castle
 	{
-		animate([KNIGHT, BLACK],1,0,3,1);  // Response: 9...N(b)d7
-		updateHistory_scr([KNIGHT, BLACK], 1, 0, 3, 1, false);
+		ds_list_add(oGame.formattedHistory,"O-O");
+		show_debug_message("0-0");
+		global.grid[4, 0] = [0, 0];
+		global.grid[7, 0] = [0, 0];
+		global.grid[6, 0] = [KING, BLACK];
+		global.grid[5, 0] = [ROOK, BLACK];
+		board_object.AICanCastleLeft = false;
+		board_object.AICanCastleRight = false;
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
 		oGame.AIOpening = false;
@@ -241,45 +296,4 @@ if (oGame.turn == 9)
 		exit;
 	}
 }
-	
-//if (oGame.turn == 10) 
-//{
-//	if (ds_list_find_value(oGame.formattedHistory,10) == "Be3") &&
-//	(ds_list_find_value(oGame.formattedHistory,12) == "Nb3") &&
-//	(ds_list_find_value(oGame.formattedHistory,14) == "f3") &&
-//	(ds_list_find_value(oGame.formattedHistory,16) == "Qd2") &&
-//	(ds_list_find_value(oGame.formattedHistory,18) == "0-0-0") 
-	
-//	{
-//		animate([KNIGHT, BLACK],1,0,3,1);  // Response: 10...N(b)d7
-//		updateHistory_scr([KNIGHT, BLACK], 1, 0, 3, 1, false);
-//		oGame.turn += 1;
-//		oGame.state = "Player Turn";
-//		oGame.AIOpening = true;
-//		oGame.AIMadeScriptedMove = true;
-//		exit;
-//	}
-//					// classical variation
-//	else if (ds_list_find_value(oGame.formattedHistory,10) == "Bg5") &&
-//	(ds_list_find_value(oGame.formattedHistory,12) == "f4") &&
-//	(ds_list_find_value(oGame.formattedHistory,14) == "Qf3") &&
-//		(ds_list_find_value(oGame.formattedHistory,16) == "Qd2") &&
-//			(ds_list_find_value(oGame.formattedHistory,18) == "0-0-0") 
-//	{
-//		animate([KNIGHT, BLACK],1,0,3,1);  // Response: 10...N(b)d7
-//		updateHistory_scr([KNIGHT, BLACK], 1, 0, 3, 1, false);
-//		oGame.turn += 1;
-//		oGame.state = "Player Turn";
-//		oGame.AIOpening = true;
-//		oGame.AIMadeScriptedMove = true;
-//		exit;
-//	}
-	
-//	else   // let AI evaluate
-//	{
-//		oGame.AIOpening = false;
-//		oGame.AIMadeScriptedMove = false;
-//		exit;
-//	}
-//}
 	
