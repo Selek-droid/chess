@@ -32,16 +32,73 @@ var yy = ds_list_find_value(possibleMoves,listIndex + 1);
 var newX = ds_list_find_value(possibleMoves,listIndex + 2);
 var newY = ds_list_find_value(possibleMoves,listIndex + 3);
 
-//show_debug_message("value of startingxx is " + string(xx));
-//show_debug_message("value of start yy is " + string(yy));
-//show_debug_message("newX is " + string(newX));
-//show_debug_message("newY is " + string(newY));
+// check for castling double-move; special case; right side first
+if (newY == 0) && (newX - xx == 2) 
+{
+	var chosenPiece = global.grid[xx, yy]; 
+	if (chosenPiece[0] == KING)
+	{
+		ds_list_add(oGame.formattedHistory,"O-O");
+		show_debug_message("0-0");
+//		animateCastling(xx, newX);
+		global.grid[4, 0] = [0, 0];
+		global.grid[7, 0] = [0, 0];
+		global.grid[6, 0] = [KING, BLACK];
+		global.grid[5, 0] = [ROOK, BLACK];
+		board_object.AICanCastleLeft = false;
+		board_object.AICanCastleRight = false;
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		exit;
+		//animate(chosenPiece, xx, yy, newX, newY);
+		//updateHistory_scr(chosenPiece, xx, yy, newX, newY, capture);
+		//var chosenPiece = global.grid[7, 0];   // move rook too
+		//animate(chosenPiece, 7, 0, 5, 0);
+		//board_object.AICanCastleLeft = false;
+		//board_object.AICanCastleRight = false;
+		//oGame.turn += 1;
+		//oGame.state = "Player Turn";
+		//exit;
+	}
+}
+
+if (newY == 0) && (xx - newX == 2)   // left side now
+{
+	var chosenPiece = global.grid[xx, yy];
+	if (chosenPiece[0] == KING)
+	{
+		//animate(chosenPiece, xx, yy, newX, newY);
+		//updateHistory_scr(chosenPiece, xx, yy, newX, newY, capture);
+		//var chosenPiece = global.grid[0, 0];   // move rook too
+		//animate(chosenPiece, 0, 0, newX + 1, 0);
+		//if (newX > xx) 	
+		//{
+		//	ds_list_add(oGame.formattedHistory,"O-O");
+		//	show_debug_message("0-0");
+		//}
+		//else 
+		//{
+		ds_list_add(oGame.formattedHistory,"O-O-0");
+		show_debug_message("0-0-0");
+//		animateCastling(xx, newX); DELETE THIS ENTIRE FUNCTION? PFFT
+		global.grid[0, 0] = [0, 0];
+		global.grid[4, 0] = [0, 0];
+		global.grid[2, 0] = [KING, BLACK];
+		global.grid[3, 0] = [ROOK, BLACK];
+		board_object.AICanCastleLeft = false;
+		board_object.AICanCastleRight = false;
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		exit;
+		}
+}
+
+// most other cases:
 
 var chosenPiece = global.grid[xx, yy];
 if !(array_equals(global.grid[newX, newY], [0, 0])) capture = true;
 animate(chosenPiece, xx, yy, newX, newY);
-//global.grid[newX, newY] = global.grid[xx, yy];   // move piece to new square
-//global.grid[xx, yy] = [0, 0];    // delete piece from old square
+
 
 if (newY == 7) && (array_equals(global.grid[newX, newY],[PAWN, BLACK])) // check for pawn promotion 
 {

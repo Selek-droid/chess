@@ -134,25 +134,50 @@ for (xx = 0; xx < 8; xx += 1;)
 		{
 			if (yy == 0) && (xx > 0) && (xx < 7)  // King on starting rank, not corners.
 			{
-				var targetID = global.grid[xx - 1, yy];  // offset -1, 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )
-					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
-								
-				var targetID = global.grid[xx - 1, yy + 1];  // offset -1, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1, boardState)) )
-					ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);
-								
-				var targetID = global.grid[xx, yy + 1];  // offset 0, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )
-					ds_list_add(legalMoves, xx, yy, xx, yy + 1);
+				// Castling kingside (to right, assuming AI has black. Trying to make code cover both.)
+				if (board_object.AICanCastleRight)
+				{
+					var castleTarget = global.grid[xx + 2, yy];  // offset 2, 0
+					var targetID = global.grid[xx + 1, yy];
+					if (targetID[1] == 0) && (castleTarget[1] == 0) &&
+//					array_equals(boardState[6, 0], [0 , 0]) &&     // redundant placeholder check for AI as white
+						!((threatenedSquare_scr(xx, yy, boardState)) ) &&
+						!((threatenedSquare_scr(xx + 1, yy, boardState)) ) &&
+						!((threatenedSquare_scr(xx + 2, yy, boardState)) ) 
+						ds_list_add(legalMoves, xx, yy, xx + 2, yy);
+				}
 				
-				var targetID = global.grid[xx + 1, yy + 1];  // offset 1, 1
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy + 1, boardState) ))
-					ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);
+				if (board_object.AICanCastleLeft)
+				{
+					var knightThere = global.grid[xx - 3, yy];
+					var castleTarget = global.grid[xx - 2, yy];  // offset 2, 0
+					var targetID = global.grid[xx - 1, yy];
+					if (targetID[1] == 0) && (castleTarget[1] == 0) && (knightThere[1] == 0) &&
+						!((threatenedSquare_scr(xx, yy, boardState)) ) &&
+						!((threatenedSquare_scr(xx + 1, yy, boardState)) ) &&
+						!((threatenedSquare_scr(xx + 2, yy, boardState)) ) 
+						ds_list_add(legalMoves, xx, yy, xx - 2, yy);
+				}
+				
+				//var targetID = global.grid[xx - 1, yy];  // offset -1, 0
+				//if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )
+				//	ds_list_add(legalMoves, xx, yy, xx - 1, yy);
+								
+				//var targetID = global.grid[xx - 1, yy + 1];  // offset -1, 1
+				//if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1, boardState)) )
+				//	ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);
+								
+				//var targetID = global.grid[xx, yy + 1];  // offset 0, 1
+				//if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )
+				//	ds_list_add(legalMoves, xx, yy, xx, yy + 1);
+				
+				//var targetID = global.grid[xx + 1, yy + 1];  // offset 1, 1
+				//if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy + 1, boardState) ))
+				//	ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);
 						
-				var targetID = global.grid[xx + 1, yy];  // offset 1, 0
-				if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )
-					ds_list_add(legalMoves, xx, yy, xx + 1, yy);		
+				//var targetID = global.grid[xx + 1, yy];  // offset 1, 0
+				//if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )
+				//	ds_list_add(legalMoves, xx, yy, xx + 1, yy);		
 			}
 			
 			if (yy == 0) && (xx == 0)  // King on starting rank, top leftcorner.

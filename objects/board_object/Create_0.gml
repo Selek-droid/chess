@@ -14,6 +14,8 @@ spriteY = 0;
 deltaX = 0;
 deltaY = 0;
 loc = 0;
+kingDoneCastling = true;
+displayCastling = false;
 
 // contents of squares: Piece, Color.
 
@@ -25,6 +27,8 @@ pickedUp = false;
 turnOver = false;
 canCastleLeft = true;
 canCastleRight = true;
+AICanCastleLeft = true;
+AICanCastleRight = true;
 
 gridX = 0;
 gridY = 0;

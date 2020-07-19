@@ -18,6 +18,67 @@ if (animateSprite)
 	}	 
 }
 
+if (displayCastling) 
+{
+	if ! (spriteInMotion) && ! (kingDoneCastling)  // first king poofs
+	{
+		global.grid[oldX, oldY] = [0, 0];  // call this only once
+		spriteInMotion = true;
+	}
+	if ! (kingDoneCastling)
+	{	
+		draw_sprite(black_king_sprite,-1,(spriteX + ((loc * deltaX)/ 20)),0);
+		loc += 1;
+		if (loc > 19) 
+		{		
+			global.grid[newX, 0] = [KING, BLACK];   		
+			animateSprite = false;
+			spriteInMotion = false;
+			kingDoneCastling = true;
+			loc = 0;
+		}	
+	}
+
+	if ! (spriteInMotion) && (kingDoneCastling)
+	{
+		if (deltaX > 0)  // rook is on right side; it poofs
+		{
+			global.grid[7, 0] = [0, 0];
+			spriteInMotion = true;
+		}
+		else
+		{
+			global.grid[0, 0] = [0, 0];  // rook on left
+			spriteInMotion = true;
+		}
+		
+	}  // Now draw rook repeatedly
+	
+	if (spriteInMotion) && (kingDoneCastling)
+	{
+		draw_sprite(black_rook_sprite,-1,((spriteX + (loc * ((0 - deltaX)/ 20)))), 0);
+		loc += 1;
+		if (loc > 19) 
+		{	
+			if (deltaX > 0)  // rook is on right side; it moves left
+			{
+				global.grid[5, 0] = [ROOK, BLACK];
+			}
+			else
+			{
+				global.grid[3, 0] = [ROOK, BLACK];  // rook on left, moves right
+			}
+		 		
+			animateSprite = false;
+			spriteInMotion = false;
+			kingDoneCastling = true;
+			displayCastling = false;
+			loc = 0;
+		}
+	}	
+}
+
+
 var xx;
 var yy;
 
