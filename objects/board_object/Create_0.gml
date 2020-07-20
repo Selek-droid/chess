@@ -668,6 +668,158 @@ HumanBishopTable [2, 0] = -10;
 HumanBishopTable [1, 0] = -10;
 HumanBishopTable [0, 0] = -20;
 
+// ========= AI Queen tables ===========
+
+AIQueenTable [7, 7] = -20;
+AIQueenTable [6, 7] = -10;
+AIQueenTable [5, 7] = -10;
+AIQueenTable [4, 7] = -5;
+AIQueenTable [3, 7] = -5;
+AIQueenTable [2, 7] = -10;
+AIQueenTable [1, 7] = -10;
+AIQueenTable [0, 7] = -20;
+
+AIQueenTable [7, 6] = -10;
+AIQueenTable [6, 6] = 0;
+AIQueenTable [5, 6] = 0;
+AIQueenTable [4, 6] = 0;
+AIQueenTable [3, 6] = 0;
+AIQueenTable [2, 6] = 0;
+AIQueenTable [1, 6] = 0;
+AIQueenTable [0, 6] = -10;
+
+AIQueenTable [7, 5] = -10;  // AI's 6th row -- Q6 etc
+AIQueenTable [6, 5] = 0;
+AIQueenTable [5, 5] = 5;
+AIQueenTable [4, 5] = 5;
+AIQueenTable [3, 5] = 5;
+AIQueenTable [2, 5] = 5;
+AIQueenTable [1, 5] = 0;
+AIQueenTable [0, 5] = -10;
+
+AIQueenTable [7, 4] = -5;  //AI 5th row
+AIQueenTable [6, 4] = 0;
+AIQueenTable [5, 4] = 5;
+AIQueenTable [4, 4] = 5;
+AIQueenTable [3, 4] = 5;
+AIQueenTable [2, 4] = 5;
+AIQueenTable [1, 4] = 0;
+AIQueenTable [0, 4] = -5;
+
+AIQueenTable [7, 3] = 0;
+AIQueenTable [6, 3] = 0;
+AIQueenTable [5, 3] = 5;
+AIQueenTable [4, 3] = 5;
+AIQueenTable [3, 3] = 5;
+AIQueenTable [2, 3] = 5;
+AIQueenTable [1, 3] = 0;
+AIQueenTable [0, 3] = -5;  // asymmetry
+
+AIQueenTable [7, 2] = -10;
+AIQueenTable [6, 2] = 5;
+AIQueenTable [5, 2] = 5;
+AIQueenTable [4, 2] = 5;
+AIQueenTable [3, 2] = 5;
+AIQueenTable [2, 2] = 5;
+AIQueenTable [1, 2] = 0; // asymmetry
+AIQueenTable [0, 2] = -10;
+
+AIQueenTable [7, 1] = -10;
+AIQueenTable [6, 1] = 0;
+AIQueenTable [5, 1] = 5;
+AIQueenTable [4, 1] = 0;
+AIQueenTable [3, 1] = 0;
+AIQueenTable [2, 1] = 0;
+AIQueenTable [1, 1] = 0;   // yes, asymmerty
+AIQueenTable [0, 1] = -10;
+
+AIQueenTable [7, 0] = -20;
+AIQueenTable [6, 0] = -10;
+AIQueenTable [5, 0] = -10;
+AIQueenTable [4, 0] = -5;
+AIQueenTable [3, 0] = -5;
+AIQueenTable [2, 0] = -10;
+AIQueenTable [1, 0] = -10;
+AIQueenTable [0, 0] = -20;
+
+
+// -------------- Human Queens --------------
+
+HumanQueenTable [7, 7] = -20;
+HumanQueenTable [6, 7] = -10;
+HumanQueenTable [5, 7] = -10;
+HumanQueenTable [4, 7] = -5;
+HumanQueenTable [3, 7] = -5;
+HumanQueenTable [2, 7] = -10;
+HumanQueenTable [1, 7] = -10;
+HumanQueenTable [0, 7] = -20;
+
+HumanQueenTable [7, 6] = -10;
+HumanQueenTable [6, 6] = 0;
+HumanQueenTable [5, 6] = 5;
+HumanQueenTable [4, 6] = 0;
+HumanQueenTable [3, 6] = 0;
+HumanQueenTable [2, 6] = 0;  // asymmetry
+HumanQueenTable [1, 6] = 0;
+HumanQueenTable [0, 6] = -10;
+
+HumanQueenTable [7, 5] = -10;
+HumanQueenTable [6, 5] = 5;
+HumanQueenTable [5, 5] = 5;
+HumanQueenTable [4, 5] = 5;
+HumanQueenTable [3, 5] = 5;
+HumanQueenTable [2, 5] = 5;
+HumanQueenTable [1, 5] = 0;  // deliberate asymmetry
+HumanQueenTable [0, 5] = -10;
+
+HumanQueenTable [7, 4] = 0;
+HumanQueenTable [6, 4] = 0;
+HumanQueenTable [5, 4] = 5;
+HumanQueenTable [4, 4] = 5;
+HumanQueenTable [3, 4] = 5;
+HumanQueenTable [2, 4] = 5;
+HumanQueenTable [1, 4] = 0;
+HumanQueenTable [0, 4] = -5;   // deliberate asymmetry
+
+HumanQueenTable [7, 3] = -5;   
+HumanQueenTable [6, 3] = 0;
+HumanQueenTable [5, 3] = 5;
+HumanQueenTable [4, 3] = 5;
+HumanQueenTable [3, 3] = 5;
+HumanQueenTable [2, 3] = 5;
+HumanQueenTable [1, 3] = 0;
+HumanQueenTable [0, 3] = -5;
+
+HumanQueenTable [7, 2] = -10;
+HumanQueenTable [6, 2] = 0;
+HumanQueenTable [5, 2] = 5;
+HumanQueenTable [4, 2] = 5;
+HumanQueenTable [3, 2] = 5;
+HumanQueenTable [2, 2] = 5;
+HumanQueenTable [1, 2] = 0;
+HumanQueenTable [0, 2] = -10;
+
+HumanQueenTable [7, 1] = -10;
+HumanQueenTable [6, 1] = 0;
+HumanQueenTable [5, 1] = 0;
+HumanQueenTable [4, 1] = 0;
+HumanQueenTable [3, 1] = 0;
+HumanQueenTable [2, 1] = 0;
+HumanQueenTable [1, 1] = 0;
+HumanQueenTable [0, 1] = -10;
+
+HumanQueenTable [7, 0] = -20;
+HumanQueenTable [6, 0] = -10;
+HumanQueenTable [5, 0] = -10;
+HumanQueenTable [4, 0] = -5;
+HumanQueenTable [3, 0] = -5;
+HumanQueenTable [2, 0] = -10;
+HumanQueenTable [1, 0] = -10;
+HumanQueenTable [0, 0] = -20;
+
+// ============= AI KING =====================
+
+
 
 
 

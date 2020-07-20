@@ -55,7 +55,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						}
 						case QUEEN:
 						{
-							positionScore += VQUEEN;
+							positionScore += (VQUEEN + board_object.AIQueenTable[xx, yy]);
 							break;
 						}
 						case KING:
@@ -92,7 +92,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						}
 						case QUEEN:
 						{
-							positionScore -= VQUEEN;
+							positionScore -= (VQUEEN + board_object.HumanQueenTable[xx, yy]);
 							break;
 						}
 						case KING:
