@@ -35,7 +35,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 					{
 						case PAWN: 
 						{
-							positionScore += VPAWN;
+							positionScore += (VPAWN + board_object.AIpawnTable[xx, yy]);
 							break;
 						}
 						case KNIGHT:
@@ -50,7 +50,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						}
 						case ROOK:
 						{
-							positionScore += VROOK;
+							positionScore += (VROOK + board_object.AIRookTable[xx, yy]);;
 							break;
 						}
 						case QUEEN:
@@ -72,7 +72,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 					{
 						case PAWN: 
 						{
-							positionScore -= VPAWN;
+							positionScore -= (VPAWN + board_object.HumanPawnTable[xx, yy]);
 							break;
 						}
 						case KNIGHT:
@@ -87,7 +87,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						}
 						case ROOK:
 						{
-							positionScore -= VROOK;
+							positionScore -= (VROOK + board_object.HumanRookTable[xx, yy]);;
 							break;
 						}
 						case QUEEN:

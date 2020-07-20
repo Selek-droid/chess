@@ -248,7 +248,7 @@ if (xx < 7 ) && (xx > 0 ) && (yy == 7)  // BOTTOM EDGE, range 1
 		}
 	}
 	
-	var targetID = boardState[xx = 1, yy];  // King, Q, R directly W
+	var targetID = boardState[xx - 1, yy];  // King, Q, R directly W
 	if (targetID[1] == enemy)
 	{
 		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
