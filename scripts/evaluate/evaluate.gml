@@ -7,6 +7,8 @@ var listIndex = 0;
 var piece = [0 , 0];
 var selectedPiece = [0 , 0];
 var candidate = 0;
+var possibleTie = false;
+var tieBreakerList = ds_list_create();
 
 //  "make" each 4-element move in the list; save each move's positionScore and its index.
 
@@ -60,7 +62,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						}
 						case KING:
 						{
-							positionScore += VKING;
+							positionScore += (VKING + board_object.AIKingTable[xx, yy]);
 							break;
 						}
 					}
@@ -97,7 +99,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						}
 						case KING:
 						{
-							positionScore -= VKING;
+							positionScore -= (VKING + board_object.HumanKingTable[xx, yy]);
 							break;
 						}
 					}
@@ -110,12 +112,24 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	show_debug_message("ListIndex " + string(listIndex) + " : " + string(oldX) + " , " + 
 			string(oldY) + " to " + string(newX) + string(" , ") + string(newY) + " score: " +
 			string(positionScore));
-		
+	 
+	if (positionScore == maxScore)   // if a tie, store both, randomize
+	{
+		ds_list_add(tieBreakerList,listIndex);
+		var possibleTie = true;
+	}
+	
 	if (positionScore > maxScore) 
+	{ 
+		if (possibleTie)
 		{
-			maxScore = positionScore;
-			candidate = listIndex;  //store list index of current best score
+			ds_list_clear(tieBreakerList);
+			possibleTie = false;
 		}
+		maxScore = positionScore;
+		candidate = listIndex;  //store list index of current best score
+	}
+	
 	positionScore = 0;
 	
 }
@@ -123,4 +137,12 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 show_debug_message("Index of best move was " + string(candidate) + " with score of " + string(maxScore));
 show_debug_message("List size was " + string(listSize) + " and listIndex was " + string(listIndex)); 
 
+if (possibleTie)
+{
+	var tieBreakIndex = irandom((ds_list_size(tieBreakerList) - 1) );
+	candidate = ds_list_find_value(tieBreakerList,tieBreakIndex);
+	show_debug_message(("Tie break Index was ") + string(tieBreakIndex));
+}
+
+ds_list_destroy(tieBreakerList);
 return candidate;

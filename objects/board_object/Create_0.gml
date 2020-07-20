@@ -819,17 +819,151 @@ HumanQueenTable [0, 0] = -20;
 
 // ============= AI KING =====================
 
+AIKingTable [7, 7] = -30;
+AIKingTable [6, 7] = -30;
+AIKingTable [5, 7] = -40;
+AIKingTable [4, 7] = -50;
+AIKingTable [3, 7] = -50;
+AIKingTable [2, 7] = -40;
+AIKingTable [1, 7] = -30;
+AIKingTable [0, 7] = -30;
+
+AIKingTable [7, 6] = -30;
+AIKingTable [6, 6] = -30;
+AIKingTable [5, 6] = -40;
+AIKingTable [4, 6] = -50;
+AIKingTable [3, 6] = -50;
+AIKingTable [2, 6] = -40;
+AIKingTable [1, 6] = -30;
+AIKingTable [0, 6] = -30;
+
+AIKingTable [7, 5] = -30;
+AIKingTable [6, 5] = -30;
+AIKingTable [5, 5] = -40;
+AIKingTable [4, 5] = -50;
+AIKingTable [3, 5] = -50;
+AIKingTable [2, 5] = -40;
+AIKingTable [1, 5] = -30;
+AIKingTable [0, 5] = -30;
+
+AIKingTable [7, 4] = -30;
+AIKingTable [6, 4] = -30;
+AIKingTable [5, 4] = -40;
+AIKingTable [4, 4] = -50;
+AIKingTable [3, 4] = -50;
+AIKingTable [2, 4] = -40;
+AIKingTable [1, 4] = -30;
+AIKingTable [0, 4] = -30;
+
+AIKingTable [7, 3] = -20;
+AIKingTable [6, 3] = -30;
+AIKingTable [5, 3] = -30;
+AIKingTable [4, 3] = -40;
+AIKingTable [3, 3] = -40;
+AIKingTable [2, 3] = -30;
+AIKingTable [1, 3] = -30;
+AIKingTable [0, 3] = -20;
+
+AIKingTable [7, 2] = -10;
+AIKingTable [6, 2] = -20;
+AIKingTable [5, 2] = -20;
+AIKingTable [4, 2] = -20;
+AIKingTable [3, 2] = -20;
+AIKingTable [2, 2] = -20;
+AIKingTable [1, 2] = -20;
+AIKingTable [0, 2] = -10;
+
+AIKingTable [7, 1] = 20;
+AIKingTable [6, 1] = 20;
+AIKingTable [5, 1] = 0;
+AIKingTable [4, 1] = 0;
+AIKingTable [3, 1] = 0;
+AIKingTable [2, 1] = 0;
+AIKingTable [1, 1] = 20;
+AIKingTable [0, 1] = 20;
+
+AIKingTable [7, 0] = 20;
+AIKingTable [6, 0] = 30;
+AIKingTable [5, 0] = 10;
+AIKingTable [4, 0] = 0;
+AIKingTable [3, 0] = 0;
+AIKingTable [2, 0] = 25;
+AIKingTable [1, 0] = 20;
+AIKingTable [0, 0] = 20;
 
 
+// ---------------- Human King ---------------------------
 
+HumanKingTable [7, 7] = 20;
+HumanKingTable [6, 7] = 30;
+HumanKingTable [5, 7] = 10;
+HumanKingTable [4, 7] = 0;
+HumanKingTable [3, 7] = 0;
+HumanKingTable [2, 7] = 25;
+HumanKingTable [1, 7] = 20;  // asymmetry; promote castling
+HumanKingTable [0, 7] = 20;
 
+HumanKingTable [7, 6] = 20;
+HumanKingTable [6, 6] = 20;
+HumanKingTable [5, 6] = 0;
+HumanKingTable [4, 6] = 0;
+HumanKingTable [3, 6] = 0;
+HumanKingTable [2, 6] = 0;
+HumanKingTable [1, 6] = 20;
+HumanKingTable [0, 6] = 20;
 
+HumanKingTable [7, 5] = -10;
+HumanKingTable [6, 5] = -20;
+HumanKingTable [5, 5] = -20;
+HumanKingTable [4, 5] = -20;
+HumanKingTable [3, 5] = -20;
+HumanKingTable [2, 5] = -20;
+HumanKingTable [1, 5] = -20;
+HumanKingTable [0, 5] = -10;
 
+HumanKingTable [7, 4] = -20;
+HumanKingTable [6, 4] = -30;
+HumanKingTable [5, 4] = -30;
+HumanKingTable [4, 4] = -40;
+HumanKingTable [3, 4] = -40;
+HumanKingTable [2, 4] = -30;
+HumanKingTable [1, 4] = -30;
+HumanKingTable [0, 4] = -20;
 
+HumanKingTable [7, 3] = -30;
+HumanKingTable [6, 3] = -30;
+HumanKingTable [5, 3] = -40;
+HumanKingTable [4, 3] = -50;
+HumanKingTable [3, 3] = -50;
+HumanKingTable [2, 3] = -40;
+HumanKingTable [1, 3] = -30;
+HumanKingTable [0, 3] = -30;
 
+HumanKingTable [7, 2] = -30;
+HumanKingTable [6, 2] = -30;
+HumanKingTable [5, 2] = -40;
+HumanKingTable [4, 2] = -50;
+HumanKingTable [3, 2] = -50;
+HumanKingTable [2, 2] = -40;
+HumanKingTable [1, 2] = -30;
+HumanKingTable [0, 2] = -30;
 
+HumanKingTable [7, 1] = -30;
+HumanKingTable [6, 1] = -30;
+HumanKingTable [5, 1] = -40;
+HumanKingTable [4, 1] = -50;
+HumanKingTable [3, 1] = -50;
+HumanKingTable [2, 1] = -40;
+HumanKingTable [1, 1] = -30;
+HumanKingTable [0, 1] = -30;
 
-
-
+HumanKingTable [7, 0] = -30;
+HumanKingTable [6, 0] = -30;
+HumanKingTable [5, 0] = -40;
+HumanKingTable [4, 0] = -50;
+HumanKingTable [3, 0] = -50;
+HumanKingTable [2, 0] = -40;
+HumanKingTable [1, 0] = -30;
+HumanKingTable [0, 0] = -30;
 
 
