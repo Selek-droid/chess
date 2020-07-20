@@ -1,5 +1,3 @@
-// Find universe of possible moves.  Evaluate them.
-
 randomize();
 
 if oGame.AIOpening
@@ -13,8 +11,6 @@ var possibleMoves = ds_list_create();
 possibleMoves = possibleMoves_scr();
 possibleMoves = avoidCheck_scr(possibleMoves);
 
-evaluate();
-
 var numberOfMoves = floor((ds_list_size(possibleMoves) / 4));
 if (numberOfMoves == 0)   // Check for stalemate/checkmate eventually. For now, revert to player. 
 	{
@@ -23,7 +19,11 @@ if (numberOfMoves == 0)   // Check for stalemate/checkmate eventually. For now, 
 	exit;
 	}
 show_debug_message("number of moves is " + string(numberOfMoves));
-var listIndex = 4 * (irandom(numberOfMoves - 1));
+
+var boardState = global.grid;
+var listIndex = evaluate(possibleMoves, boardState);
+
+// var listIndex = 4 * (irandom(numberOfMoves - 1));
 
 var xx = ds_list_find_value(possibleMoves,listIndex);
 var yy = ds_list_find_value(possibleMoves,listIndex + 1);
@@ -68,14 +68,15 @@ if (newY == 0) && (xx - newX == 2)   // left side now
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
 		exit;
-		}
+	}
 }
-
-// most other cases:
+// ********** PERFORM THE MOVE! *****************
 
 var chosenPiece = global.grid[xx, yy];
 if !(array_equals(global.grid[newX, newY], [0, 0])) capture = true;
-animate(chosenPiece, xx, yy, newX, newY); 
+animate(chosenPiece, xx, yy, newX, newY);
+
+// ******* post-move adjustments ***************
 
 if (chosenPiece[0] == ROOK) && ( xx == 0 ) && ( yy == 0 ) board_object.AICanCastleLeft = false;
 if (chosenPiece[0] == ROOK) && ( xx == 7 ) && ( yy == 0 ) board_object.AICanCastleRight = false;
@@ -85,10 +86,6 @@ if (chosenPiece[0] == KING) && ( (abs(newX - xx)) == 1 )
 	board_object.AICanCastleRight = false;
 }
 
-if (newY == 7) && (array_equals(global.grid[newX, newY],[PAWN, BLACK])) // check for pawn promotion 
-{
-	global.grid[newX, newY] = [QUEEN, BLACK];
-}
 
 updateHistory_scr(chosenPiece, xx, yy, newX, newY, capture);
 oGame.turn += 1;

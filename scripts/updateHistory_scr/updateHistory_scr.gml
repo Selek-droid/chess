@@ -101,4 +101,4 @@ switch (piece[0])
 }
 
 ds_list_add(oGame.formattedHistory,formattedMove);
-show_debug_message(formattedMove);
+show_debug_message("Turn " + string(oGame.turn) + " : " + formattedMove);

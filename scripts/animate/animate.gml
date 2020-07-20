@@ -17,7 +17,8 @@ switch (piece[0])
 {
 	case PAWN:
 	{
-		board_object.movingSprite = black_pawn_sprite;
+		board_object.movingSprite = black_pawn_sprite; 
+		if (board_object.newY == 7)	board_object.movingPiece = [QUEEN, BLACK];
 		break;
 	}
 	
