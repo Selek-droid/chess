@@ -17,6 +17,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	var newX = ds_list_find_value(possibleMoves,listIndex + 2);
 	var newY = ds_list_find_value(possibleMoves,listIndex + 3);
 
+	boardState = argument1;
 	var selectedPiece = boardState[oldX, oldY];  // "move" piece to new location
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0]  // need to check for castling, but first test  *****
@@ -28,6 +29,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 			{
 				var piece = boardState[xx, yy];
 				if piece[1] == BLACK   // check each piece at each square
+				
 				{
 					switch (piece[0])
 					{
@@ -102,20 +104,22 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 				}
 			}
 		}
-		show_debug_message("ListIndex " + string(listIndex) + " : " + string(oldX) + " , " + 
-				string(oldY) + " to " + string(newX) + string(" , ") + string(newY) + " score: " +
-				string(positionScore));
+	}
+	// should have TOTAL positionScore from 64 loops thru the board. Pluses and minuses alike.	
+	
+	show_debug_message("ListIndex " + string(listIndex) + " : " + string(oldX) + " , " + 
+			string(oldY) + " to " + string(newX) + string(" , ") + string(newY) + " score: " +
+			string(positionScore));
 		
-		
-		if (positionScore > maxScore) 
+	if (positionScore > maxScore) 
 		{
 			maxScore = positionScore;
 			candidate = listIndex;  //store list index of current best score
 		}
-		positionScore = 0;
-		
-	}
+	positionScore = 0;
+	
 }
+
 show_debug_message("Index of best move was " + string(candidate) + " with score of " + string(maxScore));
 show_debug_message("List size was " + string(listSize) + " and listIndex was " + string(listIndex)); 
 
