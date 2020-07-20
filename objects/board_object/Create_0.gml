@@ -371,6 +371,154 @@ HumanRookTable [2, 0] = 0;
 HumanRookTable [1, 0] = 0;
 HumanRookTable [0, 0] = 0;
 
+// AI Knight table ==========================================================
+
+AIKnightTable [7, 7] = -50;  // AI's most distant row == AI K8 etc
+AIKnightTable [6, 7] = -40;
+AIKnightTable [5, 7] = -30;
+AIKnightTable [4, 7] = -30;
+AIKnightTable [3, 7] = -30;
+AIKnightTable [2, 7] = -30;
+AIKnightTable [1, 7] = -40;
+AIKnightTable [0, 7] = -50;
+
+AIKnightTable [7, 6] = -40;
+AIKnightTable [6, 6] = -20;
+AIKnightTable [5, 6] = 0;
+AIKnightTable [4, 6] = 5;
+AIKnightTable [3, 6] = 5;
+AIKnightTable [2, 6] = 0;
+AIKnightTable [1, 6] = -20;
+AIKnightTable [0, 6] = -40;
+
+AIKnightTable [7, 5] = -30;  // AI's 6th row
+AIKnightTable [6, 5] = 0;
+AIKnightTable [5, 5] = 10;
+AIKnightTable [4, 5] = 15;
+AIKnightTable [3, 5] = 15;
+AIKnightTable [2, 5] = 10;
+AIKnightTable [1, 5] = 0;
+AIKnightTable [0, 5] = -30;
+
+AIKnightTable [7, 4] = -30;  // AI's 5th row
+AIKnightTable [6, 4] = 5;
+AIKnightTable [5, 4] = 15;
+AIKnightTable [4, 4] = 20;
+AIKnightTable [3, 4] = 20;
+AIKnightTable [2, 4] = 15;
+AIKnightTable [1, 4] = 5;
+AIKnightTable [0, 4] = -30;
+
+AIKnightTable [7, 3] = -30;  // 4th row
+AIKnightTable [6, 3] = 0;
+AIKnightTable [5, 3] = 15;
+AIKnightTable [4, 3] = 20;
+AIKnightTable [3, 3] = 20;
+AIKnightTable [2, 3] = 15;
+AIKnightTable [1, 3] = 0;
+AIKnightTable [0, 3] = -30;
+
+AIKnightTable [7, 2] = -30;  // AI's 3rd row == AI K3 etc
+AIKnightTable [6, 2] = 5;
+AIKnightTable [5, 2] = 10;
+AIKnightTable [4, 2] = 15;
+AIKnightTable [3, 2] = 15;
+AIKnightTable [2, 2] = 10;
+AIKnightTable [1, 2] = 5;
+AIKnightTable [0, 2] = -30;
+
+AIKnightTable [7, 1] = -40;  // AIs 2nd row = AI K2 etc
+AIKnightTable [6, 1] = -20;
+AIKnightTable [5, 1] = 0;
+AIKnightTable [4, 1] = 5;
+AIKnightTable [3, 1] = 5;
+AIKnightTable [2, 1] = 0;
+AIKnightTable [1, 1] = -20;
+AIKnightTable [0, 1] = -40;
+
+AIKnightTable [7, 0] = -30;  // 1st row
+AIKnightTable [6, 0] = 0;
+AIKnightTable [5, 0] = 15;
+AIKnightTable [4, 0] = 20;
+AIKnightTable [3, 0] = 20;
+AIKnightTable [2, 0] = 15;
+AIKnightTable [1, 0] = 0;
+AIKnightTable [0, 0] = -30;
+
+// Human knights ================================================================
+
+HumanKnightTable [7, 7] = -50;
+HumanKnightTable [6, 7] = -40;
+HumanKnightTable [5, 7] = -30;
+HumanKnightTable [4, 7] = -30;
+HumanKnightTable [3, 7] = -30;
+HumanKnightTable [2, 7] = -30;
+HumanKnightTable [1, 7] = -40;
+HumanKnightTable [0, 7] = -50;
+
+HumanKnightTable [7, 6] = -40;
+HumanKnightTable [6, 6] = -20;
+HumanKnightTable [5, 6] = 0;
+HumanKnightTable [4, 6] = 5;
+HumanKnightTable [3, 6] = 5;
+HumanKnightTable [2, 6] = 0;
+HumanKnightTable [1, 6] = -20;
+HumanKnightTable [0, 6] = -40;
+
+HumanKnightTable [7, 5] = -30;
+HumanKnightTable [6, 5] = 5;
+HumanKnightTable [5, 5] = 10;
+HumanKnightTable [4, 5] = 15;
+HumanKnightTable [3, 5] = 15;
+HumanKnightTable [2, 5] = 10;
+HumanKnightTable [1, 5] = 5;
+HumanKnightTable [0, 5] = -30;
+
+HumanKnightTable [7, 4] = -30;
+HumanKnightTable [6, 4] = 0;
+HumanKnightTable [5, 4] = 15;
+HumanKnightTable [4, 4] = 20;
+HumanKnightTable [3, 4] = 20;
+HumanKnightTable [2, 4] = 15;
+HumanKnightTable [1, 4] = 0;
+HumanKnightTable [0, 4] = -30;
+
+HumanKnightTable [7, 3] = -30;
+HumanKnightTable [6, 3] = 5;
+HumanKnightTable [5, 3] = 15;
+HumanKnightTable [4, 3] = 20;
+HumanKnightTable [3, 3] = 20;
+HumanKnightTable [2, 3] = 15;
+HumanKnightTable [1, 3] = 5;
+HumanKnightTable [0, 3] = -30;
+
+HumanKnightTable [7, 2] = -30;
+HumanKnightTable [6, 2] = 0;
+HumanKnightTable [5, 2] = 10;
+HumanKnightTable [4, 2] = 15;
+HumanKnightTable [3, 2] = 15;
+HumanKnightTable [2, 2] = 10;
+HumanKnightTable [1, 2] = 0;
+HumanKnightTable [0, 2] = -30;
+
+HumanKnightTable [7, 1] = -40;
+HumanKnightTable [6, 1] = -20;
+HumanKnightTable [5, 1] = 0;
+HumanKnightTable [4, 1] = 0;
+HumanKnightTable [3, 1] = 0;
+HumanKnightTable [2, 1] = 0;
+HumanKnightTable [1, 1] = -20;
+HumanKnightTable [0, 1] = -40;
+
+HumanKnightTable [7, 0] = -50;
+HumanKnightTable [6, 0] = -40;
+HumanKnightTable [5, 0] = -30;
+HumanKnightTable [4, 0] = -30;
+HumanKnightTable [3, 0] = -30;
+HumanKnightTable [2, 0] = -30;
+HumanKnightTable [1, 0] = -40;
+HumanKnightTable [0, 0] = -50;
+
 
 
 

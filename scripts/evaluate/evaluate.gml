@@ -40,7 +40,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						}
 						case KNIGHT:
 						{
-							positionScore += VKNIGHT;
+							positionScore += (VKNIGHT + board_object.AIKnightTable[xx, yy]);
 							break;
 						}
 						case BISHOP:
@@ -77,7 +77,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						}
 						case KNIGHT:
 						{
-							positionScore -= VKNIGHT;
+							positionScore -= (VKNIGHT + board_object.AIKnightTable[xx, yy]);
 							break;
 						}
 						case BISHOP:
