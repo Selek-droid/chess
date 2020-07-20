@@ -519,6 +519,157 @@ HumanKnightTable [2, 0] = -30;
 HumanKnightTable [1, 0] = -40;
 HumanKnightTable [0, 0] = -50;
 
+// =============   AI Bishops ========================================
+
+AIBishopTable [7, 7] = -20;
+AIBishopTable [6, 7] = -10;
+AIBishopTable [5, 7] = -10;  
+AIBishopTable [4, 7] = -10;
+AIBishopTable [3, 7] = -10;
+AIBishopTable [2, 7] = -10;  
+AIBishopTable [1, 7] = -10;
+AIBishopTable [0, 7] = -20;
+
+AIBishopTable [7, 6] = -10;
+AIBishopTable [6, 6] = 0;
+AIBishopTable [5, 6] = 0;  
+AIBishopTable [4, 6] = 0;
+AIBishopTable [3, 6] = 0;
+AIBishopTable [2, 6] = 0;  
+AIBishopTable [1, 6] = 0;
+AIBishopTable [0, 6] = -10;
+
+AIBishopTable [7, 5] = -10;
+AIBishopTable [6, 5] = 0;
+AIBishopTable [5, 5] = 5;  
+AIBishopTable [4, 5] = 10;
+AIBishopTable [3, 5] = 10;
+AIBishopTable [2, 5] = 5;  
+AIBishopTable [1, 5] = 0;
+AIBishopTable [0, 5] = -10;
+
+AIBishopTable [7, 4] = -10;
+AIBishopTable [6, 4] = 5;
+AIBishopTable [5, 4] = 5;  
+AIBishopTable [4, 4] = 10;
+AIBishopTable [3, 4] = 10;
+AIBishopTable [2, 4] = 5;  
+AIBishopTable [1, 4] = 5;
+AIBishopTable [0, 4] = -10;
+
+AIBishopTable [7, 3] = -10;
+AIBishopTable [6, 3] = 0;
+AIBishopTable [5, 3] = 10;  
+AIBishopTable [4, 3] = 10;
+AIBishopTable [3, 3] = 10;
+AIBishopTable [2, 3] = 10;  
+AIBishopTable [1, 3] = 0;
+AIBishopTable [0, 3] = -10;
+
+AIBishopTable [7, 2] = -10;
+AIBishopTable [6, 2] = 10;
+AIBishopTable [5, 2] = 10;  
+AIBishopTable [4, 2] = 10;
+AIBishopTable [3, 2] = 10;
+AIBishopTable [2, 2] = 10;  
+AIBishopTable [1, 2] = 10;
+AIBishopTable [0, 2] = -10;
+
+AIBishopTable [7, 1] = -10;
+AIBishopTable [6, 1] = 5;
+AIBishopTable [5, 1] = 0;  
+AIBishopTable [4, 1] = 0;
+AIBishopTable [3, 1] = 0;
+AIBishopTable [2, 1] = 0;  
+AIBishopTable [1, 1] = 5;
+AIBishopTable [0, 1] = -10;
+
+AIBishopTable [7, 0] = -20;
+AIBishopTable [6, 0] = -10;
+AIBishopTable [5, 0] = -25;  
+AIBishopTable [4, 0] = -10;
+AIBishopTable [3, 0] = -10;
+AIBishopTable [2, 0] = -25;  
+AIBishopTable [1, 0] = -10;
+AIBishopTable [0, 0] = -20;
+
+
+// =========== Human bishops ----------------------------------
+
+HumanBishopTable [7, 7] = -20;
+HumanBishopTable [6, 7] = -10;
+HumanBishopTable [5, 7] = -25;  // experiment with B starting squares
+HumanBishopTable [4, 7] = -10;
+HumanBishopTable [3, 7] = -10;
+HumanBishopTable [2, 7] = -25;  // experiment with B starting squares
+HumanBishopTable [1, 7] = -10;
+HumanBishopTable [0, 7] = -20;
+
+HumanBishopTable [7, 6] = -10;
+HumanBishopTable [6, 6] = 5;
+HumanBishopTable [5, 6] = 0;  
+HumanBishopTable [4, 6] = 0;
+HumanBishopTable [3, 6] = 0;
+HumanBishopTable [2, 6] = 0;  
+HumanBishopTable [1, 6] = 5;
+HumanBishopTable [0, 6] = -10;
+
+HumanBishopTable [7, 5] = -10;
+HumanBishopTable [6, 5] = 10;
+HumanBishopTable [5, 5] = 10;  
+HumanBishopTable [4, 5] = 10;
+HumanBishopTable [3, 5] = 10;
+HumanBishopTable [2, 5] = 10;  
+HumanBishopTable [1, 5] = 10;
+HumanBishopTable [0, 5] = -10;
+
+HumanBishopTable [7, 4] = -10;
+HumanBishopTable [6, 4] = 0;
+HumanBishopTable [5, 4] = 10;  
+HumanBishopTable [4, 4] = 10;
+HumanBishopTable [3, 4] = 10;
+HumanBishopTable [2, 4] = 10;  
+HumanBishopTable [1, 4] = 0;
+HumanBishopTable [0, 4] = -10;
+
+HumanBishopTable [7, 3] = -10;
+HumanBishopTable [6, 3] = 5;
+HumanBishopTable [5, 3] = 5;  
+HumanBishopTable [4, 3] = 10;
+HumanBishopTable [3, 3] = 10;
+HumanBishopTable [2, 3] = 5;  
+HumanBishopTable [1, 3] = 5;
+HumanBishopTable [0, 3] = -10;
+
+HumanBishopTable [7, 2] = -10;
+HumanBishopTable [6, 2] = 0;
+HumanBishopTable [5, 2] = 5;  
+HumanBishopTable [4, 2] = 10;
+HumanBishopTable [3, 2] = 10;
+HumanBishopTable [2, 2] = 5;  
+HumanBishopTable [1, 2] = 0;
+HumanBishopTable [0, 2] = -10;
+
+HumanBishopTable [7, 1] = -10;
+HumanBishopTable [6, 1] = 0;
+HumanBishopTable [5, 1] = 0;  
+HumanBishopTable [4, 1] = 0;
+HumanBishopTable [3, 1] = 0;
+HumanBishopTable [2, 1] = 0;  
+HumanBishopTable [1, 1] = 0;
+HumanBishopTable [0, 1] = -10;
+
+HumanBishopTable [7, 0] = -20;
+HumanBishopTable [6, 0] = -10;
+HumanBishopTable [5, 0] = -10;  
+HumanBishopTable [4, 0] = -10;
+HumanBishopTable [3, 0] = -10;
+HumanBishopTable [2, 0] = -10;  
+HumanBishopTable [1, 0] = -10;
+HumanBishopTable [0, 0] = -20;
+
+
+
 
 
 

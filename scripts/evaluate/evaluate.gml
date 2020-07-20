@@ -45,7 +45,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						}
 						case BISHOP:
 						{
-							positionScore += VBISHOP;
+							positionScore += (VBISHOP + board_object.AIBishopTable[xx, yy]);
 							break;
 						}
 						case ROOK:
@@ -77,12 +77,12 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						}
 						case KNIGHT:
 						{
-							positionScore -= (VKNIGHT + board_object.AIKnightTable[xx, yy]);
+							positionScore -= (VKNIGHT + board_object.HumanKnightTable[xx, yy]);
 							break;
 						}
 						case BISHOP:
 						{
-							positionScore -= VBISHOP;
+							positionScore -= (VBISHOP + board_object.HumanBishopTable[xx, yy]);
 							break;
 						}
 						case ROOK:
