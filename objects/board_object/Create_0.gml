@@ -436,13 +436,13 @@ AIKnightTable [2, 1] = 0;
 AIKnightTable [1, 1] = -20;
 AIKnightTable [0, 1] = -40;
 
-AIKnightTable [7, 0] = -30;  // 1st row
-AIKnightTable [6, 0] = 0;
-AIKnightTable [5, 0] = 15;
-AIKnightTable [4, 0] = 20;
-AIKnightTable [3, 0] = 20;
-AIKnightTable [2, 0] = 15;
-AIKnightTable [1, 0] = 0;
+AIKnightTable [7, 0] = -50;  // 1st row
+AIKnightTable [6, 0] = -40;
+AIKnightTable [5, 0] = -30;
+AIKnightTable [4, 0] = -30;
+AIKnightTable [3, 0] = -30;
+AIKnightTable [2, 0] = -30;
+AIKnightTable [1, 0] = -40;
 AIKnightTable [0, 0] = -30;
 
 // Human knights ================================================================

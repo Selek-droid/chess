@@ -1,0 +1,603 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 var xx;\par
+var yy;\par
+var legalMoves = ds_list_create();\par
+var boardState = global.grid;\par
+\par
+for (xx = 0; xx < 8; xx += 1;)\par
+\{\par
+\tab for (yy = 0; yy < 8; yy += 1;)\par
+\tab\{\par
+\tab\tab if array_equals(global.grid[xx, yy],[PAWN, BLACK])\par
+\tab\tab\{ \par
+\tab\tab\tab if ( (yy == 1) && (array_equals(global.grid[xx, 3],[0, 0])) // Pawn two-space move\par
+\tab\tab\tab\tab\tab\tab && (array_equals(global.grid[xx, 2],[0 , 0]) ) )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, (yy + 2));\par
+\tab\tab\tab\}\par
+\par
+\tab\tab\tab if (yy < 7) && (array_equals(global.grid[xx, yy +  1],[0 , 0])) // Pawn one-move, <7th rank.\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, (yy + 1));\par
+\tab\tab\tab\} \par
+\tab\tab\tab\par
+\tab\tab\tab if (xx == 0) & (yy < 7) // check edge-pawn capture separately, to avoid out-of-array \par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[1, yy + 1];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE) \par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, 0, yy, 1, yy + 1); \par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\} \par
+\tab\tab\tab\par
+\tab\tab\tab if (xx == 7) & (yy < 7) // check other-edge pawn capture\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[6, yy + 1];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, 7, yy, 6, yy + 1);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab  \par
+\tab\tab\tab if (xx < 7) && (xx > 0) && (yy < 7)\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy + 1];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy + 1];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\par
+\tab\par
+\tab\tab if array_equals(global.grid[xx, yy],[KNIGHT, BLACK])\par
+\tab\tab\{\par
+\tab\tab\tab if (xx <= 6) && (yy <= 5) // offset 1, 2\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy + 2];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE) || (targetID[1] == 0)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy + 2);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx <= 5) && (yy <= 6) // offset 2, 1\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 2, yy + 1];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE) || (targetID[1] == 0)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 2, yy + 1);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx <= 5) && (yy >= 1) // offset 2, -1\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 2, yy - 1];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE) || (targetID[1] == 0)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 2, yy - 1);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\tab\par
+\tab\tab\tab if (xx <= 6) && (yy >= 2) // offset 1, -2\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy - 2];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE) || (targetID[1] == 0)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy - 2);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\tab\par
+\tab\tab\tab if (xx >= 2) && (yy >= 1) // offset -2, -1\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 2, yy - 1];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE) || (targetID[1] == 0)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 2, yy - 1);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx >= 2) && (yy <= 6) // offset -2, 1\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 2, yy + 1];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE) || (targetID[1] == 0)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 2, yy + 1);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx >= 1) && (yy <= 5) // offset -1, 2\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy + 2];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE) || (targetID[1] == 0)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy + 2);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx >= 1) && (yy >= 2) // offset -1, -2\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy - 2];\par
+\tab\tab\tab\tab if (targetID[1] == WHITE) || (targetID[1] == 0)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy - 2);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\tab\par
+\tab\tab if array_equals(global.grid[xx, yy],[KING, BLACK])\par
+\tab\tab\{\par
+\tab\tab\tab if (yy == 0) && (xx > 0) && (xx < 7)  // King on starting rank, not corners.\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab // Castling kingside (to right, assuming AI has black. Trying to make code cover both.)\par
+\tab\tab\tab\tab if (board_object.AICanCastleRight)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var castleTarget = global.grid[xx + 2, yy];  // offset 2, 0\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy];\par
+\tab\tab\tab\tab\tab if (targetID[1] == 0) && (castleTarget[1] == 0) &&\par
+//\tab\tab\tab\tab\tab array_equals(boardState[6, 0], [0 , 0]) &&     // redundant placeholder check for AI as white\par
+\tab\tab\tab\tab\tab\tab !((threatenedSquare_scr(xx, yy, boardState)) ) &&\par
+\tab\tab\tab\tab\tab\tab !((threatenedSquare_scr(xx + 1, yy, boardState)) ) &&\par
+\tab\tab\tab\tab\tab\tab !((threatenedSquare_scr(xx + 2, yy, boardState)) ) \par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 2, yy);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\par
+\tab\tab\tab\tab if (board_object.AICanCastleLeft)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var knightThere = global.grid[xx - 3, yy];\par
+\tab\tab\tab\tab\tab var castleTarget = global.grid[xx - 2, yy];  // offset 2, 0\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy];\par
+\tab\tab\tab\tab\tab if (targetID[1] == 0) && (castleTarget[1] == 0) && (knightThere[1] == 0) &&\par
+\tab\tab\tab\tab\tab\tab !((threatenedSquare_scr(xx, yy, boardState)) ) &&\par
+\tab\tab\tab\tab\tab\tab !((threatenedSquare_scr(xx + 1, yy, boardState)) ) &&\par
+\tab\tab\tab\tab\tab\tab !((threatenedSquare_scr(xx + 2, yy, boardState)) ) \par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 2, yy);\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy];  // offset -1, 0\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy);\par
+\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy + 1];  // offset -1, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);\par
+\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy + 1];  // offset 0, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy + 1);\par
+\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy + 1];  // offset 1, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy + 1, boardState) ))\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy];  // offset 1, 0\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy);\tab\tab\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (yy == 0) && (xx == 0)  // King on starting rank, top leftcorner.\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[1, 0];  // offset 1, 0\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(1, 0, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, 0, 0, 1, 0);\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[1, 1];  // offset 1, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(1, 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, 0, 0, 1, 1);\tab\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[0, 1];  // offset 0, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(0, 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, 0, 0, 0, 1);\tab\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx == 7) && (yy == 0) // King on starting rank, top right corner.\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy];  // offset -1, 0\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy);\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy + 1];  // offset -1, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy + 1];  // offset 0, 1 \par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy + 1);\tab\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx > 0) && (xx < 7) && (yy > 0) && (yy < 7)    // King not on any edge\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy];  // offset -1, 0. Prevent moving into check.\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy);\par
+\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy + 1];  // offset -1, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);\par
+\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy + 1];  // offset 0, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy + 1);\par
+\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy + 1];  // offset 1, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy + 1, boardState)) )\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy];  // offset 1, 0\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy);\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy - 1];  // offset 1, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1);\tab\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy - 1];  // offset 0, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy - 1);\tab\par
+\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy - 1];  // offset -1, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);\tab\tab\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx == 0) &&  (yy > 0) && (yy < 7)    // King on left edge, not corners\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy - 1];  // offset 0, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy - 1);\tab\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy - 1];  // offset 1, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy];  // offset 1, 0\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy + 1];  // offset 1, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy + 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy + 1];  // offset 0, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy + 1);\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx == 7) &&  (yy > 0) && (yy < 7)    // King on right edge, not corners\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy - 1];  // offset 0, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy - 1);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy - 1];  // offset -1, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy];  // offset -1, 0\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy + 1];  // offset -1 , 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy + 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);\tab\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy + 1];  // offset 0, 1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy + 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy + 1);\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx == 0) && (yy == 7)    // King on lower left corner\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy - 1];  // offset 0, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy - 1);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy - 1];  // offset 1 , -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy];  // offset 1 , 0\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy);\tab\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx == 7) && (yy == 7)    // King on lower right corner\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy - 1];  // offset 0, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy - 1);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy];  // offset -1, 0\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy - 1];  // offset -1, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx >= 1) && (xx <= 6) && (yy == 7)    // King on bottom edge, not in corners\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab var targetID = global.grid[xx - 1, yy];  // offset -1, 0\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy - 1];  // offset -1, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx - 1, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);\par
+\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx, yy - 1];  // offset 0, -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy - 1);\par
+\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy - 1];  // offset 1 , -1\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy - 1, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1);\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab var targetID = global.grid[xx + 1, yy];  // offset 1 , 0\par
+\tab\tab\tab\tab if ((targetID[1] == 0) || (targetID[1] == WHITE)) && !((threatenedSquare_scr(xx + 1, yy, boardState)) )\par
+\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + 1, yy);\tab\par
+\tab\tab\tab\}\tab\tab\par
+\tab\tab\}\par
+\tab\tab\par
+\tab\tab if array_equals(global.grid[xx, yy],[ROOK, BLACK])\par
+\tab\tab\{\tab\tab // Look left, first measuring room to maneuver, then iterate until hit obstacle\par
+\tab\tab\tab if (xx > 0)\par
+\tab\tab\tab\{\tab var availableSpace = xx;\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx - i, yy];  // offset -i, 0\par
+\tab\tab\tab\tab\tab if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx - i, yy); // empty; keep looking\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)  // record move and stop.\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - i, yy);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx < 7)  // now look right\par
+\tab\tab\tab\{\tab var availableSpace = 7 - xx;\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx + i, yy];  // offset i, 0\par
+\tab\tab\tab\tab\tab if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx + i, yy);\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + i, yy);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (yy > 0)  // now look up\par
+\tab\tab\tab\{\tab var availableSpace = yy;\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx, yy - i];  // offset 0, -i\par
+\tab\tab\tab\tab\tab if (targetID[1] == 0)  ds_list_add(legalMoves, xx, yy, xx, yy - i);\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy - i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\tab\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (yy < 7)  // now look down\par
+\tab\tab\tab\{\tab var availableSpace = 7 - yy;\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx, yy + i];  // offset 0, +i\par
+\tab\tab\tab\tab\tab if (targetID[1] == 0)  ds_list_add(legalMoves, xx, yy, xx, yy + i);\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy + i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\tab\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\tab\par
+\tab\tab if array_equals(global.grid[xx, yy],[BISHOP, BLACK])\par
+\tab\tab\{\par
+\tab\tab\tab if (xx > 0) && (yy > 0) // start looking NW\par
+\tab\tab\tab\{\tab var availableSpace = min(xx, yy);  // has less space than a rook!\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx - i, yy - i];  // offset -i, -i\par
+\tab\tab\tab\tab\tab if (targetID[1] == 0)  ds_list_add(legalMoves, xx, yy, xx - i, yy - i);\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)  // record move and stop.\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - i, yy - i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx < 7) && (yy < 7)  // next looking SE\par
+\tab\tab\tab\{\tab var availableSpace = min ((7 - xx), (7 - yy));\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx + i, yy + i];  // offset i, i\par
+\tab\tab\tab\tab\tab if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx + i, yy + i); // empty; keep looking\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)  // record move and stop.\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + i, yy + i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx > 0) && (yy < 7) // now look SW\par
+\tab\tab\tab\{\tab var availableSpace = min(xx, (7 - yy));  // has less space than a rook!\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx - i, yy + i];  // offset -i, +i\par
+\tab\tab\tab\tab\tab if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx - i, yy + i); // empty; keep looking\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)  // record move and stop.\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - i, yy + i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx < 7) && (yy > 0) // end by looking NE\par
+\tab\tab\tab\{\tab var availableSpace = min((7 - xx), yy);  // has less space than a rook!\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx + i, yy - i];  // offset +i, -i\par
+\tab\tab\tab\tab\tab if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx + i, yy - i); // empty; keep looking\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)  // record move and stop.\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + i, yy - i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\tab\par
+\tab\tab if array_equals(global.grid[xx, yy],[QUEEN, BLACK])\par
+\tab\tab\{\par
+\tab\tab\tab if (xx > 0)\par
+\tab\tab\tab\{\tab var availableSpace = xx;\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx - i, yy];  // offset -i, 0\par
+\tab\tab\tab\tab\tab if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx - i, yy); // empty; keep looking\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)  // record move and stop.\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - i, yy);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx < 7)  // now look right\par
+\tab\tab\tab\{\tab var availableSpace = 7 - xx;\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx + i, yy];  // offset i, 0\par
+\tab\tab\tab\tab\tab if (targetID[1] == 0) ds_list_add(legalMoves, xx, yy, xx + i, yy);\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + i, yy);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (yy > 0)  // now look up\par
+\tab\tab\tab\{\tab var availableSpace = yy;\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx, yy - i];  // offset 0, -i\par
+\tab\tab\tab\tab\tab if (targetID[1] == 0)  ds_list_add(legalMoves, xx, yy, xx, yy - i);\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy - i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\tab\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (yy < 7)  // now look down\par
+\tab\tab\tab\{\tab var availableSpace = 7 - yy;\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx, yy + i];  // offset 0, +i\par
+\tab\tab\tab\tab\tab if (targetID[1] == 0)  ds_list_add(legalMoves, xx, yy, xx, yy + i);\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx, yy + i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\tab\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx > 0) && (yy > 0) // start looking NW\par
+\tab\tab\tab\{\tab var availableSpace = min(xx, yy);  // has less space than a rook!\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx - i, yy - i];  // offset -i, -i\par
+\tab\tab\tab\tab\tab if (targetID[1] == 0)  ds_list_add(legalMoves, xx, yy, xx - i, yy - i);\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)  // record move and stop.\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - i, yy - i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx < 7) && (yy < 7)  // next looking SE\par
+\tab\tab\tab\{\tab var availableSpace = min ((7 - xx), (7 - yy));\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx + i, yy + i];  // offset i, i\par
+\tab\tab\tab\tab\tab if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx + i, yy + i); // empty; keep looking\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)  // record move and stop.\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + i, yy + i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx > 0) && (yy < 7) // now look SW\par
+\tab\tab\tab\{\tab var availableSpace = min(xx, (7 - yy));  // has less space than a rook!\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx - i, yy + i];  // offset -i, +i\par
+\tab\tab\tab\tab\tab if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx - i, yy + i); // empty; keep looking\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)  // record move and stop.\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx - i, yy + i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\par
+\tab\tab\tab if (xx < 7) && (yy > 0) // end by looking NE\par
+\tab\tab\tab\{\tab var availableSpace = min((7 - xx), yy);  // has less space than a rook!\par
+\tab\tab\tab\tab for (var i = 1; i <= availableSpace; i += 1;)\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab var targetID = global.grid[xx + i, yy - i];  // offset +i, -i\par
+\tab\tab\tab\tab\tab if ((targetID[1] == 0))  ds_list_add(legalMoves, xx, yy, xx + i, yy - i); // empty; keep looking\par
+\tab\tab\tab\tab\tab if (targetID[1] == WHITE)  // record move and stop.\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab ds_list_add(legalMoves, xx, yy, xx + i, yy - i);\par
+\tab\tab\tab\tab\tab\tab break;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab if (targetID[1] == BLACK) break;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\}\par
+\}\par
+\par
+return legalMoves;\par
+}
+ 
