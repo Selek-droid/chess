@@ -338,7 +338,7 @@
             "Key": "c8192428-b2b7-4615-a8c3-210ee9841135",
             "Value": {
                 "id": "eb7608f0-d60a-4fad-9fab-0feb0deb566b",
-                "resourcePath": "scripts\\threatenedSquare_scr\\threatenedSquare_scr.yy",
+                "resourcePath": "scripts\\OLDthreatenedSquare_scrOLDVERSION\\OLDthreatenedSquare_scrOLDVERSION.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -354,7 +354,7 @@
             "Key": "cac66575-1abc-4978-b181-da619438b1b1",
             "Value": {
                 "id": "e2717377-33f9-4c6c-80b1-a3c9a81a1af4",
-                "resourcePath": "scripts\\threatenedSquareRevised_scr\\threatenedSquareRevised_scr.yy",
+                "resourcePath": "scripts\\threatenedSquare_scr\\threatenedSquare_scr.yy",
                 "resourceType": "GMScript"
             }
         },
