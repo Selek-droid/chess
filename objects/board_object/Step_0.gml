@@ -5,9 +5,22 @@ switch (oGame.state)
 		AIscript();
 		break;
 	}
+	
+	case ("Player Turn"):
+		break;
+	
+	case ("Initializing"):
+	{
+		if (global.HermioneColor == WHITE)
+		{
+		oGame.state = "AI Turn";
+		exit;
+		}
+		else oGame.state = "Player Turn";
+	}
 }
 
-
+if keyboard_check_pressed(vk_escape) game_end();
 
 var newX = 0;
 var newY = 0;
@@ -16,8 +29,10 @@ var pieceType;
 // var kingPosition;
 var proposedState;
 var capture = false;
+var HermioneColor = global.HermioneColor;
+var PlayerColor = WHITE;
 
-
+if (HermioneColor == WHITE) PlayerColor = BLACK;
 
 if (!pickedUp) && (mouse_check_button_released(mb_left))  // pickup
 {

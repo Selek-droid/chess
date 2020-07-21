@@ -1,5 +1,7 @@
 randomize();
 
+show_debug_message("Started AI script");
+
 if oGame.AIOpening
 {
 	AIOpeningsScript();  // returns true if able to move
@@ -9,7 +11,7 @@ if oGame.AIOpening
 var boardState = global.grid;
 var capture = false;
 var possibleMoves = ds_list_create();
-var AISide = BLACK;
+var AISide = global.HermioneColor;
 
 possibleMoves = possibleMoves_scr(AISide, boardState, true, true);  // generate ds_list of possible moves
 possibleMoves = avoidCheck_scr(possibleMoves);   // prune them for check outside possMoves?

@@ -87,6 +87,14 @@
             }
         },
         {
+            "Key": "184785db-e8e6-4bc0-925a-a4133594c1bb",
+            "Value": {
+                "id": "b4406f46-680f-4cba-a9a9-d71b107e3c18",
+                "resourcePath": "objects\\start_menu\\start_menu.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "213a3157-d3ba-45ce-9058-ed214387e67c",
             "Value": {
                 "id": "7062be80-adff-4e25-90d9-ccfef07221e7",
@@ -180,6 +188,14 @@
                 "id": "fde57461-45ae-4af3-a15e-11a175b805b2",
                 "resourcePath": "scripts\\anotherevalNotSure\\anotherevalNotSure.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "6559667c-89ae-4b98-8461-b611623197ed",
+            "Value": {
+                "id": "0e734453-c17f-4b9a-ab1a-545084b5d952",
+                "resourcePath": "sprites\\start_menu_sprite\\start_menu_sprite.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -356,6 +372,14 @@
                 "id": "bb39469b-0cc9-407b-993d-f034f935541b",
                 "resourcePath": "scripts\\NimzoIndianDefense\\NimzoIndianDefense.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "d49af387-5012-4408-b31f-4f4442b00f25",
+            "Value": {
+                "id": "4b80dced-fc9c-425e-98d6-17b3fca301f4",
+                "resourcePath": "rooms\\StartScreen\\StartScreen.yy",
+                "resourceType": "GMRoom"
             }
         },
         {
