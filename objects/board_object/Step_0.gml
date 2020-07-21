@@ -149,8 +149,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						if array_equals(global.grid[gridX + 1, 7],[0, 0]) &&
 						array_equals(global.grid[gridX + 2, 7],[0, 0]) &&
 						array_equals(global.grid[6, 7],[0, 0]) &&
-						!threatenedSquare_scr(gridX + 1, 7, global.grid) &&
-						!threatenedSquare_scr(gridX + 2, 7, global.grid) 
+						!threatenedSquare_scr(gridX + 1, 7, global.grid, SOUTH, PlayerColor) &&
+						!threatenedSquare_scr(gridX + 2, 7, global.grid, SOUTH, PlayerColor) 
 						{
 							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[gridX + 2, 7] = [KING, PlayerColor];
@@ -170,8 +170,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						if array_equals(global.grid[gridX - 1, 7],[0, 0]) &&
 						array_equals(global.grid[gridX - 2, 7],[0, 0]) &&
 						array_equals(global.grid[1, 7],[0, 0]) &&
-						!threatenedSquare_scr(gridX - 1, 7, global.grid) &&
-						!threatenedSquare_scr(gridX - 2, 7, global.grid) 						
+						!threatenedSquare_scr(gridX - 1, 7, global.grid, SOUTH, PlayerColor) &&
+						!threatenedSquare_scr(gridX - 2, 7, global.grid, SOUTH, PlayerColor) 						
 						{
 							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[gridX - 2, 7] = [KING, PlayerColor];

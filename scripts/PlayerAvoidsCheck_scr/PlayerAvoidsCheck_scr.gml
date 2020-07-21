@@ -19,7 +19,7 @@ for (var xx = 0; xx < 8; xx += 1;)
 
 // Now see if proposed King position is threatend by enemy.
 
-if !threatenedSquare_scr(proposedKingPosition[0],proposedKingPosition[1], proposedState)
+if !threatenedSquare_scr(proposedKingPosition[0],proposedKingPosition[1], proposedState,SOUTH,PlayerColor)
 {
 return true;
 }

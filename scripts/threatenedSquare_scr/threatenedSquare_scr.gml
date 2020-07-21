@@ -7,22 +7,34 @@ var friend;
 var availableSpace;
 var xx = argument0;
 var yy = argument1;
-// var boardState = global.grid; 
 var boardState = argument2; 
+var moversSeat = argument3;  // SOUTH or NORTH.  If player, always SOUTH; if AI, oscillates.
+var moversColor = argument4;  // BLACK or WHITE.
 
-if (oGame.state == "AI Turn") 
+if (moversColor == BLACK) 
 {
-	enemy = WHITE;
-	friend = BLACK;
+	var enemy = WHITE;
+	var friend = BLACK;
 }
-	
-if (oGame.state == "Player Turn") 
+else
 {
 	enemy = BLACK;
 	friend = WHITE;
 }
 
-// Checke 1-square range first -- King and Pawns essentially, but others as warranted
+//if (oGame.state == "AI Turn") 
+//{
+//	enemy = WHITE;
+//	friend = BLACK;
+//}
+	
+//if (oGame.state == "Player Turn") 
+//{
+//	enemy = BLACK;
+//	friend = WHITE;
+//}
+
+// Check 1-square range first -- King and Pawns essentially, but others as warranted
 
 if (xx == 0) && (yy < 7) && (yy > 0) // LEFT EDGE but not corners
 {
@@ -33,7 +45,7 @@ if (xx == 0) && (yy < 7) && (yy > 0) // LEFT EDGE but not corners
 	}
 	
 	var targetID = boardState[xx + 1, yy - 1];  // king, Q, B directly NE
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -41,7 +53,7 @@ if (xx == 0) && (yy < 7) && (yy > 0) // LEFT EDGE but not corners
 		}
 	}
 	
-	else if oGame.state == "Player Turn"
+	else if moversSeat == SOUTH
 	{	if (targetID[1] == enemy)
 			{
 			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
@@ -56,7 +68,7 @@ if (xx == 0) && (yy < 7) && (yy > 0) // LEFT EDGE but not corners
 	}
 	
 	var targetID = boardState[xx + 1, yy + 1];  // King, Q, B, P directly SE
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -64,7 +76,7 @@ if (xx == 0) && (yy < 7) && (yy > 0) // LEFT EDGE but not corners
 			|| (targetID[0] == PAWN) return true;
 		}
 	}
-	else if oGame.state == "Player Turn"
+	else if moversSeat == SOUTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -95,13 +107,13 @@ if (xx == 7) && (yy < 7) && (yy > 0 )  // RIGHT EDGE, but not corners, range 1
 	}
 	
 	var targetID = boardState[xx - 1, yy - 1];  // King, Q, B directly NW
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{	if (targetID[1] == enemy)
 		{
 			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
 		}
 	}
-	else if oGame.state == "Player Turn"
+	else if moversSeat == SOUTH
 	{	if (targetID[1] == enemy)
 		{
 			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
@@ -116,14 +128,14 @@ if (xx == 7) && (yy < 7) && (yy > 0 )  // RIGHT EDGE, but not corners, range 1
 	}
 	
 	var targetID = boardState[xx - 1, yy + 1];  // King, Q, B, P directly SW
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{	if (targetID[1] == enemy)
 		{
 			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
 			|| (targetID[0] == PAWN) return true;
 		}
 	} 
-	else if oGame.state = "Player Turn"
+	else if moversSeat == SOUTH
 	{	if (targetID[1] == enemy)
 		{
 			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
@@ -149,7 +161,7 @@ if (xx > 0) && (xx < 7 ) && (yy == 0)  // TOP EDGE, range 1
 	}
 	
 	var targetID = boardState[xx + 1, yy + 1];  // King, Q, B, P directly SE
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -157,7 +169,7 @@ if (xx > 0) && (xx < 7 ) && (yy == 0)  // TOP EDGE, range 1
 			|| (targetID[0] == PAWN) return true;
 		}
 	}
-	else if oGame.state == "Player Turn"
+	else if moversSeat == SOUTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -178,7 +190,7 @@ if (xx > 0) && (xx < 7 ) && (yy == 0)  // TOP EDGE, range 1
 	}
 	
 	var targetID = boardState[xx - 1, yy + 1];  // King, Q, B or P directly SW
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -186,7 +198,7 @@ if (xx > 0) && (xx < 7 ) && (yy == 0)  // TOP EDGE, range 1
 			|| (targetID[0] == PAWN) return true;
 		}
 	}
-	else if oGame.state == "Player Turn"
+	else if moversSeat == SOUTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -207,7 +219,7 @@ if (xx < 7 ) && (xx > 0 ) && (yy == 7)  // BOTTOM EDGE, range 1
 	}
 	
 	var targetID = boardState[xx + 1, yy - 1];  // king, Q, B directly NE
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -215,7 +227,7 @@ if (xx < 7 ) && (xx > 0 ) && (yy == 7)  // BOTTOM EDGE, range 1
 			return true;
 		}
 	}
-	else if oGame.state == "Player Turn"
+	else if moversSeat == SOUTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -231,7 +243,7 @@ if (xx < 7 ) && (xx > 0 ) && (yy == 7)  // BOTTOM EDGE, range 1
 	}
 	
 	var targetID = boardState[xx - 1, yy - 1];  // King, Q, B directly NW
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -239,7 +251,7 @@ if (xx < 7 ) && (xx > 0 ) && (yy == 7)  // BOTTOM EDGE, range 1
 			return true;
 		}
 	}
-	else if oGame.state == "Player Turn"
+	else if moversSeat == SOUTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -268,7 +280,7 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 	}
 	
 	var targetID = boardState[xx + 1, yy - 1];  // king, Q, B directly NE
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -276,7 +288,7 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 			return true;
 		}
 	}
-	else if oGame.state == "Player Turn"
+	else if moversSeat == SOUTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -292,7 +304,7 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 	}
 	
 	var targetID = boardState[xx + 1, yy + 1];  // King, Q, B, P directly SE
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -300,7 +312,7 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 			|| (targetID[0] == PAWN) return true;
 		}
 	}
-	else if oGame.state == "Player Turn"
+	else if moversSeat == SOUTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -315,7 +327,7 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 	}
 	
 	var targetID = boardState[xx - 1, yy - 1];  // King, Q, B directly NW
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -323,7 +335,7 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 			return true;
 		}
 	}
-	else if oGame.state == "Player Turn"
+	else if moversSeat == SOUTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -339,7 +351,7 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 	}
 	
 	var targetID = boardState[xx - 1, yy + 1];  // King, Q, B, P directly SW
-	if oGame.state == "AI Turn"
+	if moversSeat == NORTH
 	{
 		if (targetID[1] == enemy)
 		{
@@ -347,7 +359,7 @@ if (xx < 7 ) && ( xx > 0 ) && (yy < 7) && (yy > 0)  // MOST OTHER 1-range CASES 
 			|| (targetID[0] == PAWN) return true;
 		}
 	}
-	else if oGame.state == "Player Turn"
+	else if moversSeat == SOUTH
 	{
 		if (targetID[1] == enemy)
 		{

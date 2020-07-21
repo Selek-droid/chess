@@ -1,4 +1,4 @@
-// Check each move to see whether AI king is in check. If so, remove move.
+// Check each AI move to see whether AI king is in check. If so, remove move.
 
 // var legalMoves = ds_list_create();
 // legalMoves = argument0;
@@ -7,6 +7,8 @@ var legalMoves = ds_list_create();
 var boardState = global.grid;
 var proposedState = boardState;
 var numberOfMoves = floor( ( (ds_list_size(argument0)) / 4) );
+var moversSeat = NORTH; // change when in minmax, somehow
+var moversColor = global.HermioneColor;  // again, change when in minmax
 
 // find AI King position
 
@@ -14,7 +16,7 @@ for (var xx = 0; xx < 8; xx += 1;)
 {
 	for (var yy = 0; yy < 8; yy += 1;)
 	{
-		if array_equals(boardState[xx, yy],[KING, BLACK])
+		if array_equals(boardState[xx, yy],[KING, moversColor])
 		{
 			var kingPosition = [xx , yy];
 			break;
@@ -38,14 +40,14 @@ for (var i = 0; i < numberOfMoves; i += 1;)
 	proposedState[oldX, oldY] = [0, 0];
 	proposedState[newX, newY] = [ movingPiece[0], movingPiece[1] ];
 	
-	if !threatenedSquare_scr(kingPosition[0],kingPosition[1], proposedState)
+	if !threatenedSquare_scr(kingPosition[0],kingPosition[1], proposedState, moversSeat, moversColor)
 		{
 			ds_list_add(legalMoves,oldX,oldY,newX,newY);
 		}
 	else show_debug_message("AI King should avoid check"); 
 	
 // Find King position after proposed move and test whether it's ok:	
-	if (movingPiece[0] == KING) && !threatenedSquare_scr(newX, newY, proposedState)
+	if (movingPiece[0] == KING) && !threatenedSquare_scr(newX, newY, proposedState, moversSeat, moversColor)
 	{
 		ds_list_add(legalMoves,oldX,oldY,newX,newY);
 	}
