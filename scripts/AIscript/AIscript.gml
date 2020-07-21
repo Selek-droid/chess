@@ -6,10 +6,14 @@ if oGame.AIOpening
 	if (oGame.AIMadeScriptedMove) exit;  // bypass AI if AI made scripted move. Else on to AI.
 }
 
+var boardState = global.grid;
 var capture = false;
 var possibleMoves = ds_list_create();
-possibleMoves = possibleMoves_scr();
-possibleMoves = avoidCheck_scr(possibleMoves);
+var AISide = BLACK;
+
+possibleMoves = possibleMoves_scr(AISide, boardState);  // generate ds_list of possible moves
+possibleMoves = avoidCheck_scr(possibleMoves);   // prune them for check outside possMoves?
+// maybe move this to inside possMoves?
 
 var numberOfMoves = floor((ds_list_size(possibleMoves) / 4));
 if (numberOfMoves == 0)   // Check for stalemate/checkmate eventually. For now, revert to player. 
@@ -20,7 +24,7 @@ if (numberOfMoves == 0)   // Check for stalemate/checkmate eventually. For now, 
 	}
 show_debug_message("number of moves is " + string(numberOfMoves));
 
-var boardState = global.grid;
+// var boardState = global.grid;  // moved this up top.  Safely delete?
 var listIndex = evaluate(possibleMoves, boardState);
 
 // var listIndex = 4 * (irandom(numberOfMoves - 1));
