@@ -11,7 +11,7 @@ var capture = false;
 var possibleMoves = ds_list_create();
 var AISide = BLACK;
 
-possibleMoves = possibleMoves_scr(AISide, boardState);  // generate ds_list of possible moves
+possibleMoves = possibleMoves_scr(AISide, boardState, true, true);  // generate ds_list of possible moves
 possibleMoves = avoidCheck_scr(possibleMoves);   // prune them for check outside possMoves?
 // maybe move this to inside possMoves?
 

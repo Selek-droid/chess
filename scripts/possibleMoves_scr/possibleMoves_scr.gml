@@ -3,6 +3,10 @@ var yy;
 var legalMoves = ds_list_create();
 var AISide = argument0;
 var boardState = argument1;
+var AICanCastleKingSide = argument2;
+var AICanCastleQueenSide = argument3;
+var AISeat = NORTH;
+
 if (AISide == BLACK) 
 {
 	var nonMovingSide = WHITE;
@@ -15,52 +19,101 @@ for (xx = 0; xx < 8; xx += 1;)
 	for (yy = 0; yy < 8; yy += 1;)
 	{
 		if array_equals(global.grid[xx, yy],[PAWN, AISide])
-		{ 
-			if ( (yy == 1) && (array_equals(global.grid[xx, 3],[0, 0])) // Pawn two-space move
-						&& (array_equals(global.grid[xx, 2],[0 , 0]) ) )
-			{
-				ds_list_add(legalMoves, xx, yy, xx, (yy + 2));
-			}
+		{
+			if (AISeat == NORTH)
+			{ 
+				if ( (yy == 1) && (array_equals(global.grid[xx, 3],[0, 0])) // Pawn two-space move
+							&& (array_equals(global.grid[xx, 2],[0 , 0]) ) )
+				{
+					ds_list_add(legalMoves, xx, yy, xx, (yy + 2));
+				}
 
-			if (yy < 7) && (array_equals(global.grid[xx, yy +  1],[0 , 0])) // Pawn one-move, <7th rank.
-			{
-				ds_list_add(legalMoves, xx, yy, xx, (yy + 1));
-			} 
-			
-			if (xx == 0) & (yy < 7) // check edge-pawn capture separately, to avoid out-of-array 
-			{
-				var targetID = global.grid[1, yy + 1];
-				if (targetID[1] == nonMovingSide) 
+				if (yy < 7) && (array_equals(global.grid[xx, yy +  1],[0 , 0])) // Pawn one-move, <7th rank.
 				{
-					ds_list_add(legalMoves, 0, yy, 1, yy + 1); 
+					ds_list_add(legalMoves, xx, yy, xx, (yy + 1));
+				} 
+			
+				if (xx == 0) & (yy < 7) // check edge-pawn capture separately, to avoid out-of-array 
+				{
+					var targetID = global.grid[1, yy + 1];
+					if (targetID[1] == nonMovingSide) 
+					{
+						ds_list_add(legalMoves, 0, yy, 1, yy + 1); 
+					}
+				} 
+			
+				if (xx == 7) & (yy < 7) // check other-edge pawn capture
+				{
+					var targetID = global.grid[6, yy + 1];
+					if (targetID[1] == nonMovingSide)
+					{
+						ds_list_add(legalMoves, 7, yy, 6, yy + 1);
+					}
 				}
-			} 
-			
-			if (xx == 7) & (yy < 7) // check other-edge pawn capture
-			{
-				var targetID = global.grid[6, yy + 1];
-				if (targetID[1] == nonMovingSide)
+			 
+				if (xx < 7) && (xx > 0) && (yy < 7)  // other (i.e., most) captures
 				{
-					ds_list_add(legalMoves, 7, yy, 6, yy + 1);
+					var targetID = global.grid[xx + 1, yy + 1];
+					if (targetID[1] == nonMovingSide)
+					{
+						ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);
+					}
+				
+					var targetID = global.grid[xx - 1, yy + 1];
+					if (targetID[1] == nonMovingSide)
+					{
+						ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);
+					}
 				}
 			}
-			 
-			if (xx < 7) && (xx > 0) && (yy < 7)
-			{
-				var targetID = global.grid[xx + 1, yy + 1];
-				if (targetID[1] == nonMovingSide)
+			
+			if (AISeat == SOUTH) // pawns instead move -y
+			{ 
+				if ( (yy == 6) && (array_equals(global.grid[xx, 4],[0, 0])) // Pawn two-space move
+							&& (array_equals(global.grid[xx, 5],[0 , 0]) ) )
 				{
-					ds_list_add(legalMoves, xx, yy, xx + 1, yy + 1);
+					ds_list_add(legalMoves, xx, yy, xx, 4);
 				}
-				
-				var targetID = global.grid[xx - 1, yy + 1];
-				if (targetID[1] == nonMovingSide)
+
+				if (yy > 0) && (array_equals(global.grid[xx, yy - 1],[0 , 0])) // Pawn one-move, <7th rank.
 				{
-					ds_list_add(legalMoves, xx, yy, xx - 1, yy + 1);
+					ds_list_add(legalMoves, xx, yy, xx, (yy - 1));  // check for promotion in AI Script now? 
+				} 
+			
+				if (xx == 0) & (yy > 0) // check left-edge-pawn capture separately, to avoid out-of-array 
+				{
+					var targetID = global.grid[1, yy - 1];
+					if (targetID[1] == nonMovingSide) 
+					{
+						ds_list_add(legalMoves, 0, yy, 1, yy - 1); 
+					}
+				} 
+			
+				if (xx == 7) & (yy > 0) // check right-edge pawn capture
+				{
+					var targetID = global.grid[6, yy - 1];
+					if (targetID[1] == nonMovingSide)
+					{
+						ds_list_add(legalMoves, 7, yy, 6, yy - 1);
+					}
+				}
+			 
+				if (xx < 7) && (xx > 0) && (yy > 0) //  other (i.e., most) captures
+				{
+					var targetID = global.grid[xx + 1, yy - 1];
+					if (targetID[1] == nonMovingSide)
+					{
+						ds_list_add(legalMoves, xx, yy, xx + 1, yy - 1);
+					}
+				
+					var targetID = global.grid[xx - 1, yy - 1];
+					if (targetID[1] == nonMovingSide)
+					{
+						ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);
+					}
 				}
 			}
 		}
-	
 	
 		if array_equals(global.grid[xx, yy],[KNIGHT, AISide])
 		{
@@ -139,32 +192,65 @@ for (xx = 0; xx < 8; xx += 1;)
 		
 		if array_equals(global.grid[xx, yy],[KING, AISide])
 		{
-			if (yy == 0) && (xx > 0) && (xx < 7)  // King on starting rank, not corners.
+			if (yy == 0) && (xx > 0) && (xx < 7)  // King on starting rank, not corners. Check castling first
 			{
-				// Castling kingside (to right, assuming AI has black. Trying to make code cover both.)
-				if (board_object.AICanCastleRight)
+				if (AISeat == NORTH)
 				{
-					var castleTarget = global.grid[xx + 2, yy];  // offset 2, 0
-					var targetID = global.grid[xx + 1, yy];
-					if (targetID[1] == 0) && (castleTarget[1] == 0) &&
-//					array_equals(boardState[6, 0], [0 , 0]) &&     // redundant placeholder check for AI as white
-						!((threatenedSquare_scr(xx, yy, boardState)) ) &&
-						!((threatenedSquare_scr(xx + 1, yy, boardState)) ) &&
-						!((threatenedSquare_scr(xx + 2, yy, boardState)) ) 
-						ds_list_add(legalMoves, xx, yy, xx + 2, yy);
+					if (AISide == BLACK)
+					{
+						if (AICanCastleKingSide)  // where to store this during minmax?
+						{
+							var castleTarget = global.grid[xx + 2, yy];  // offset 2, 0
+							var targetID = global.grid[xx + 1, yy];
+							if (targetID[1] == 0) && (castleTarget[1] == 0) &&
+								!((threatenedSquare_scr(xx, yy, boardState)) ) &&
+								!((threatenedSquare_scr(xx + 1, yy, boardState)) ) &&
+								!((threatenedSquare_scr(xx + 2, yy, boardState)) ) 
+								ds_list_add(legalMoves, xx, yy, xx + 2, yy);  // how to hold AICanCastleKingSide=false?
+						}
+				
+						if (AICanCastleQueenSide)
+						{
+							var knightThere = global.grid[xx - 3, yy];
+							var castleTarget = global.grid[xx - 2, yy];  // offset 2, 0
+							var targetID = global.grid[xx - 1, yy];
+							if (targetID[1] == 0) && (castleTarget[1] == 0) && (knightThere[1] == 0) &&
+								!((threatenedSquare_scr(xx, yy, boardState)) ) &&
+								!((threatenedSquare_scr(xx + 1, yy, boardState)) ) &&
+								!((threatenedSquare_scr(xx + 2, yy, boardState)) ) 
+								ds_list_add(legalMoves, xx, yy, xx - 2, yy);
+						}
+					}
+				
+					if (AISide == WHITE)  //  AI is playing bottom (white) pieces on behalf of player, or as Albus
+					{
+						if (AICanCastleKingSide)
+						{
+							var castleTarget = global.grid[xx - 2, yy];  // offset 2, 0
+							var targetID = global.grid[xx + 1, yy];
+							if (targetID[1] == 0) && (castleTarget[1] == 0) &&
+		//					array_equals(boardState[6, 0], [0 , 0]) &&     // redundant placeholder check for AI as white
+								!((threatenedSquare_scr(xx, yy, boardState)) ) &&
+								!((threatenedSquare_scr(xx - 1, yy, boardState)) ) &&
+								!((threatenedSquare_scr(xx - 2, yy, boardState)) ) 
+								ds_list_add(legalMoves, xx, yy, xx - 2, yy);
+						}
+				
+						if (AICanCastleQueenSide)
+						{
+							var knightThere = global.grid[xx + 3, yy];
+							var castleTarget = global.grid[xx + 2, yy];  // offset 2, 0
+							var targetID = global.grid[xx + 1, yy];
+							if (targetID[1] == 0) && (castleTarget[1] == 0) && (knightThere[1] == 0) &&
+								!((threatenedSquare_scr(xx, yy, boardState)) ) &&
+								!((threatenedSquare_scr(xx + 1, yy, boardState)) ) &&
+								!((threatenedSquare_scr(xx + 2, yy, boardState)) ) 
+								ds_list_add(legalMoves, xx, yy, xx + 2, yy);
+						}
+					}
 				}
 				
-				if (board_object.AICanCastleLeft)
-				{
-					var knightThere = global.grid[xx - 3, yy];
-					var castleTarget = global.grid[xx - 2, yy];  // offset 2, 0
-					var targetID = global.grid[xx - 1, yy];
-					if (targetID[1] == 0) && (castleTarget[1] == 0) && (knightThere[1] == 0) &&
-						!((threatenedSquare_scr(xx, yy, boardState)) ) &&
-						!((threatenedSquare_scr(xx + 1, yy, boardState)) ) &&
-						!((threatenedSquare_scr(xx + 2, yy, boardState)) ) 
-						ds_list_add(legalMoves, xx, yy, xx - 2, yy);
-				}
+// If no castle, we check for other moves on top rank, regardless of where AI is seated or color.
 				
 				var targetID = global.grid[xx - 1, yy];  // offset -1, 0
 				if ((targetID[1] == 0) || (targetID[1] == nonMovingSide)) && !((threatenedSquare_scr(xx - 1, yy, boardState)) )

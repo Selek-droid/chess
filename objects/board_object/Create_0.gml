@@ -27,8 +27,10 @@ pickedUp = false;
 turnOver = false;
 canCastleLeft = true;
 canCastleRight = true;
-AICanCastleLeft = true;
-AICanCastleRight = true;
+BlackCanCastleQueenside = true;
+BlackCanCastleKingside = true;
+WhiteCanCastleQueenside = true;
+WhitecanCastleKingside = true;
 
 gridX = 0;
 gridY = 0;
@@ -42,7 +44,7 @@ for (xx = 0; xx < 8; xx += 1;)
 {
 	for (yy = 0; yy < 8; yy += 1;)
 	{
-		global.grid[xx, yy] = contents;
+		global.grid[xx, yy] = contents;  // initialize to zero
 	}
 }
 

@@ -10,6 +10,9 @@
 #macro QUEEN 5
 #macro KING 6
 
+#macro SOUTH 0
+#macro NORTH 1
+
 #macro VKING 20000
 #macro VQUEEN 1000
 #macro VROOK 550
