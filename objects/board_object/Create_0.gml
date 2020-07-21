@@ -101,8 +101,8 @@ for (xx = 0; xx < 8; xx += 1;)
 	global.grid[6, 7] = [KNIGHT, BLACK];
 	global.grid[2, 7] = [BISHOP, BLACK];
 	global.grid[5, 7] = [BISHOP, BLACK];
-	global.grid[3, 7] = [QUEEN, BLACK];
-	global.grid[4, 7] = [KING, BLACK];
+	global.grid[4, 7] = [QUEEN, BLACK];  // K and Q switched
+	global.grid[3, 7] = [KING, BLACK];
 
 	global.grid[0, 0] = [ROOK, WHITE];
 	global.grid[7, 0] = [ROOK, WHITE];
@@ -110,8 +110,8 @@ for (xx = 0; xx < 8; xx += 1;)
 	global.grid[6, 0] = [KNIGHT, WHITE];
 	global.grid[2, 0] = [BISHOP, WHITE];
 	global.grid[5, 0] = [BISHOP, WHITE];
-	global.grid[3, 0] = [QUEEN, WHITE];
-	global.grid[4, 0] = [KING, WHITE];
+	global.grid[4, 0] = [QUEEN, WHITE];  // K and Q switched
+	global.grid[3, 0] = [KING, WHITE];
 
 	
 }
