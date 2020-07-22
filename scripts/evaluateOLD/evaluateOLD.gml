@@ -1,7 +1,5 @@
-var boardState = argument0;
-var moversSeat = argument1;  // in any human game, this will be NORTH. We flip to south below.
-var moversColor = argument2;
-var possibleMoves = ds_list_create();
+var possibleMoves = argument0;
+var boardState = argument1;
 var listSize = (ds_list_size(possibleMoves)) - 4;
 var positionScore = 0;
 var maxScore = (0 - infinity);
@@ -9,41 +7,20 @@ var listIndex = 0;
 var piece = [0 , 0];
 var selectedPiece = [0 , 0];
 var candidate = 0;
+var possibleTie = false;
+var tieBreakerList = ds_list_create();
 
-if moversColor == WHITE   // flip color: white AI now "plays" as black, and vice-versa
-{
-	moversColor = BLACK;
-	var nonmoversColor = WHITE;
-} 
+var possibleResponses = ds_list_create();
+var sizeOfResponseList = (ds_list_size(possibleResponses)) - 4;
+var responseIndex = 0;
 
-else if moversColor == BLACK // AI playing as black; flip it to white.
+var moversColor = argument2; // Color will oscillate depending on as-yet-undeclared depth variable *************
+if moversColor == WHITE 
 {
-	moversColor = WHITE;
 	var nonmoversColor = BLACK;
 }
-
-if moversSeat == NORTH   // flip side: north AI now "plays" as south, and vice-versa
-{
-	moversSeat = SOUTH;
-	var nonmoversSeat = NORTH;
-}
-
-else if moversSeat == SOUTH
-{
-	moversSeat = NORTH;
-	var nonmoversSeat = SOUTH;
-}
-
-// Got boardState from evaluate(), reflecting just one move.  Now generate all possible RESPONSES.
-
-possibleMoves = possibleMoves_scr(boardState, moversSeat, moversColor, true, true);  // generate ds_list of possible moves
-possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat);   // prune them for check outside possMoves?
-
-listSize = (ds_list_size(possibleMoves)) - 4;
-// show_debug_message("Number of possible human responses was " + string(listSize));
-show_debug_message("Number of possible human responses to this move was " + string(floor(listSize/4)));
-
-//  "make" each 4-element move in the pruned list; just save highest score?
+else nonmoversColor = WHITE;
+//  "make" each 4-element move in the list; save each move's positionScore and its index.
 
 for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 {						
@@ -52,14 +29,25 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	var newX = ds_list_find_value(possibleMoves,listIndex + 2);
 	var newY = ds_list_find_value(possibleMoves,listIndex + 3);
 
-	boardState = argument0;  // crucial: refresh the board, undoing the move just tested
+	boardState = argument1;  // crucial: refresh the board, undoing the move just tested
 
 	var selectedPiece = boardState[oldX, oldY];  // "move" piece to new location
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0]  
 
-//  Now score the new boardState:  ****************
+// now, INSTEAD of scoring, we run PossMoves again to generate 20 more moves!
+// Then score each of those, but for other side, and flip sign of result.
 
+	//possibleResponses = possibleMoves_scr(boardState, nonmoversColor, true, true);
+	//for (responseIndex = 0; responseIndex <= sizeOfResponseList; responseIndex += 4)
+	//{						
+	//	var oldX = ds_list_find_value(possibleMoves,listIndex);
+	//	var oldY = ds_list_find_value(possibleMoves,listIndex + 1);
+	//	var newX = ds_list_find_value(possibleMoves,listIndex + 2);
+	//	var newY = ds_list_find_value(possibleMoves,listIndex + 3);
+	
+	
+									//  Now score the new boardState:  ****************
 	{
 		for (var xx = 0; xx < 8; xx += 1;)
 		{
@@ -79,7 +67,6 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						case KNIGHT:
 						{
 							positionScore += (VKNIGHT + board_object.AIKnightTable[xx, yy]);
-							// show_debug_message("Added Knight score for " + string(xx) + " , " + string(yy));
 							break;
 						}
 						case BISHOP:
@@ -117,7 +104,6 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 						case KNIGHT:
 						{
 							positionScore -= (VKNIGHT + board_object.HumanKnightTable[xx, yy]);
-							// show_debug_message("Subtracted Knight score for " + string(xx) + " , " + string(yy));
 							break;
 						}
 						case BISHOP:
@@ -144,21 +130,43 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 				}
 			}
 		}
-		show_debug_message("Response-move ListIndex " + string(listIndex) + " :  (" + string(oldX) + " , " + 
-			string(oldY) + ") to  (" + string(newX) + string(" , ") + string(newY) + ") initial deepScore: " +
+	}
+	// should have TOTAL positionScore from 64 loops thru the board. Pluses and minuses alike.	
+	
+	show_debug_message("ListIndex " + string(listIndex) + " : " + string(oldX) + " , " + 
+			string(oldY) + " to " + string(newX) + string(" , ") + string(newY) + " score: " +
 			string(positionScore));
-
+	 
+	if (positionScore == maxScore)   // if a tie, store both, randomize
+	{
+		ds_list_add(tieBreakerList,listIndex);
+		var possibleTie = true;
+	}
+	
 	if (positionScore > maxScore) 
 	{ 
+		if (possibleTie)
+		{
+			ds_list_clear(tieBreakerList);
+			possibleTie = false;
+		}
 		maxScore = positionScore;
-		candidate = listIndex;  // unnecessary, I think; delete?
+		candidate = listIndex;  //store list index of current best score
 	}
 	
 	positionScore = 0;
-	}
-	// should have TOTAL positionScore from 64 loops thru the board. Pluses and minuses alike.	
-	// show_debug_message("Index of best DEEP move was " + string(candidate) + " with score of " + string(maxScore));
-	// show_debug_message("List size was " + string(listSize) + " and listIndex was " + string(listIndex)); 
+	
 }
 
-return maxScore;
+show_debug_message("Index of best move was " + string(candidate) + " with score of " + string(maxScore));
+show_debug_message("List size was " + string(listSize) + " and listIndex was " + string(listIndex)); 
+
+if (possibleTie)
+{
+	var tieBreakIndex = irandom((ds_list_size(tieBreakerList) - 1) );
+	candidate = ds_list_find_value(tieBreakerList,tieBreakIndex);
+	show_debug_message(("Tie break Index was ") + string(tieBreakIndex));
+}
+
+ds_list_destroy(tieBreakerList);
+return candidate;

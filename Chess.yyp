@@ -330,7 +330,7 @@
             "Key": "adfcc445-2a9d-49a0-a44f-f380faacd71a",
             "Value": {
                 "id": "f3ee1bc7-312e-4d67-b3db-42cd283f673a",
-                "resourcePath": "scripts\\evaluate\\evaluate.yy",
+                "resourcePath": "scripts\\evaluateOLD\\evaluateOLD.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -338,7 +338,7 @@
             "Key": "b25109cb-410f-4f37-bd25-35e4e8543a70",
             "Value": {
                 "id": "c94c51e7-851a-4957-b5fa-a1f8a9c59421",
-                "resourcePath": "scripts\\evaluateEXPERIMENTAL\\evaluateEXPERIMENTAL.yy",
+                "resourcePath": "scripts\\evaluate\\evaluate.yy",
                 "resourceType": "GMScript"
             }
         },
