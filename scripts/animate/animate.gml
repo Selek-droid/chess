@@ -13,42 +13,87 @@ var newSpriteY = board_object.y + (SQUARE_SIZE * argument4);
 board_object.deltaX = newSpriteX - board_object.spriteX;
 board_object.deltaY = newSpriteY - board_object.spriteY;
 
-switch (piece[0])
+if global.HermioneColor == BLACK
 {
-	case PAWN:
+	switch (piece[0])
 	{
-		board_object.movingSprite = black_pawn_sprite; 
-		if (board_object.newY == 7)	board_object.movingPiece = [QUEEN, BLACK];
-		break;
-	}
+		case PAWN:
+		{
+			board_object.movingSprite = black_pawn_sprite; 
+			if (board_object.newY == 7)	board_object.movingPiece = [QUEEN, BLACK];
+			break;
+		}
 	
-	case BISHOP:
-	{
-		board_object.movingSprite = black_bishop_sprite;
-		break;
-	}
+		case BISHOP:
+		{
+			board_object.movingSprite = black_bishop_sprite;
+			break;
+		}
 	
-	case KNIGHT:
-	{
-		board_object.movingSprite = black_knight_sprite;
-		break;
-	}
+		case KNIGHT:
+		{
+			board_object.movingSprite = black_knight_sprite;
+			break;
+		}
 	
-	case ROOK:
-	{
-		board_object.movingSprite = black_rook_sprite;
-		break;
-	}
+		case ROOK:
+		{
+			board_object.movingSprite = black_rook_sprite;
+			break;
+		}
 	
-	case QUEEN:
-	{
-		board_object.movingSprite = black_queen_sprite;
-		break;
-	}
+		case QUEEN:
+		{
+			board_object.movingSprite = black_queen_sprite;
+			break;
+		}
 	
-	case KING:
+		case KING:
+		{
+			board_object.movingSprite = black_king_sprite;
+		}
+	}
+}
+
+if global.HermioneColor == WHITE
+{
+	switch (piece[0])
 	{
-		board_object.movingSprite = black_king_sprite;
+		case PAWN:
+		{
+			board_object.movingSprite = white_pawn_sprite; 
+			if (board_object.newY == 7)	board_object.movingPiece = [QUEEN, BLACK];
+			break;
+		}
+	
+		case BISHOP:
+		{
+			board_object.movingSprite = white_bishop_sprite;
+			break;
+		}
+	
+		case KNIGHT:
+		{
+			board_object.movingSprite = white_knight_sprite;
+			break;
+		}
+	
+		case ROOK:
+		{
+			board_object.movingSprite = white_rook_sprite;
+			break;
+		}
+	
+		case QUEEN:
+		{
+			board_object.movingSprite = white_queen_sprite;
+			break;
+		}
+	
+		case KING:
+		{
+			board_object.movingSprite = white_king_sprite;
+		}
 	}
 }
 
