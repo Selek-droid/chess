@@ -1,0 +1,88 @@
+	{
+		for (var xx = 0; xx < 8; xx += 1;)
+		{
+			for (var yy = 0; yy < 8; yy += 1;)
+			{
+				var piece = boardState[xx, yy];
+				if piece[1] == moversColor   // check each piece at each square
+				
+				{
+					switch (piece[0])
+					{
+						case PAWN: 
+						{
+							positionScore += (VPAWN + board_object.AIpawnTable[xx, yy]);
+							break;
+						}
+						case KNIGHT:
+						{
+							positionScore += (VKNIGHT + board_object.AIKnightTable[xx, yy]);
+							break;
+						}
+						case BISHOP:
+						{
+							positionScore += (VBISHOP + board_object.AIBishopTable[xx, yy]);
+							break;
+						}
+						case ROOK:
+						{
+							positionScore += (VROOK + board_object.AIRookTable[xx, yy]);;
+							break;
+						}
+						case QUEEN:
+						{
+							positionScore += (VQUEEN + board_object.AIQueenTable[xx, yy]);
+							break;
+						}
+						case KING:
+						{
+							positionScore += (VKING + board_object.AIKingTable[xx, yy]);
+							break;
+						}
+					}
+				}
+				
+				if piece[1] == nonmoversColor
+				{
+					switch (piece[0])
+					{
+						case PAWN: 
+						{
+							positionScore -= (VPAWN + board_object.HumanPawnTable[xx, yy]);
+							break;
+						}
+						case KNIGHT:
+						{
+							positionScore -= (VKNIGHT + board_object.HumanKnightTable[xx, yy]);
+							break;
+						}
+						case BISHOP:
+						{
+							positionScore -= (VBISHOP + board_object.HumanBishopTable[xx, yy]);
+							break;
+						}
+						case ROOK:
+						{
+							positionScore -= (VROOK + board_object.HumanRookTable[xx, yy]);;
+							break;
+						}
+						case QUEEN:
+						{
+							positionScore -= (VQUEEN + board_object.HumanQueenTable[xx, yy]);
+							break;
+						}
+						case KING:
+						{
+							positionScore -= (VKING + board_object.HumanKingTable[xx, yy]);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+	// should have TOTAL positionScore from 64 loops thru the board. Pluses and minuses alike.	
+	
+	show_debug_message("ListIndex " + string(listIndex) + " : " + string(oldX) + " , " + 
+			string(oldY) + " to " + string(newX) + string(" , ") + string(newY) + " score: " +
+			string(positionScore));

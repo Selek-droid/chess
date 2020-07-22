@@ -1,11 +1,12 @@
+var boardState = argument0;
+var AISeat = argument1; 
+var AIColor = argument2;
+var AICanCastleKingSide = argument3;
+var AICanCastleQueenSide = argument4;
+
 var xx;
 var yy;
 var legalMoves = ds_list_create();
-var AIColor = argument0;
-var boardState = argument1;
-var AICanCastleKingSide = argument2;
-var AICanCastleQueenSide = argument3;
-var AISeat = NORTH; // shouldn't this be an argument? Won't always be North during Negamax.
 
 if (AIColor == BLACK) 
 {

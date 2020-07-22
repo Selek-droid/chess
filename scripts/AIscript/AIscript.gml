@@ -12,9 +12,10 @@ var boardState = global.grid;
 var capture = false;
 var possibleMoves = ds_list_create();
 var AIColor = global.HermioneColor;
+var AISeat = NORTH;
 
-possibleMoves = possibleMoves_scr(AIColor, boardState, true, true);  // generate ds_list of possible moves
-possibleMoves = avoidCheck_scr(possibleMoves);   // prune them for check outside possMoves?
+possibleMoves = possibleMoves_scr(boardState, AISeat, AIColor, true, true);  // generate ds_list of possible moves
+possibleMoves = avoidCheck_scr(possibleMoves, AIColor, AISeat);   // prune them for check outside possMoves?
 // maybe move this to inside possMoves?
 
 var numberOfMoves = floor((ds_list_size(possibleMoves) / 4));
@@ -27,7 +28,7 @@ if (numberOfMoves == 0)   // Check for stalemate/checkmate eventually. For now, 
 show_debug_message("number of moves is " + string(numberOfMoves));
 
 // var boardState = global.grid;  // moved this up top.  Safely delete?
-var listIndex = evaluate(possibleMoves, boardState, AIColor);  // Parent node has picked a move!
+var listIndex = evaluate(possibleMoves, boardState, NORTH, AIColor);  // Parent node has picked a move!
 
 // var listIndex = 4 * (irandom(numberOfMoves - 1));
 

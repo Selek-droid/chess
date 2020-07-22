@@ -257,8 +257,8 @@ if (oGame.turn == 10)
 		global.grid[7, 0] = [0, 0];
 		global.grid[6, 0] = [KING, BLACK];
 		global.grid[5, 0] = [ROOK, BLACK];
-		board_object.AICanCastleLeft = false;
-		board_object.AICanCastleRight = false;
+		board_object.NorthCanCastleLeft = false;
+		board_object.NorthCanCastleRight = false;
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
 		oGame.AIOpening = false;
@@ -280,8 +280,8 @@ if (oGame.turn == 10)
 		global.grid[7, 0] = [0, 0];
 		global.grid[6, 0] = [KING, BLACK];
 		global.grid[5, 0] = [ROOK, BLACK];
-		board_object.AICanCastleLeft = false;
-		board_object.AICanCastleRight = false;
+		board_object.NorthCanCastleLeft = false;
+		board_object.NorthCanCastleRight = false;
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
 		oGame.AIOpening = false;

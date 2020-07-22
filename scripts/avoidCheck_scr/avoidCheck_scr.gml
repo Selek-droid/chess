@@ -4,8 +4,9 @@ var legalMoves = ds_list_create();
 var boardState = global.grid;
 var proposedState = boardState;
 var numberOfMoves = floor( ( (ds_list_size(argument0)) / 4) );
-var moversSeat = NORTH; // change when in minmax, somehow
-var moversColor = global.HermioneColor;  // again, change when in minmax
+
+var moversColor = argument1;  // changes in Negamax
+var moversSeat = argument2;   // changes in Negamax
 
 // find AI King position
 
