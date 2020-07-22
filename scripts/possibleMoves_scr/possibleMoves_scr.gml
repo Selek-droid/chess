@@ -5,7 +5,7 @@ var AIColor = argument0;
 var boardState = argument1;
 var AICanCastleKingSide = argument2;
 var AICanCastleQueenSide = argument3;
-var AISeat = NORTH;
+var AISeat = NORTH; // shouldn't this be an argument? Won't always be North during Negamax.
 
 if (AIColor == BLACK) 
 {
@@ -198,21 +198,21 @@ for (xx = 0; xx < 8; xx += 1;)
 				{
 					if (AIColor == BLACK)
 					{
-						if (AICanCastleKingSide) && (xx == 4) // where to store this during minmax?
+						if (board_object.NorthCanCastleRight) && (xx == 4) // where to store this during minmax?
 						{
-							var castleTarget = global.grid[6, yy];  // offset 2, 0
+							var castleTarget = global.grid[6, yy];  // Castling Kingside, to Right
 							var targetID = global.grid[5, yy];
 							if (targetID[1] == 0) && (castleTarget[1] == 0) &&
 								!((threatenedSquare_scr(xx, yy, boardState, AISeat, AIColor)) ) &&
 								!((threatenedSquare_scr(xx + 1, yy, boardState, AISeat, AIColor)) ) &&
 								!((threatenedSquare_scr(xx + 2, yy, boardState, AISeat, AIColor)) ) 
-								ds_list_add(legalMoves, xx, yy, 6, yy);  // how to hold AICanCastleKingSide=false?
+								ds_list_add(legalMoves, xx, yy, 6, yy);  
 						}
 				
-						if (AICanCastleQueenSide) && (xx == 4)
+						if (board_object.NorthCanCastleLeft) && (xx == 4) // castling Queenside, to Left
 						{
 							var knightThere = global.grid[xx - 3, yy];
-							var castleTarget = global.grid[xx - 2, yy];  // offset 2, 0
+							var castleTarget = global.grid[xx - 2, yy];  
 							var targetID = global.grid[xx - 1, yy];
 							if (targetID[1] == 0) && (castleTarget[1] == 0) && (knightThere[1] == 0) &&
 								!((threatenedSquare_scr(xx, yy, boardState, AISeat, AIColor)) ) &&
@@ -224,22 +224,24 @@ for (xx = 0; xx < 8; xx += 1;)
 				
 					if (AIColor == WHITE)  //  AI is playing white pieces on north side
 					{
-						if (AICanCastleKingSide) && (xx == 4)
+						if (board_object.NorthCanCastleLeft) && (xx == 3) // Castle Kingside, to Left
 						{
-							var castleTarget = global.grid[xx - 2, yy];  // offset 2, 0
-							var targetID = global.grid[xx + 1, yy];
+							var castleTarget = global.grid[1, yy];  
+							var targetID = global.grid[2, yy];
 							if (targetID[1] == 0) && (castleTarget[1] == 0) &&
-		//					array_equals(boardState[6, 0], [0 , 0]) &&     // redundant placeholder check for AI as white
 								!((threatenedSquare_scr(xx, yy, boardState, AISeat, AIColor)) ) &&
 								!((threatenedSquare_scr(xx - 1, yy, boardState, AISeat, AIColor)) ) &&
 								!((threatenedSquare_scr(xx - 2, yy, boardState, AISeat, AIColor)) ) 
-								ds_list_add(legalMoves, xx, yy, xx - 2, yy);
+								{
+									show_debug_message("AI adding kingside castle to possible moves");
+									ds_list_add(legalMoves, 3, yy, 1, yy);
+								}
 						}
 				
-						if (AICanCastleQueenSide) && (xx == 4)
+						if (board_object.NorthCanCastleRight) && (xx == 3) // Castle Queenside, to Right
 						{
 							var knightThere = global.grid[xx + 3, yy];
-							var castleTarget = global.grid[xx + 2, yy];  // offset 2, 0
+							var castleTarget = global.grid[xx + 2, yy];  
 							var targetID = global.grid[xx + 1, yy];
 							if (targetID[1] == 0) && (castleTarget[1] == 0) && (knightThere[1] == 0) &&
 								!((threatenedSquare_scr(xx, yy, boardState, AISeat, AIColor)) ) &&
@@ -456,18 +458,18 @@ for (xx = 0; xx < 8; xx += 1;)
 				{
 					if (AIColor == BLACK)
 					{
-						if (AICanCastleKingSide) && (xx == 3) // where to store this during minmax?
+						if (board_object.SouthCanCastleLeft) && (xx == 3) // Kingside, to left
 						{
-							var castleTarget = global.grid[1, yy];  // offset 2, 0
+							var castleTarget = global.grid[1, yy];  
 							var targetID = global.grid[2, yy];
 							if (targetID[1] == 0) && (castleTarget[1] == 0) &&
 								!((threatenedSquare_scr(3, yy, boardState, AISeat, AIColor)) ) &&
 								!((threatenedSquare_scr(2, yy, boardState, AISeat, AIColor)) ) &&
 								!((threatenedSquare_scr(1, yy, boardState, AISeat, AIColor)) ) 
-								ds_list_add(legalMoves, 3, yy, 1, yy);  // how to hold AICanCastleKingSide=false?
+								ds_list_add(legalMoves, 3, yy, 1, yy);  
 						}
 				
-						if (AICanCastleQueenSide) && (xx == 3)
+						if (board_object.SouthCanCastleRight) && (xx == 3) // Queenside, to right
 						{
 							var knightThere = global.grid[6, yy];
 							var castleTarget = global.grid[5, yy];  // offset 2, 0

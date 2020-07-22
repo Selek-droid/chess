@@ -928,8 +928,8 @@ AIKingTable [6, 0] = 30;
 AIKingTable [5, 0] = 10;
 AIKingTable [4, 0] = 0;
 AIKingTable [3, 0] = 0;
-AIKingTable [2, 0] = 25;
-AIKingTable [1, 0] = 20;
+AIKingTable [2, 0] = 10;
+AIKingTable [1, 0] = 30;
 AIKingTable [0, 0] = 20;
 
 
@@ -940,8 +940,8 @@ HumanKingTable [6, 7] = 30;
 HumanKingTable [5, 7] = 10;
 HumanKingTable [4, 7] = 0;
 HumanKingTable [3, 7] = 0;
-HumanKingTable [2, 7] = 25;
-HumanKingTable [1, 7] = 20;  // asymmetry; promote castling
+HumanKingTable [2, 7] = 10;
+HumanKingTable [1, 7] = 30;  
 HumanKingTable [0, 7] = 20;
 
 HumanKingTable [7, 6] = 20;

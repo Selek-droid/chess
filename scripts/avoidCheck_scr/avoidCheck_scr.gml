@@ -1,8 +1,5 @@
 // Check each AI move to see whether AI king is in check. If so, remove move.
 
-// var legalMoves = ds_list_create();
-// legalMoves = argument0;
-
 var legalMoves = ds_list_create();
 var boardState = global.grid;
 var proposedState = boardState;
@@ -32,8 +29,7 @@ for (var i = 0; i < numberOfMoves; i += 1;)
 	var oldY = ds_list_find_value(argument0,( (4 * i) + 1 ));
 	var newX = ds_list_find_value(argument0,(( 4 * i) + 2 ));
 	var newY = ds_list_find_value(argument0,(( 4 * i) + 3 ));
-//	show_debug_message("Here is the first recorded move " + string(xx) + " , " + string(yy) +
-//		" , " + string(newX) + " , " + string(newY));
+
 	
 // "Make" the move, and see if king is on a "threatenedSquare"
 	var movingPiece = boardState[oldX, oldY];
@@ -43,15 +39,12 @@ for (var i = 0; i < numberOfMoves; i += 1;)
 	if !threatenedSquare_scr(kingPosition[0],kingPosition[1], proposedState, moversSeat, moversColor)
 		{
 			ds_list_add(legalMoves,oldX,oldY,newX,newY);
+	
 		}
 	else show_debug_message("AI King should avoid check"); 
-	
-// Find King position after proposed move and test whether it's ok:	
-	if (movingPiece[0] == KING) && !threatenedSquare_scr(newX, newY, proposedState, moversSeat, moversColor)
-	{
-		ds_list_add(legalMoves,oldX,oldY,newX,newY);
-	}
-	
+
+		//		show_debug_message("AvoidCheck approves: " + string(oldX) + " , " + string(oldY) +
+		//" , " + string(newX) + " , " + string(newY));
 	
 // "Unmake the move", whether or not the move is valid.
 	proposedState = boardState;
