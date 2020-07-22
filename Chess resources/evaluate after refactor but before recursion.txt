@@ -9,11 +9,6 @@ var selectedPiece = [0 , 0];
 var candidate = 0;
 var possibleTie = false;
 var tieBreakerList = ds_list_create();
-
-var possibleResponses = ds_list_create();
-var sizeOfResponseList = (ds_list_size(possibleResponses)) - 4;
-var responseIndex = 0;
-
 var moversColor = argument2; // Color will oscillate depending on as-yet-undeclared depth variable *************
 if moversColor == WHITE 
 {
@@ -34,19 +29,6 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	var selectedPiece = boardState[oldX, oldY];  // "move" piece to new location
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0]  
-
-// now, INSTEAD of scoring, we run PossMoves again to generate 20 more moves!
-// Then score each of those, but for other side, and flip sign of result.
-
-	//possibleResponses = possibleMoves_scr(boardState, nonmoversColor, true, true);
-	//for (responseIndex = 0; responseIndex <= sizeOfResponseList; responseIndex += 4)
-	//{						
-	//	var oldX = ds_list_find_value(possibleMoves,listIndex);
-	//	var oldY = ds_list_find_value(possibleMoves,listIndex + 1);
-	//	var newX = ds_list_find_value(possibleMoves,listIndex + 2);
-	//	var newY = ds_list_find_value(possibleMoves,listIndex + 3);
-	
-	
 									//  Now score the new boardState:  ****************
 	{
 		for (var xx = 0; xx < 8; xx += 1;)

@@ -27,7 +27,7 @@ if (numberOfMoves == 0)   // Check for stalemate/checkmate eventually. For now, 
 show_debug_message("number of moves is " + string(numberOfMoves));
 
 // var boardState = global.grid;  // moved this up top.  Safely delete?
-var listIndex = evaluate(possibleMoves, boardState, AIColor);
+var listIndex = evaluate(possibleMoves, boardState, AIColor);  // Parent node has picked a move!
 
 // var listIndex = 4 * (irandom(numberOfMoves - 1));
 

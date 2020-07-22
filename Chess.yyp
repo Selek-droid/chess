@@ -135,6 +135,14 @@
             }
         },
         {
+            "Key": "3ddd2ed1-406b-41cd-bf71-963f1fa4f370",
+            "Value": {
+                "id": "dc45752b-0ec0-4e05-a353-de8943f07827",
+                "resourcePath": "scripts\\Negamax\\Negamax.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "4b6c80de-bb76-4fc9-9021-6aa07ad87399",
             "Value": {
                 "id": "ba8118de-cab9-40bf-9fe0-a5ae9a588740",
@@ -327,6 +335,14 @@
             }
         },
         {
+            "Key": "b25109cb-410f-4f37-bd25-35e4e8543a70",
+            "Value": {
+                "id": "c94c51e7-851a-4957-b5fa-a1f8a9c59421",
+                "resourcePath": "scripts\\evaluateEXPERIMENTAL\\evaluateEXPERIMENTAL.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "bfbc77a1-3f18-4a12-b9c7-3019c5c7ddcf",
             "Value": {
                 "id": "4072eabc-4c32-49a6-8cb4-264b6d56eaac",
@@ -459,9 +475,11 @@
         "57f38643-edd6-4ce1-a0c8-2dc096b6a2f2",
         "ceacf3e2-c440-4ae1-9f8b-c2328b2aa9ee",
         "adfcc445-2a9d-49a0-a44f-f380faacd71a",
+        "b25109cb-410f-4f37-bd25-35e4e8543a70",
         "62be158b-98e0-4c4d-b946-d8085af467fb",
         "cac66575-1abc-4978-b181-da619438b1b1",
-        "767b96ea-e0ab-436b-9e98-5b4e3ec71bdb"
+        "767b96ea-e0ab-436b-9e98-5b4e3ec71bdb",
+        "3ddd2ed1-406b-41cd-bf71-963f1fa4f370"
     ],
     "tutorial": ""
 }
