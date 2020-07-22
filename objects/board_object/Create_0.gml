@@ -25,12 +25,11 @@ selectedPiece[1] = 0;
 selectedPiece[0] = 0;
 pickedUp = false;
 turnOver = false;
-canCastleLeft = true;
-canCastleRight = true;
-BlackCanCastleQueenside = true;
-BlackCanCastleKingside = true;
-WhiteCanCastleQueenside = true;
-WhitecanCastleKingside = true;
+SouthCanCastleLeft = true;
+SouthCanCastleRight = true;
+NorthCanCastleLeft = true;
+NorthCanCastleRight = true;
+
 
 gridX = 0;
 gridY = 0;

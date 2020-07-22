@@ -733,7 +733,7 @@ for (xx = 0; xx < 8; xx += 1;)
 						ds_list_add(legalMoves, xx, yy, xx - i, yy - i);
 						break;
 					}
-					if (targetID[1] == AISide) break;
+					if (targetID[1] == AIColor) break;
 				}
 			}
 			

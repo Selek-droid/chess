@@ -21,6 +21,11 @@ for (var xx = 0; xx < 8; xx += 1;)
 
 if !threatenedSquare_scr(proposedKingPosition[0],proposedKingPosition[1], proposedState,SOUTH,PlayerColor)
 {
-return true;
+	show_debug_message("Proposed K pos at " + string(proposedKingPosition[0]) + " , " + string(proposedKingPosition[1]) + " was NOT threatened");
+	return true;
 }
-else return false;
+else
+{
+	show_debug_message("Proposed K pos at " + string(proposedKingPosition[0]) + " , " + string(proposedKingPosition[1]) + " threatened");
+	return false;
+}

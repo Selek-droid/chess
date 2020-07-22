@@ -88,46 +88,40 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					if ( (targetID[1] == HermioneColor) && ((abs (newX - gridX)) == 1 ) // captures
 						&& (gridY - newY == 1) ) 
 					{
-						global.grid[newX, newY] = selectedPiece;
-						capture = true;
-						updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
-						if (newY == 0) global.grid[newX, newY] = [QUEEN, PlayerColor];  // code user choice later
-						pickedUp = false;
-						selectedPiece = [0 , 0];
-						oGame.state = "AI Turn";
-						break;
-					}
-						
+						proposedState = global.grid;
+						proposedState[newX, newY] = selectedPiece;
+						if PlayerAvoidsCheck_scr(proposedState)
+						{
+							global.grid[newX, newY] = selectedPiece;
+							capture = true;
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
+							if (newY == 0) global.grid[newX, newY] = [QUEEN, PlayerColor];  // code user choice later
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						}
+					}	
 					else if ((gridY - newY == 1) && (gridX == newX)) 
 						&& (array_equals(global.grid[newX, newY],[0, 0]))  // one-square moves forward
 					{
-						global.grid[newX, newY] = selectedPiece;
-						updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
-						if (newY == 0) global.grid[newX, newY] = [QUEEN, PlayerColor];  // code user choice later
-						pickedUp = false;
-						selectedPiece = [0 , 0];
-						oGame.state = "AI Turn";
-						break;
-					} 
-						
+						proposedState = global.grid;
+						proposedState[newX, newY] = selectedPiece;
+						if PlayerAvoidsCheck_scr(proposedState)
+						{
+							global.grid[newX, newY] = selectedPiece;
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
+							if (newY == 0) global.grid[newX, newY] = [QUEEN, PlayerColor];  // code user choice later
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						} 
+					}
+										
 					else if ( (gridY == 6) && (gridY - newY == 2) && (gridX == newX) 
 						&& (array_equals(global.grid[newX, newY],[0, 0]))
 						&& (array_equals(global.grid[gridX, gridY - 1],[0 , 0]) ) )
-						{
-						updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
-						global.grid[newX, newY] = selectedPiece;
-						pickedUp = false;
-						selectedPiece = [0 , 0];
-						oGame.state = "AI Turn";
-						break;
-						}
-						
-					break;
-				}
-					
-				case KING:
-				{
-					if  ((abs (newX - gridX) <= 1) && (abs (newY - gridY) <= 1))
 					{
 						proposedState = global.grid;
 						proposedState[newX, newY] = selectedPiece;
@@ -135,29 +129,50 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						{
 							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 							global.grid[newX, newY] = selectedPiece;
-							canCastleLeft = false;
-							canCastleRight = false;
 							pickedUp = false;
 							selectedPiece = [0 , 0];
 							oGame.state = "AI Turn";
 							break;
 						}
 					}
-// Castling code. Will work for white and black, in theory!		
-					if (canCastleRight) && (newX == gridX + 2) 
+					
+					break;
+				}
+					
+				case KING:
+				{
+					if  ((abs (newX - gridX) <= 1) && (abs (newY - gridY) <= 1))  // not castling
 					{
-						if array_equals(global.grid[gridX + 1, 7],[0, 0]) &&
-						array_equals(global.grid[gridX + 2, 7],[0, 0]) &&
-						array_equals(global.grid[6, 7],[0, 0]) &&
-						!threatenedSquare_scr(gridX + 1, 7, global.grid, SOUTH, PlayerColor) &&
-						!threatenedSquare_scr(gridX + 2, 7, global.grid, SOUTH, PlayerColor) 
+						proposedState = global.grid;
+						proposedState[newX, newY] = selectedPiece;
+						if PlayerAvoidsCheck_scr(proposedState)
 						{
 							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
-							global.grid[gridX + 2, 7] = [KING, PlayerColor];
-							global.grid[gridX + 1, 7] = [ROOK, PlayerColor];
+							global.grid[newX, newY] = selectedPiece;
+							SouthCanCastleLeft = false;
+							SouthCanCastleRight = false;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						}
+					}
+// Castling code. White castling first:
+
+					if  (newX == gridX + 2) && (PlayerColor == WHITE) && (SouthCanCastleRight) // kingside castle, to right, as white.
+					{
+						if array_equals(global.grid[5, 7],[0, 0]) &&
+						array_equals(global.grid[6, 7],[0, 0]) &&
+						!threatenedSquare_scr(4, 7, global.grid, SOUTH, PlayerColor) &&
+						!threatenedSquare_scr(5, 7, global.grid, SOUTH, PlayerColor) &&
+						!threatenedSquare_scr(6, 7, global.grid, SOUTH, PlayerColor) 
+						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, false);
+							global.grid[6, 7] = [KING, PlayerColor];
+							global.grid[5, 7] = [ROOK, PlayerColor];
 							global.grid[7, 7] = [0 , 0];
-							canCastleLeft = false;
-							canCastleRight = false;
+							SouthCanCastleLeft = false;
+							SouthCanCastleRight = false;
 							pickedUp = false;
 							selectedPiece = [0 , 0];
 							oGame.state = "AI Turn";
@@ -165,26 +180,72 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						}
 					} 
 					
-					if (canCastleLeft) && (newX == gridX - 2)
+					if (newX == gridX - 2) && (PlayerColor == WHITE) && (SouthCanCastleLeft)  // Queenside, to left, as white
 					{
-						if array_equals(global.grid[gridX - 1, 7],[0, 0]) &&
-						array_equals(global.grid[gridX - 2, 7],[0, 0]) &&
+						if array_equals(global.grid[3, 7],[0, 0]) &&
+						array_equals(global.grid[2, 7],[0, 0]) &&
 						array_equals(global.grid[1, 7],[0, 0]) &&
-						!threatenedSquare_scr(gridX - 1, 7, global.grid, SOUTH, PlayerColor) &&
-						!threatenedSquare_scr(gridX - 2, 7, global.grid, SOUTH, PlayerColor) 						
+						!threatenedSquare_scr(4, 7, global.grid, SOUTH, PlayerColor) &&
+						!threatenedSquare_scr(3, 7, global.grid, SOUTH, PlayerColor) &&
+						!threatenedSquare_scr(2, 7, global.grid, SOUTH, PlayerColor) 
 						{
 							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
-							global.grid[gridX - 2, 7] = [KING, PlayerColor];
-							global.grid[gridX - 1, 7] = [ROOK, PlayerColor];
+							global.grid[2, 7] = [KING, PlayerColor];
+							global.grid[3, 7] = [ROOK, PlayerColor];
 							global.grid[0, 7] = [0 , 0];
-							canCastleLeft = false;
-							canCastleRight = false;
+							SouthCanCastleLeft = false;
+							SouthCanCastleRight = false;
 							pickedUp = false;
 							selectedPiece = [0 , 0];
 							oGame.state = "AI Turn";
 							break;
 						}
 					}
+					
+					if  (newX == gridX + 2) && (PlayerColor == BLACK) && (SouthCanCastleRight)   // Queenside black castle, to right.
+					{
+						if array_equals(global.grid[4, 7],[0, 0]) &&
+						array_equals(global.grid[5, 7],[0, 0]) &&
+						array_equals(global.grid[6, 7],[0, 0]) &&
+						!threatenedSquare_scr(4, 7, global.grid, SOUTH, PlayerColor) &&
+						!threatenedSquare_scr(5, 7, global.grid, SOUTH, PlayerColor) &&
+						!threatenedSquare_scr(6, 7, global.grid, SOUTH, PlayerColor) 
+						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, false);
+							global.grid[5, 7] = [KING, PlayerColor];
+							global.grid[4, 7] = [ROOK, PlayerColor];
+							global.grid[7, 7] = [0 , 0];
+							SouthCanCastleLeft = false;
+							SouthCanCastleRight = false;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						}
+					} 
+					
+					if (newX == gridX - 2) && (PlayerColor == BLACK) && (SouthCanCastleLeft)   // Kingside, Black, so to left
+					{
+						if array_equals(global.grid[3, 7],[0, 0]) &&
+						array_equals(global.grid[2, 7],[0, 0]) &&
+						array_equals(global.grid[1, 7],[0, 0]) &&
+						!threatenedSquare_scr(3, 7, global.grid, SOUTH, PlayerColor) &&
+						!threatenedSquare_scr(2, 7, global.grid, SOUTH, PlayerColor) &&
+						!threatenedSquare_scr(1, 7, global.grid, SOUTH, PlayerColor) 
+						{
+							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
+							global.grid[2, 7] = [KING, PlayerColor];
+							global.grid[3, 7] = [ROOK, PlayerColor];
+							global.grid[0, 7] = [0 , 0];
+							SouthCanCastleLeft = false;
+							SouthCanCastleRight = false;
+							pickedUp = false;
+							selectedPiece = [0 , 0];
+							oGame.state = "AI Turn";
+							break;
+						}
+					}
+					
 					break;
 				}
 					
@@ -232,8 +293,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 					{
 						updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
 						global.grid[newX, newY] = selectedPiece;
-						if (gridX == 0) && (gridY == 7) canCastleLeft = false;
-						if (gridX == 7) && (gridY == 7) canCastleRight = false;
+						if (gridX == 0) && (gridY == 7) SouthCanCastleLeft = false;
+						if (gridX == 7) && (gridY == 7) SouthCanCastleRight = false;
 						pickedUp = false;
 						selectedPiece = [0 , 0];
 						oGame.state = "AI Turn";
