@@ -11,23 +11,23 @@ if oGame.AIOpening
 var boardState = global.grid;
 var capture = false;
 var possibleMoves = ds_list_create();
-var AISide = global.HermioneColor;
+var AIColor = global.HermioneColor;
 
-possibleMoves = possibleMoves_scr(AISide, boardState, true, true);  // generate ds_list of possible moves
+possibleMoves = possibleMoves_scr(AIColor, boardState, true, true);  // generate ds_list of possible moves
 possibleMoves = avoidCheck_scr(possibleMoves);   // prune them for check outside possMoves?
 // maybe move this to inside possMoves?
 
 var numberOfMoves = floor((ds_list_size(possibleMoves) / 4));
 if (numberOfMoves == 0)   // Check for stalemate/checkmate eventually. For now, revert to player. 
 	{
-		show_debug_message("AI can't find a move")
+	show_debug_message("AI can't find a move")
 	oGame.state = "Player Turn";
 	exit;
 	}
 show_debug_message("number of moves is " + string(numberOfMoves));
 
 // var boardState = global.grid;  // moved this up top.  Safely delete?
-var listIndex = evaluate(possibleMoves, boardState);
+var listIndex = evaluate(possibleMoves, boardState, AIColor);
 
 // var listIndex = 4 * (irandom(numberOfMoves - 1));
 
