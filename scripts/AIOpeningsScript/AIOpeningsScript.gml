@@ -1,15 +1,23 @@
-if (ds_list_find_value(oGame.formattedHistory,0) == "e4") 
+if global.HermioneColor == BLACK
 {
-	SicilianDefense();
+	if (ds_list_find_value(oGame.formattedHistory,0) == "e4") 
+	{
+		SicilianDefense();
+	}
+
+	else if (ds_list_find_value(oGame.formattedHistory,0) == "d4") 
+	{
+		NimzoIndianDefense();
+	}
+
+	else
+	{ 
+		oGame.AIOpening = false;
+		exit;
+	}
 }
 
-else if (ds_list_find_value(oGame.formattedHistory,0) == "d4") 
+else if oGame.AIOpening
 {
-	NimzoIndianDefense();
-}
-
-else
-{
-	oGame.AIOpening = false;
-	exit;
+	RuyLopez();
 }

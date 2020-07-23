@@ -68,8 +68,19 @@ switch (piece[0])
 	
 	case BISHOP:
 	{
-		formattedMove = string("B") + string(notationX[newX]) + string(notationY[newY]);
-		break;
+		
+		if (capture)
+		{
+			formattedMove = string("B" + string("x") + string(notationX[newX]) 
+				+ string(notationY[newY]));
+			break;
+		}
+		else
+		{
+			formattedMove = string("B") + string(notationX[newX]) + string(notationY[newY]);
+			break;
+		}
+		
 	}
 	
 	case KNIGHT:
@@ -89,13 +100,31 @@ switch (piece[0])
 	
 	case QUEEN:
 	{
+		if (capture)
+		{
+			formattedMove = string("Q") + string("x") + string(notationX[newX]) 
+				+ string(notationY[newY]);
+			break;
+		}
+		else
+		{
 		formattedMove = string("Q") + string(notationX[newX]) + string(notationY[newY]);
 		break;
+		}
 	}
 	
 	case ROOK:
 	{
+		if (capture)
+		{
+			formattedMove = string("R") + string("x") + string(notationX[newX]) 
+				+ string(notationY[newY]);
+			break;
+		}
+		else
+		{
 		formattedMove = string("R") + string(notationX[newX]) + string(notationY[newY]);
+		}
 	}
 		
 }

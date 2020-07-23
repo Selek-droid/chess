@@ -7,7 +7,7 @@ var friend;
 var availableSpace;
 var xx = argument0;
 var yy = argument1;
-var boardState = argument2; 
+var boardState = argument2;  
 var moversSeat = argument3;  // SOUTH or NORTH.  If player, always SOUTH; if AI, oscillates.
 var moversColor = argument4;  // BLACK or WHITE.
 

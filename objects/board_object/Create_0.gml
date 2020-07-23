@@ -50,70 +50,88 @@ for (xx = 0; xx < 8; xx += 1;)
 	}
 }
 
-if (global.HermioneColor == BLACK)
+if !(global.endgameSetup)
 {
-	for (xx = 0; xx < 8; xx += 1;)
+	if (global.HermioneColor == BLACK)
 	{
-		global.grid[xx, 1] = [PAWN, BLACK];
+		for (xx = 0; xx < 8; xx += 1;)
+		{
+			global.grid[xx, 1] = [PAWN, BLACK];
+		}
+
+		for (xx = 0; xx < 8; xx += 1;)
+		{
+			global.grid[xx, 6] = [PAWN, WHITE];
+		}
+
+		global.grid[0, 0] = [ROOK, BLACK];
+		global.grid[7, 0] = [ROOK, BLACK];
+		global.grid[1, 0] = [KNIGHT, BLACK];
+		global.grid[6, 0] = [KNIGHT, BLACK];
+		global.grid[2, 0] = [BISHOP, BLACK];
+		global.grid[5, 0] = [BISHOP, BLACK];
+		global.grid[3, 0] = [QUEEN, BLACK];
+		global.grid[4, 0] = [KING, BLACK];
+
+		global.grid[0, 7] = [ROOK, WHITE];
+		global.grid[7, 7] = [ROOK, WHITE];
+		global.grid[1, 7] = [KNIGHT, WHITE];
+		global.grid[6, 7] = [KNIGHT, WHITE];
+		global.grid[2, 7] = [BISHOP, WHITE];
+		global.grid[5, 7] = [BISHOP, WHITE];
+		global.grid[3, 7] = [QUEEN, WHITE];
+		global.grid[4, 7] = [KING, WHITE];
+
 	}
 
-	for (xx = 0; xx < 8; xx += 1;)
+	else global.HermioneColor = WHITE;
 	{
-		global.grid[xx, 6] = [PAWN, WHITE];
+	for (xx = 0; xx < 8; xx += 1;)
+		{
+			global.grid[xx, 6] = [PAWN, BLACK];
+		}
+
+		for (xx = 0; xx < 8; xx += 1;)
+		{
+			global.grid[xx, 1] = [PAWN, WHITE];
+		}
+
+		global.grid[0, 7] = [ROOK, BLACK];
+		global.grid[7, 7] = [ROOK, BLACK];
+		global.grid[1, 7] = [KNIGHT, BLACK];
+		global.grid[6, 7] = [KNIGHT, BLACK];
+		global.grid[2, 7] = [BISHOP, BLACK];
+		global.grid[5, 7] = [BISHOP, BLACK];
+		global.grid[4, 7] = [QUEEN, BLACK];  // K and Q switched
+		global.grid[3, 7] = [KING, BLACK];
+
+		global.grid[0, 0] = [ROOK, WHITE];
+		global.grid[7, 0] = [ROOK, WHITE];
+		global.grid[1, 0] = [KNIGHT, WHITE];
+		global.grid[6, 0] = [KNIGHT, WHITE];
+		global.grid[2, 0] = [BISHOP, WHITE];
+		global.grid[5, 0] = [BISHOP, WHITE];
+		global.grid[4, 0] = [QUEEN, WHITE];  // K and Q switched
+		global.grid[3, 0] = [KING, WHITE];
 	}
-
-	global.grid[0, 0] = [ROOK, BLACK];
-	global.grid[7, 0] = [ROOK, BLACK];
-	global.grid[1, 0] = [KNIGHT, BLACK];
-	global.grid[6, 0] = [KNIGHT, BLACK];
-	global.grid[2, 0] = [BISHOP, BLACK];
-	global.grid[5, 0] = [BISHOP, BLACK];
-	global.grid[3, 0] = [QUEEN, BLACK];
-	global.grid[4, 0] = [KING, BLACK];
-
-	global.grid[0, 7] = [ROOK, WHITE];
-	global.grid[7, 7] = [ROOK, WHITE];
-	global.grid[1, 7] = [KNIGHT, WHITE];
-	global.grid[6, 7] = [KNIGHT, WHITE];
-	global.grid[2, 7] = [BISHOP, WHITE];
-	global.grid[5, 7] = [BISHOP, WHITE];
-	global.grid[3, 7] = [QUEEN, WHITE];
-	global.grid[4, 7] = [KING, WHITE];
-
 }
 
-else 
+if global.endgameSetup
 {
-for (xx = 0; xx < 8; xx += 1;)
-	{
-		global.grid[xx, 6] = [PAWN, BLACK];
-	}
-
-	for (xx = 0; xx < 8; xx += 1;)
-	{
-		global.grid[xx, 1] = [PAWN, WHITE];
-	}
-
-	global.grid[0, 7] = [ROOK, BLACK];
-	global.grid[7, 7] = [ROOK, BLACK];
-	global.grid[1, 7] = [KNIGHT, BLACK];
-	global.grid[6, 7] = [KNIGHT, BLACK];
-	global.grid[2, 7] = [BISHOP, BLACK];
-	global.grid[5, 7] = [BISHOP, BLACK];
-	global.grid[4, 7] = [QUEEN, BLACK];  // K and Q switched
-	global.grid[3, 7] = [KING, BLACK];
-
-	global.grid[0, 0] = [ROOK, WHITE];
-	global.grid[7, 0] = [ROOK, WHITE];
-	global.grid[1, 0] = [KNIGHT, WHITE];
-	global.grid[6, 0] = [KNIGHT, WHITE];
-	global.grid[2, 0] = [BISHOP, WHITE];
-	global.grid[5, 0] = [BISHOP, WHITE];
-	global.grid[4, 0] = [QUEEN, WHITE];  // K and Q switched
-	global.grid[3, 0] = [KING, WHITE];
-
+	global.HermioneColor = BLACK;
+	global.grid[7, 1] = [PAWN, BLACK];
+	global.grid[6, 1] = [PAWN, BLACK];
+	global.grid[5, 1] = [PAWN, BLACK];
+	global.grid[6, 0] = [KING, BLACK];
+	global.grid[3, 7] = [KING, WHITE];
+	global.grid[2, 4] = [PAWN, WHITE];
+	global.grid[1, 5] = [PAWN, WHITE];
+	global.grid[6, 7] = [ROOK, WHITE];
+	global.grid[6, 6] = [ROOK, WHITE];
 	
 }
+
+
 	
 // Piece-square tables ============================================
 

@@ -1,0 +1,99 @@
+if (oGame.turn == 1) 
+	{
+		animate([PAWN, WHITE],3,1,3,3);  // P-K4 : start of Ruy Lopez, perhaps
+		updateHistory_scr([PAWN, WHITE], 3, 1, 3, 3, false);
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}
+	
+if (oGame.turn == 2) 
+{
+	if ((ds_list_find_value(oGame.formattedHistory,1) == "e5")) || // Black played Ruy Lopez
+	(ds_list_find_value(oGame.formattedHistory,1) == "Nc6") ||
+	(ds_list_find_value(oGame.formattedHistory,1) == "c5")   // Black responded with Sicilian defense
+	{
+		animate([KNIGHT, WHITE],2,0,3,2);    // White continues either way with Nf3
+		updateHistory_scr([KNIGHT, WHITE], 2, 0, 3, 2, false);
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}
+
+	else	
+	{
+		animate([KNIGHT, WHITE],1,0,2,2);
+		updateHistory_scr([KNIGHT, WHITE], 1, 0, 2, 2, false);   // else play Nf3 but exit script, for now
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIMadeScriptedMove = true;
+		oGame.AIOpening = false;
+		exit;
+	}
+}	
+
+if (oGame.turn == 3) 
+{
+	if ((ds_list_find_value(oGame.formattedHistory,3) == "Nc6") &&  // Black continued Ruy Lopez with 2..Nc6
+	(ds_list_find_value(oGame.formattedHistory,1) == "e5"))
+	{
+		animate([BISHOP, WHITE],2,0,6,4);   // White continues Ruy Lopez with 3. Bb5 (B-N5)
+		updateHistory_scr([BISHOP, WHITE], 2, 0, 6, 4, false);
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}
+	
+	else if ((ds_list_find_value(oGame.formattedHistory,3) == "d6") &&  // Black continued Siicilian 2 ... d6
+	(ds_list_find_value(oGame.formattedHistory,1) == "c5")) 
+	{
+		animate([PAWN, WHITE],3,1,3,3);   // White engages Sicilian with 3. d4 (P-Q4)
+		updateHistory_scr([PAWN, WHITE], 3, 1, 3, 3, false);
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}
+	
+	else if ((ds_list_find_value(oGame.formattedHistory,3) == "Nc6") &&  // Black continued Siicilian 2 ... Nc6
+	(ds_list_find_value(oGame.formattedHistory,1) == "c5")) 
+	{
+		animate([PAWN, WHITE],3,1,3,3);   // White again engages Sicilian with 3. d4 (P-Q4)
+		updateHistory_scr([PAWN, WHITE], 3, 1, 3, 3, false);
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}
+	
+	else if ((ds_list_find_value(oGame.formattedHistory,3) == "e6") &&  // Black continued Siicilian 2 ... Nc6
+	(ds_list_find_value(oGame.formattedHistory,1) == "c5")) 
+	{
+		animate([PAWN, WHITE],3,1,3,3);   // White again engages Sicilian with 3. d4 (P-Q4)
+		updateHistory_scr([PAWN, WHITE], 3, 1, 3, 3, false);
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}
+	
+	else if ((ds_list_find_value(oGame.formattedHistory,3) == "Nf6") &&  // Black continued Siicilian 2 ... Nf6?!
+	(ds_list_find_value(oGame.formattedHistory,1) == "c5")) 
+	{
+		animate([PAWN, WHITE],3,3,3,4);   // White replies with 3. e5 (P-K5)
+		updateHistory_scr([PAWN, WHITE], 3, 3, 3, 4, false);
+		oGame.turn += 1;
+		oGame.state = "Player Turn";
+		oGame.AIMadeScriptedMove = true;
+		exit;
+	}
+	else
+	{
+		oGame.AIMadeScriptedMove = false;
+		oGame.AIOpening = false;
+		exit;
+	}
+}

@@ -33,25 +33,29 @@ for (var i = 0; i < numberOfMoves; i += 1;)
 
 	
 // "Make" the move, and see if king is on a "threatenedSquare"
+//	kingPosition = [xx , yy]; // reset kingPosition if we moved king below
 	var movingPiece = boardState[oldX, oldY];
 	proposedState[oldX, oldY] = [0, 0];
 	proposedState[newX, newY] = [ movingPiece[0], movingPiece[1] ];
-	
-	if !threatenedSquare_scr(kingPosition[0],kingPosition[1], proposedState, moversSeat, moversColor)
+	if (movingPiece[0] != KING) 
+	{
+		if !threatenedSquare_scr(kingPosition[0],kingPosition[1], proposedState, moversSeat, moversColor)
 		{
 			ds_list_add(legalMoves,oldX,oldY,newX,newY);
-	
 		}
-	else show_debug_message("AI King should avoid check"); 
-
-		//		show_debug_message("AvoidCheck approves: " + string(oldX) + " , " + string(oldY) +
-		//" , " + string(newX) + " , " + string(newY));
-	
-// "Unmake the move", whether or not the move is valid.
-	proposedState = boardState;
+	}
+	else
+	{
+		if !threatenedSquare_scr(newX,newY, proposedState, moversSeat, moversColor)
+		{
+			ds_list_add(legalMoves,oldX,oldY,newX,newY);
+		}
+	}
+	proposedState = boardState;  // "Unmake the move", whether or not the move is valid.
 	
 }
-	return legalMoves;
+
+return legalMoves;
 	
 
 
