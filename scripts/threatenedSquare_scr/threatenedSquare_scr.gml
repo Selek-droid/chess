@@ -397,7 +397,7 @@ if (xx < 7)  // Now look right for Q and R.
 var availableSpace = 7 - xx;
 	for (var i = 1; i <= availableSpace; i += 1;)
 	{
-		var targetID = boardState[xx + i, yy];  // offset -i, 0
+		var targetID = boardState[xx + i, yy];  // offset i, 0
 		if (targetID[1] == friend) 
 		{
 			if (targetID[0] != KING) break;    // friendly non-king blocks enemy fire; 

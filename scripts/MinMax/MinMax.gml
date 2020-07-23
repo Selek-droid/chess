@@ -146,8 +146,8 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 			}
 		}
 		
-		show_debug_message("Tested this white response: (" +  string(oldX) + " , " + string(oldY) + " to (" +
-	string(newX) + " , " + string(newY) + ")" );
+//		show_debug_message("Tested this white response: (" +  string(oldX) + " , " + string(oldY) + " to (" +
+//	string(newX) + " , " + string(newY) + ")" );
 		//show_debug_message("Response-move ListIndex " + string(listIndex) + " :  (" + string(oldX) + " , " + 
 		//	string(oldY) + ") to  (" + string(newX) + string(" , ") + string(newY) + ") initial deepScore: " +
 		//	string(positionScore));

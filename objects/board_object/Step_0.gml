@@ -234,8 +234,8 @@ if (pickedUp) && (mouse_check_button_released(mb_left))  // destination clicked
 						!threatenedSquare_scr(1, 7, global.grid, SOUTH, PlayerColor) 
 						{
 							updateHistory_scr(selectedPiece, gridX, gridY, newX, newY, capture);
-							global.grid[2, 7] = [KING, PlayerColor];
-							global.grid[3, 7] = [ROOK, PlayerColor];
+							global.grid[1, 7] = [KING, PlayerColor];
+							global.grid[2, 7] = [ROOK, PlayerColor];
 							global.grid[0, 7] = [0 , 0];
 							SouthCanCastleLeft = false;
 							SouthCanCastleRight = false;
