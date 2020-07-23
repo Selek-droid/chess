@@ -41,7 +41,6 @@ possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat);   // pru
 
 listSize = (ds_list_size(possibleMoves)) - 4;
 // show_debug_message("Number of possible human responses was " + string(listSize));
-show_debug_message("Number of possible human responses to this move was " + string(floor(listSize/4)));
 
 //  "make" each 4-element move in the pruned list; just save highest score?
 
@@ -53,6 +52,8 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	var newY = ds_list_find_value(possibleMoves,listIndex + 3);
 
 	boardState = argument0;  // crucial: refresh the board, undoing the move just tested
+// Number of possible human responses to this move was " + string(floor(listSize/4)));
+
 
 	var selectedPiece = boardState[oldX, oldY];  // "move" piece to new location
 	boardState[newX, newY] = selectedPiece;
@@ -144,9 +145,12 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 				}
 			}
 		}
-		show_debug_message("Response-move ListIndex " + string(listIndex) + " :  (" + string(oldX) + " , " + 
-			string(oldY) + ") to  (" + string(newX) + string(" , ") + string(newY) + ") initial deepScore: " +
-			string(positionScore));
+		
+		show_debug_message("Tested this white response: (" +  string(oldX) + " , " + string(oldY) + " to (" +
+	string(newX) + " , " + string(newY) + ")" );
+		//show_debug_message("Response-move ListIndex " + string(listIndex) + " :  (" + string(oldX) + " , " + 
+		//	string(oldY) + ") to  (" + string(newX) + string(" , ") + string(newY) + ") initial deepScore: " +
+		//	string(positionScore));
 
 	if (positionScore > maxScore) 
 	{ 
@@ -155,8 +159,9 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	}
 	
 	positionScore = 0;
+
+	
 	}
-	// should have TOTAL positionScore from 64 loops thru the board. Pluses and minuses alike.	
 	// show_debug_message("Index of best DEEP move was " + string(candidate) + " with score of " + string(maxScore));
 	// show_debug_message("List size was " + string(listSize) + " and listIndex was " + string(listIndex)); 
 }
