@@ -124,11 +124,12 @@ if global.endgameSetup
 	global.grid[6, 1] = [PAWN, BLACK];
 	global.grid[5, 1] = [PAWN, BLACK];
 	global.grid[6, 0] = [KING, BLACK];
-	global.grid[3, 7] = [KING, WHITE];
-	global.grid[2, 4] = [PAWN, WHITE];
-	global.grid[1, 5] = [PAWN, WHITE];
-	global.grid[6, 7] = [ROOK, WHITE];
-	global.grid[6, 6] = [ROOK, WHITE];
+	global.grid[2, 7] = [KING, WHITE];
+	global.grid[2, 6] = [PAWN, WHITE];
+	global.grid[1, 6] = [PAWN, WHITE];
+	global.grid[6, 2] = [BISHOP, BLACK];
+//	global.grid[6, 7] = [ROOK, WHITE];
+//	global.grid[6, 6] = [ROOK, WHITE];
 	
 }
 

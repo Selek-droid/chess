@@ -202,7 +202,7 @@
             "Key": "62be158b-98e0-4c4d-b946-d8085af467fb",
             "Value": {
                 "id": "fde57461-45ae-4af3-a15e-11a175b805b2",
-                "resourcePath": "scripts\\MinMaxBad\\MinMaxBad.yy",
+                "resourcePath": "scripts\\MinMaxExperimental\\MinMaxExperimental.yy",
                 "resourceType": "GMScript"
             }
         },

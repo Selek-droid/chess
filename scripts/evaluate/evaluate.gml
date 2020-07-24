@@ -29,8 +29,8 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	var selectedPiece = boardState[oldX, oldY];  // "move" piece to new location
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0]  
-	//show_debug_message("AI/black proposed this move: (" +  string(oldX) + " , " + string(oldY) + " to (" +
-	//string(newX) + " , " + string(newY) + ")" );
+	show_debug_message("AI/black move: (" +  string(oldX) + " , " + string(oldY) + " to (" +
+	string(newX) + " , " + string(newY) + ")" );
 
 // now, call Minmax to score that move.
 

@@ -201,8 +201,8 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 		positionScore = 0;
 	
 		}
-		// show_debug_message("Index of best DEEP move was " + string(candidate) + " with score of " + string(maxScore));
-		// show_debug_message("List size was " + string(listSize) + " and listIndex was " + string(listIndex)); 
+		 show_debug_message("Index of best DEEP move was " + string(candidate) + " with score of " + string(maxScore));
+		 show_debug_message("List size was " + string(listSize) + " and listIndex was " + string(listIndex)); 
 	}
 }
 return maxScore;

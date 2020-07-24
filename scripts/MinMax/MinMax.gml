@@ -61,6 +61,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 
 
 //  Now score the new boardState:  ****************
+// We FLIP the piece-square tables depending on seating:
 
 	{
 		for (var xx = 0; xx < 8; xx += 1;)
@@ -75,33 +76,44 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 					{
 						case PAWN: 
 						{
+							if moversSeat == NORTH
 							positionScore += (VPAWN + board_object.AIpawnTable[xx, yy]);
+							else positionScore +=(VPAWN + board_object.HumanPawnTable[xx, yy]); 
 							break;
 						}
 						case KNIGHT:
 						{
+							if moversSeat == NORTH
 							positionScore += (VKNIGHT + board_object.AIKnightTable[xx, yy]);
-							// show_debug_message("Added Knight score for " + string(xx) + " , " + string(yy));
+							else positionScore += (VKNIGHT + board_object.HumanKnightTable[xx, yy]);
 							break;
 						}
 						case BISHOP:
 						{
+							if moversSeat == NORTH
 							positionScore += (VBISHOP + board_object.AIBishopTable[xx, yy]);
+							else positionScore += (VBISHOP + board_object.HumanBishopTable[xx, yy]);
 							break;
 						}
 						case ROOK:
 						{
-							positionScore += (VROOK + board_object.AIRookTable[xx, yy]);;
+							if moversSeat == NORTH
+							positionScore += (VROOK + board_object.AIRookTable[xx, yy]);
+							else positionScore += (VROOK + board_object.HumanRookTable[xx, yy]);
 							break;
 						}
 						case QUEEN:
 						{
+							if moversSeat == NORTH
 							positionScore += (VQUEEN + board_object.AIQueenTable[xx, yy]);
+							else positionScore += (VQUEEN + board_object.HumanQueenTable[xx, yy]);
 							break;
 						}
 						case KING:
 						{
+							if moversSeat == NORTH
 							positionScore += (VKING + board_object.AIKingTable[xx, yy]);
+							else positionScore += (VKING + board_object.HumanKingTable[xx, yy]);
 							break;
 						}
 					}
@@ -113,33 +125,45 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 					{
 						case PAWN: 
 						{
+							if moversSeat == NORTH
 							positionScore -= (VPAWN + board_object.HumanPawnTable[xx, yy]);
+							else positionScore -= (VPAWN + board_object.AIpawnTable[xx, yy]);
 							break;
 						}
 						case KNIGHT:
 						{
+							if moversSeat == NORTH
 							positionScore -= (VKNIGHT + board_object.HumanKnightTable[xx, yy]);
+							else positionScore -= (VKNIGHT + board_object.AIKnightTable[xx, yy]);
 							// show_debug_message("Subtracted Knight score for " + string(xx) + " , " + string(yy));
 							break;
 						}
 						case BISHOP:
 						{
+							if moversSeat == NORTH
 							positionScore -= (VBISHOP + board_object.HumanBishopTable[xx, yy]);
+							else positionScore -= (VBISHOP + board_object.AIBishopTable[xx, yy]);
 							break;
 						}
 						case ROOK:
 						{
-							positionScore -= (VROOK + board_object.HumanRookTable[xx, yy]);;
+							if moversSeat == NORTH
+							positionScore -= (VROOK + board_object.HumanRookTable[xx, yy]);
+							else positionScore -= (VROOK + board_object.AIRookTable[xx, yy]);;
 							break;
 						}
 						case QUEEN:
 						{
+							if moversSeat == NORTH
 							positionScore -= (VQUEEN + board_object.HumanQueenTable[xx, yy]);
+							else positionScore -= (VQUEEN + board_object.AIQueenTable[xx, yy]);
 							break;
 						}
 						case KING:
 						{
+							if moversSeat == NORTH
 							positionScore -= (VKING + board_object.HumanKingTable[xx, yy]);
+							else positionScore -= (VKING + board_object.AIKingTable[xx, yy]);
 							break;
 						}
 					}
@@ -147,8 +171,8 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 			}
 		}
 		
-//		show_debug_message("Tested this white response: (" +  string(oldX) + " , " + string(oldY) + " to (" +
-//	string(newX) + " , " + string(newY) + ")" );
+		show_debug_message("White response: (" +  string(oldX) + " , " + string(oldY) + " to (" +
+		string(newX) + " , " + string(newY) + ")" + " deepScore: )" + string(positionScore));
 		//show_debug_message("Response-move ListIndex " + string(listIndex) + " :  (" + string(oldX) + " , " + 
 		//	string(oldY) + ") to  (" + string(newX) + string(" , ") + string(newY) + ") initial deepScore: " +
 		//	string(positionScore));
