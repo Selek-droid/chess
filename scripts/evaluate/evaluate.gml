@@ -1,3 +1,7 @@
+// Called by parent node, AIscript, with AI sitting NORTH. 
+// Possible moves is legal set of moves for AI, averaging 30ish.
+// Boardstate is simply the current global.grid.
+
 var possibleMoves = argument0;
 var boardState = argument1;
 var listSize = (ds_list_size(possibleMoves)) - 4;
@@ -7,20 +11,11 @@ var listIndex = 0;
 var candidate = 0;
 var possibleTie = false;
 var tieBreakerList = ds_list_create();
-var moversSeat = argument2;  // The seat the AI is playing. Will switch in Minmax!
+var moversSeat = argument2;  // The seat the AI is using. Always starts NORTH for now. Will switch in Minmax!
 var moversColor = argument3; // The color the AI is playing. Will switch in MinMax! *************
 
-//if moversColor == WHITE 
-//{
-//	var nonmoversColor = BLACK;   // i.e., we'll send nonmoversColor to Minmax.
-//}
-//else nonmoversColor = WHITE;
-
-//if moversSeat == NORTH
-//{
-//	var nonmoversSeat = SOUTH;
-//}
-//else nonmoversSeat = NORTH;
+// Generate new possible moves to respond to teach possible move!
+// Start by unpacking each top-level possible move, one at a time:
 
 for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 {						
@@ -37,15 +32,15 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	//show_debug_message("AI/black proposed this move: (" +  string(oldX) + " , " + string(oldY) + " to (" +
 	//string(newX) + " , " + string(newY) + ")" );
 
-// now, INSTEAD of scoring, we run PossMoves again to generate 20 more moves!
-// Then score each of those, but for other side, and flip sign of result.
-// We do this in the NEXT script.  Could do it here but my head hurts.
-// Not sure how to set arguments for global.NorthCanCastle eligibility, as might have changed.
+// now, call Minmax to score that move.
 
 	deepScore = MinMax(boardState, moversSeat, moversColor); // generate poss responses & return SINGLE best score from them
 	// show_debug_message("MinMax returned a score of " + string(deepScore));
-
+	if oGame.searchDepth == 1
+	{
 	deepScore = 0 - deepScore;  // Flip Minmax result!  
+	}
+	
 	if (deepScore == maxScore)   // if a tie, store both, randomize
 	{
 		ds_list_add(tieBreakerList,listIndex);

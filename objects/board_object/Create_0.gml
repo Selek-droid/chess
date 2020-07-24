@@ -84,7 +84,7 @@ if !(global.endgameSetup)
 
 	}
 
-	else global.HermioneColor = WHITE;
+	else if global.HermioneColor == WHITE
 	{
 	for (xx = 0; xx < 8; xx += 1;)
 		{
@@ -113,6 +113,7 @@ if !(global.endgameSetup)
 		global.grid[5, 0] = [BISHOP, WHITE];
 		global.grid[4, 0] = [QUEEN, WHITE];  // K and Q switched
 		global.grid[3, 0] = [KING, WHITE];
+		show_debug_message("Er, why are pieces flipped?");
 	}
 }
 

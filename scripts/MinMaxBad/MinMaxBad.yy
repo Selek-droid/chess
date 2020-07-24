@@ -1,8 +1,8 @@
 {
-    "id": "17822bbe-d549-4eb9-b7bd-fe551f30ad11",
+    "id": "62be158b-98e0-4c4d-b946-d8085af467fb",
     "modelName": "GMScript",
     "mvc": "1.0",
-    "name": "MinMax",
+    "name": "MinMaxBad",
     "IsCompatibility": false,
     "IsDnD": false
 }

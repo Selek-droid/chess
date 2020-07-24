@@ -58,6 +58,45 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	var selectedPiece = boardState[oldX, oldY];  // "move" piece to new location
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0]  
+	var maxThisBoardState = boardState;
+	
+	if moversColor == WHITE   // flip color AGAIN: white AI now "plays" as black, and vice-versa
+	{
+		moversColor = BLACK;
+		var nonmoversColor = WHITE;
+	} 
+
+	else if moversColor == BLACK // AI playing as black; flip it to white.
+	{
+		moversColor = WHITE;
+		var nonmoversColor = BLACK;
+	}
+
+	if moversSeat == NORTH   // flip side: north AI now "plays" as south, and vice-versa
+	{
+		moversSeat = SOUTH;
+		var nonmoversSeat = NORTH;
+	}
+
+	else if moversSeat == SOUTH
+	{
+		moversSeat = NORTH;
+		var nonmoversSeat = SOUTH;
+	}
+		
+	possibleMoves = possibleMoves_scr(maxThisBoardState, moversSeat, moversColor, true, true);  // generate ds_list of possible moves
+	possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat);   // prune them for check outside possMoves?
+	listSize = (ds_list_size(possibleMoves)) - 4;
+// show_debug_message("Number of possible human responses was " + string(listSize));
+
+//  "make" each 4-element move in the pruned list; just save highest score?
+
+	for (listIndex = 0; listIndex <= listSize; listIndex += 4)
+	{						
+		var oldX = ds_list_find_value(possibleMoves,listIndex);
+		var oldY = ds_list_find_value(possibleMoves,listIndex + 1);
+		var newX = ds_list_find_value(possibleMoves,listIndex + 2);
+		var newY = ds_list_find_value(possibleMoves,listIndex + 3);
 
 
 //  Now score the new boardState:  ****************
@@ -153,17 +192,17 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 		//	string(oldY) + ") to  (" + string(newX) + string(" , ") + string(newY) + ") initial deepScore: " +
 		//	string(positionScore));
 
-	if (positionScore > maxScore) 
-	{ 
-		maxScore = positionScore;
-		candidate = listIndex;  // unnecessary, I think; delete?
-	}
+		if (positionScore > maxScore) 
+		{ 
+			maxScore = positionScore;
+			candidate = listIndex;  // unnecessary, I think; delete?
+		}
 	
-	positionScore = 0;
+		positionScore = 0;
 	
+		}
+		// show_debug_message("Index of best DEEP move was " + string(candidate) + " with score of " + string(maxScore));
+		// show_debug_message("List size was " + string(listSize) + " and listIndex was " + string(listIndex)); 
 	}
-	// show_debug_message("Index of best DEEP move was " + string(candidate) + " with score of " + string(maxScore));
-	// show_debug_message("List size was " + string(listSize) + " and listIndex was " + string(listIndex)); 
 }
-
 return maxScore;
