@@ -37,7 +37,7 @@ else if moversSeat == SOUTH
 // Got boardState from evaluate(), reflecting just one move.  Now generate all possible RESPONSES.
 
 possibleMoves = possibleMoves_scr(boardState, moversSeat, moversColor, true, true);  // generate ds_list of possible moves
-possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat);   // prune them for check outside possMoves?
+possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat,boardState);   // prune them for check outside possMoves?
 
 listSize = (ds_list_size(possibleMoves)) - 4;
 // show_debug_message("Number of possible human responses was " + string(listSize));
@@ -85,7 +85,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	}
 		
 	possibleMoves = possibleMoves_scr(maxThisBoardState, moversSeat, moversColor, true, true);  // generate ds_list of possible moves
-	possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat);   // prune them for check outside possMoves?
+	possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat,boardState);   // prune them for check outside possMoves?
 	listSize = (ds_list_size(possibleMoves)) - 4;
 // show_debug_message("Number of possible human responses was " + string(listSize));
 

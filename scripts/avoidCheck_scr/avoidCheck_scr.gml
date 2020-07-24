@@ -1,7 +1,7 @@
 // Check each AI move to see whether AI king is in check. If so, remove move.
 
 var legalMoves = ds_list_create();
-var boardState = global.grid;
+var boardState = argument3;  // bug here -- was always looking at global.grid. Ugh.
 var proposedState = boardState;
 var numberOfMoves = floor( ( (ds_list_size(argument0)) / 4) );
 
@@ -36,12 +36,14 @@ for (var i = 0; i < numberOfMoves; i += 1;)
 //	kingPosition = [xx , yy]; // reset kingPosition if we moved king below
 	var movingPiece = boardState[oldX, oldY];
 	proposedState[oldX, oldY] = [0, 0];
-	proposedState[newX, newY] = [ movingPiece[0], movingPiece[1] ];
+	proposedState[newX, newY] = [ movingPiece[0], movingPiece[1] ]; 
 	if (movingPiece[0] != KING) 
 	{
 		if !threatenedSquare_scr(kingPosition[0],kingPosition[1], proposedState, moversSeat, moversColor)
 		{
 			ds_list_add(legalMoves,oldX,oldY,newX,newY);
+			//show_debug_message("Added move: (" + string(oldX) + " , " + string(oldY) + ") to " + string(newX)
+			//+ " , " + string(newY));
 		}
 	}
 	else
@@ -49,6 +51,8 @@ for (var i = 0; i < numberOfMoves; i += 1;)
 		if !threatenedSquare_scr(newX,newY, proposedState, moversSeat, moversColor)
 		{
 			ds_list_add(legalMoves,oldX,oldY,newX,newY);
+			//show_debug_message("Added move: (" + string(oldX) + " , " + string(oldY) + ") to " + string(newX)
+			//+ " , " + string(newY));
 		}
 	}
 	proposedState = boardState;  // "Unmake the move", whether or not the move is valid.

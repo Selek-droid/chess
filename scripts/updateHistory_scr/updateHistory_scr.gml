@@ -81,9 +81,11 @@ switch (piece[0])
 					break;
 				}
 			}
-			
-		formattedMove = string("K") + string(oGame.notationX[newX]) + string(oGame.notationY[newY]);
-		break;
+		}
+		else
+		{
+			formattedMove = string("K") + string(oGame.notationX[newX]) + string(oGame.notationY[newY]);
+			break;
 		}
 	}
 	

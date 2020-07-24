@@ -86,7 +86,6 @@ if (xx == 0) && (yy < 7) && (yy > 0) // LEFT EDGE but not corners
 	}
 	
 	
-	
 	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
 	if (targetID[1] == enemy)
 	{

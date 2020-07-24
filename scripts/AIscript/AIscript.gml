@@ -15,7 +15,7 @@ var AIColor = global.HermioneColor;
 var AISeat = NORTH;
 
 possibleMoves = possibleMoves_scr(boardState, AISeat, AIColor, true, true);  // generate ds_list of possible moves
-possibleMoves = avoidCheck_scr(possibleMoves, AIColor, AISeat);   // prune them for check outside possMoves?
+possibleMoves = avoidCheck_scr(possibleMoves, AIColor, AISeat, boardState);   // prune them for check outside possMoves?
 // maybe move this to inside possMoves?
 
 var numberOfMoves = floor((ds_list_size(possibleMoves) / 4));
