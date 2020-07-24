@@ -4,7 +4,7 @@ AIMadeScriptedMove = false;
 history = ds_list_create();
 formattedHistory = ds_list_create();
 turn = 1;
-searchDepth = 1;
+depthOfSearch = 1;
 
 if global.HermioneColor == BLACK
 {

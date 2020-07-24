@@ -37,12 +37,7 @@ else if moversSeat == SOUTH
 // Got boardState from evaluate(), reflecting just one move.  Now generate all possible RESPONSES.
 
 possibleMoves = possibleMoves_scr(boardState, moversSeat, moversColor, true, true);  // generate ds_list of possible moves
-
-show_debug_message("After poss moves, move list size is: " + string((ds_list_size(possibleMoves))/4 ) );
-
 possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat, boardState);   // prune them for check outside possMoves?
-
-show_debug_message("After avoidCheck, move list size is: " + string((ds_list_size(possibleMoves))/4 ) );
 
 listSize = (ds_list_size(possibleMoves)) - 4;
 // show_debug_message("Number of possible human responses was " + string(listSize));
@@ -59,29 +54,12 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	boardState = argument0;  // crucial: refresh the board, undoing the move just tested
 // Number of possible human responses to this move was " + string(floor(listSize/4)));
 
-	var selectedPiece = boardState[oldX, oldY];  // "move" responding piece to new location
+
+	var selectedPiece = boardState[oldX, oldY];  // "move" piece to new location
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0]  
-	
-	if (oGame.depthOfSearch == 5)  // now generate responses to response! ***************************
-	{
-		var alteredBoardState = boardState;
-		possibleMoves = possibleMoves_scr(boardState, moversSeat, moversColor, true, true);  // generate ds_list of possible moves
-		possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat, boardState);   // prune them for check outside possMoves?
-		listSize = (ds_list_size(possibleMoves)) - 4;
-		for (listIndex = 0; listIndex <= listSize; listIndex += 4)
-		{						
-			var oldX = ds_list_find_value(possibleMoves,listIndex);
-			var oldY = ds_list_find_value(possibleMoves,listIndex + 1);
-			var newX = ds_list_find_value(possibleMoves,listIndex + 2);
-			var newY = ds_list_find_value(possibleMoves,listIndex + 3);
-		
-			boardState = alteredBoardState;
-			var selectedPiece = boardState[oldX, oldY];  // "move" responding piece to new location
-			boardState[newX, newY] = selectedPiece;
-			boardState[oldX, oldY] = [0 , 0]  
-		}
-	}
+
+
 //  Now score the new boardState:  ****************
 // We FLIP the piece-square tables depending on seating:
 

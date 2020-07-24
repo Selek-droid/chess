@@ -167,6 +167,14 @@
             }
         },
         {
+            "Key": "4c75508d-0b2b-43c7-a6c9-57a24362754b",
+            "Value": {
+                "id": "8888c478-9e25-4708-9829-df439713c9fd",
+                "resourcePath": "scripts\\MinMaxDuplicate\\MinMaxDuplicate.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "4e3c63ed-4dd7-4580-8867-7f3a70bad961",
             "Value": {
                 "id": "032924d6-070d-4cd6-a281-e6f606927197",
@@ -489,6 +497,7 @@
         "b25109cb-410f-4f37-bd25-35e4e8543a70",
         "62be158b-98e0-4c4d-b946-d8085af467fb",
         "17822bbe-d549-4eb9-b7bd-fe551f30ad11",
+        "4c75508d-0b2b-43c7-a6c9-57a24362754b",
         "cac66575-1abc-4978-b181-da619438b1b1",
         "767b96ea-e0ab-436b-9e98-5b4e3ec71bdb",
         "ceacf3e2-c440-4ae1-9f8b-c2328b2aa9ee",

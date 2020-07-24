@@ -36,7 +36,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 
 	deepScore = MinMax(boardState, moversSeat, moversColor); // generate poss responses & return SINGLE best score from them
 	// show_debug_message("MinMax returned a score of " + string(deepScore));
-	if oGame.searchDepth == 1
+	if oGame.depthOfSearch == 1
 	{
 	deepScore = 0 - deepScore;  // Flip Minmax result!  
 	}

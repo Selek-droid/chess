@@ -515,8 +515,9 @@ for (xx = 0; xx < 8; xx += 1;)
 				!((threatenedSquare_scr(xx - 1, yy, boardState, AISeat, AIColor)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy);
 					
-				var targetID = boardState[xx, yy - 1];  // offset -1, -1
-				if ((targetID[1] == 0) || (targetID[1] == nonMovingSide)) &&
+				var targetID = boardState[xx -1, yy - 1];  // offset -1, -1
+				if ((targetID[1] == 0) || (targetID[1] == nonMovingSide)) 
+				&&
 				!((threatenedSquare_scr(xx - 1, yy - 1, boardState, AISeat, AIColor)) )
 					ds_list_add(legalMoves, xx, yy, xx - 1, yy - 1);
 				
