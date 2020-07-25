@@ -35,7 +35,7 @@ else if moversSeat == SOUTH
 	var nonmoversSeat = SOUTH;
 }
 
-if (searchDepth > 2)  // Reached bottom of tree. Report best score to "evaluate", our root node.
+if (searchDepth > 1)  // Reached bottom of tree. Report best score to "evaluate", our root node.
 {
 	for (var xx = 0; xx < 8; xx += 1;)
 	{
