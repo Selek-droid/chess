@@ -3,10 +3,11 @@ var moversSeat = argument1;  // in any human game, this will be NORTH. We flip t
 var moversColor = argument2;
 var searchDepth = argument3;  // ok to use local var?
 
+
 var possibleMoves = ds_list_create();
 var listSize = (ds_list_size(possibleMoves)) - 4;
 var positionScore = 0;
-var minScore = infinity;  // Return value. Eval will compare this to other maxscores from other sent moves.
+var minScore = 0 - infinity;  // Return value. Eval will compare this to other maxscores from other sent moves.
 var listIndex = 0;
 var piece = [0 , 0];
 var selectedPiece = [0 , 0];
@@ -141,6 +142,7 @@ if (searchDepth > 1)  // Reached bottom of tree. Report best score to "evaluate"
 			}
 		}
 	}
+show_debug_message(" M I N scores a final leaf: " +  string(positionScore));
 ds_list_destroy(possibleMoves);	
 return positionScore;
 }
@@ -163,8 +165,14 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	selectedPiece = boardState[oldX, oldY];  // "move" responding piece to new location
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0];
+	
+	show_debug_message("M I N sends back this BLACK REPLY to Max: (" +  string(oldX) + " , " + string(oldY) + " to (" +
+	string(newX) + " , " + string(newY) + ")" + " , at depth :" + string(searchDepth) + " BBBBBBBBBBBBBBBBBBBBBBBBBBBB ");
+		
 	var maximizedScore = Maximize(boardState, moversSeat, moversColor, searchDepth + 1);
-	if (maximizedScore < minScore)  minScore = maximizedScore;
+	show_debug_message("M I N receives this score from MAX: (" +  string(maximizedScore));
+	if (maximizedScore > minScore)  minScore = maximizedScore;
+	show_debug_message("M I N sets this minScore: (" +  string(minScore));
 }
 searchDepth += 1;
 ds_list_destroy(possibleMoves);

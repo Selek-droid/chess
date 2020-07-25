@@ -1,6 +1,7 @@
 x = (room_width/2) - (BOARD_WIDTH/2);
 y = (room_height/2) - (BOARD_HEIGHT/2);
 
+GrangerColor = global.HermioneColor;
 animateSprite = false;
 spriteInMotion = false;
 movingSprite = PAWN;
@@ -126,7 +127,8 @@ if global.endgameSetup
 	global.grid[0, 0] = [KING, BLACK];
 	global.grid[0, 7] = [KING, WHITE];
 	global.grid[1, 4] = [PAWN, WHITE];
-	global.grid[0, 2] = [PAWN, BLACK];
+	global.grid[0, 4] = [PAWN, WHITE];
+	global.grid[0, 2] = [QUEEN, BLACK];
 //	global.grid[1, 6] = [PAWN, WHITE];
 //	global.grid[2, 2] = [ROOK, BLACK];
 //	global.grid[6, 7] = [ROOK, WHITE];

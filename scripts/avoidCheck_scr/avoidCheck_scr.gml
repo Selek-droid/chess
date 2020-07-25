@@ -8,6 +8,8 @@ var numberOfMoves = floor( ( (ds_list_size(argument0)) / 4) );
 var moversColor = argument1;  // changes in Negamax
 var moversSeat = argument2;   // changes in Negamax
 
+var kingPosition = [0 , 0];
+
 // find AI King position
 
 for (var xx = 0; xx < 8; xx += 1;)

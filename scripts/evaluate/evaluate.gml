@@ -41,6 +41,8 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	//deepScore = 0 - deepScore;  // Flip Minmax result!  
 	//}
 	
+	show_debug_message("Evaluate received back deepScore of " + string(deepScore));
+	
 	if (deepScore == maxScore)   // if a tie, store both, randomize
 	{
 		ds_list_add(tieBreakerList,listIndex);
