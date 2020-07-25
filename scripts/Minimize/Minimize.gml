@@ -6,7 +6,7 @@ var searchDepth = argument3;  // ok to use local var?
 var possibleMoves = ds_list_create();
 var listSize = (ds_list_size(possibleMoves)) - 4;
 var positionScore = 0;
-var maxScore = (0 - infinity);  // Return value. Eval will compare this to other maxscores from other sent moves.
+var minScore = infinity;  // Return value. Eval will compare this to other maxscores from other sent moves.
 var listIndex = 0;
 var piece = [0 , 0];
 var selectedPiece = [0 , 0];
@@ -142,7 +142,7 @@ if (searchDepth > 2)  // Reached bottom of tree. Report best score to "evaluate"
 		}
 	}
 ds_list_destroy(possibleMoves);	
-return maxScore;
+return positionScore;
 }
 
 // *** GENERATE POSSIBLE MOVES, one at a time, frmo INCOMING BOARD
@@ -163,9 +163,9 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	selectedPiece = boardState[oldX, oldY];  // "move" responding piece to new location
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0];
-	var minimizedScore = Minimize(boardState, moversSeat, moversColor, searchDepth + 1);
-	if (minimizedScore > maxScore) maxScore = minimizedScore;
+	var maximizedScore = Maximize(boardState, moversSeat, moversColor, searchDepth + 1);
+	if (maximizedScore < minScore)  minScore = maximizedScore;
 }
 searchDepth += 1;
 ds_list_destroy(possibleMoves);
-return maxScore;
+return minScore;

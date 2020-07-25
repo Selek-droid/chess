@@ -383,7 +383,6 @@ if (xx > 0)
 		{
 			if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("R or Q protected piece right of them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king
@@ -405,7 +404,6 @@ var availableSpace = 7 - xx;
 		{
 			if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("R or Q protected piece left of them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king. Keep looking
@@ -427,7 +425,6 @@ var availableSpace = yy;
 		{
 			if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("R or Q protected piece below them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king; keep looking for threats
@@ -449,7 +446,6 @@ var availableSpace = 7 - yy;
 		{
 			if (targetID[0] == ROOK) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("R or Q protected piece above them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king
@@ -473,7 +469,6 @@ if (xx > 0) && (yy > 0) // start looking NW
 		{
 			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("enemy B or Q targeting square SE of them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king
@@ -495,7 +490,6 @@ if (xx < 7) && (yy < 7)  // next looking SE
 		{
 			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("enemy B or Q targeting square NW of them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king
@@ -517,7 +511,6 @@ if (xx > 0) && (yy < 7) // now look SW
 		{
 			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("B or Q targeting square NE of them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king
@@ -539,7 +532,6 @@ if (xx < 7) && (yy > 0) // end by looking NE
 		{
 			if (targetID[0] == BISHOP) || (targetID[0] == QUEEN) 
 			{
-				show_debug_message("enemy B or Q targeting square NE of them")
 				return true;
 			}
 			else break;  // even enemy piece shields AI king
@@ -554,7 +546,6 @@ if (xx <= 6) && (yy <= 5) // offset 1, 2
 	var targetID = boardState[xx + 1, yy + 2];
 	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
-		show_debug_message("Knight protecting a space");
 		return true;
 	}
 }
@@ -564,7 +555,6 @@ if (xx <= 5) && (yy <= 6) // offset 2, 1
 	var targetID = boardState[xx + 2, yy + 1];
 	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
-		show_debug_message("Knight protecting a space");
 		return true;
 	}
 }
@@ -574,7 +564,6 @@ if (xx <= 5) && (yy >= 1) // offset 2, -1
 	var targetID = boardState[xx + 2, yy - 1];
 	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
-		show_debug_message("Knight protecting a space");
 		return true;
 	}
 }
@@ -584,7 +573,6 @@ if (xx <= 6) && (yy >= 2) // offset 1, -2
 	var targetID = boardState[xx + 1, yy - 2];
 	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
-		show_debug_message("Knight protecting a space");
 		return true;
 	}
 }
@@ -594,7 +582,6 @@ if (xx >= 2) && (yy >= 1) // offset -2, -1
 	var targetID = boardState[xx - 2, yy - 1];
 	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
-		show_debug_message("Knight protecting a space");
 		return true;
 	}
 }
@@ -604,7 +591,6 @@ if (xx >= 2) && (yy <= 6) // offset -2, 1
 	var targetID = boardState[xx - 2, yy + 1];
 	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
-		show_debug_message("Knight protecting a space");
 		return true;
 	}
 }
@@ -614,7 +600,6 @@ if (xx >= 1) && (yy <= 5) // offset -1, 2
 	var targetID = boardState[xx - 1, yy + 2];
 	if ((targetID[1] == enemy) && (targetID[0] == KNIGHT))
 	{
-		show_debug_message("Knight protecting a space");
 		return true;
 	}
 }
@@ -624,7 +609,6 @@ if (xx >= 1) && (yy >= 2) // offset -1, -2
 	var targetID = boardState[xx - 1, yy - 2];
 	if (targetID[1] == enemy) && (targetID[0] == KNIGHT)
 	{
-		show_debug_message("Knight protecting a space");
 		return true;
 	}
 }

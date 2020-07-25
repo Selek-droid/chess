@@ -57,7 +57,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 
 	var selectedPiece = boardState[oldX, oldY];  // "move" piece to new location
 	boardState[newX, newY] = selectedPiece;
-	boardState[oldX, oldY] = [0 , 0]  
+	boardState[oldX, oldY] = [0 , 0];  
 
 
 //  Now score the new boardState:  ****************

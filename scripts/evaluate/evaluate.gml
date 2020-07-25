@@ -34,12 +34,12 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 
 // now, call Minmax to score that move.
 
-	deepScore = MinMax(boardState, moversSeat, moversColor); // generate poss responses & return SINGLE best score from them
+	deepScore = Maximize(boardState, moversSeat, moversColor, 0); // generate poss responses & return SINGLE best score from them
 	// show_debug_message("MinMax returned a score of " + string(deepScore));
-	if oGame.depthOfSearch == 1
-	{
-	deepScore = 0 - deepScore;  // Flip Minmax result!  
-	}
+	//if oGame.depthOfSearch == 1
+	//{
+	//deepScore = 0 - deepScore;  // Flip Minmax result!  
+	//}
 	
 	if (deepScore == maxScore)   // if a tie, store both, randomize
 	{
