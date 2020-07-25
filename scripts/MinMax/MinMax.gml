@@ -6,8 +6,10 @@ var listSize = (ds_list_size(possibleMoves)) - 4;
 var positionScore = 0;
 var maxScore = (0 - infinity);
 var listIndex = 0;
+var depthListIndex = 0;
 var piece = [0 , 0];
 var selectedPiece = [0 , 0];
+var depthSelectedPiece = [0, 0];
 var candidate = 0;
 
 if moversColor == WHITE   // flip color: white AI now "plays" as black, and vice-versa
@@ -38,11 +40,11 @@ else if moversSeat == SOUTH
 
 possibleMoves = possibleMoves_scr(boardState, moversSeat, moversColor, true, true);  // generate ds_list of possible moves
 
-show_debug_message("After poss moves, move list size is: " + string((ds_list_size(possibleMoves))/4 ) );
+// show_debug_message("After poss moves, human move list size is: " + string((ds_list_size(possibleMoves))/4 ) );
 
 possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat, boardState);   // prune them for check outside possMoves?
 
-show_debug_message("After avoidCheck, move list size is: " + string((ds_list_size(possibleMoves))/4 ) );
+show_debug_message("After avoidCheck, human move list size is: " + string((ds_list_size(possibleMoves))/4 ) );
 
 listSize = (ds_list_size(possibleMoves)) - 4;
 // show_debug_message("Number of possible human responses was " + string(listSize));
@@ -63,25 +65,56 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0]  
 	
-	if (oGame.depthOfSearch == 5)  // now generate responses to response! ***************************
+	show_debug_message("Testing Human (white) initial response of: (" +  string(oldX) + " , " + string(oldY) + " to (" +
+	string(newX) + " , " + string(newY) + ")" );		
+	
+	if (oGame.depthOfSearch == 1)  // now generate responses to response! ***************************
 	{
 		var alteredBoardState = boardState;
-		possibleMoves = possibleMoves_scr(boardState, moversSeat, moversColor, true, true);  // generate ds_list of possible moves
-		possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat, boardState);   // prune them for check outside possMoves?
-		listSize = (ds_list_size(possibleMoves)) - 4;
-		for (listIndex = 0; listIndex <= listSize; listIndex += 4)
+		if moversColor == WHITE   // flip color: white AI now "plays" as black, and vice-versa
+		{
+			moversColor = BLACK;
+			var nonmoversColor = WHITE;
+		} 
+
+		else if moversColor == BLACK // AI playing as black; flip it to white.
+		{
+			moversColor = WHITE;
+			var nonmoversColor = BLACK;
+		}
+
+		if moversSeat == NORTH   // flip side: north AI now "plays" as south, and vice-versa
+		{
+			moversSeat = SOUTH;
+			var nonmoversSeat = NORTH;
+		}
+
+		else if moversSeat == SOUTH
+		{
+			moversSeat = NORTH;
+			var nonmoversSeat = SOUTH;
+		}
+		var depthPossibleMoves = possibleMoves_scr(boardState, moversSeat, moversColor, true, true);  // generate ds_list of possible moves
+		depthPossibleMoves = avoidCheck_scr(depthPossibleMoves, moversColor, moversSeat, boardState);   // prune them for check outside possMoves?
+		var depthListSize = (ds_list_size(depthPossibleMoves)) - 4;
+		
+		show_debug_message("Black response-to-response move-list size: " + string((ds_list_size(depthPossibleMoves))/4 ) );
+		
+		for (depthListIndex = 0; depthListIndex <= depthListSize; depthListIndex += 4)
 		{						
-			var oldX = ds_list_find_value(possibleMoves,listIndex);
-			var oldY = ds_list_find_value(possibleMoves,listIndex + 1);
-			var newX = ds_list_find_value(possibleMoves,listIndex + 2);
-			var newY = ds_list_find_value(possibleMoves,listIndex + 3);
+			var oldX = ds_list_find_value(depthPossibleMoves,depthListIndex);
+			var oldY = ds_list_find_value(depthPossibleMoves,depthListIndex + 1);
+			var newX = ds_list_find_value(depthPossibleMoves,depthListIndex + 2);
+			var newY = ds_list_find_value(depthPossibleMoves,depthListIndex + 3);
 		
 			boardState = alteredBoardState;
-			var selectedPiece = boardState[oldX, oldY];  // "move" responding piece to new location
-			boardState[newX, newY] = selectedPiece;
+			depthSelectedPiece = boardState[oldX, oldY];  // "move" responding piece to new location
+			boardState[newX, newY] = depthSelectedPiece;
 			boardState[oldX, oldY] = [0 , 0]  
+			show_debug_message("Testing Black reply of: (" +  string(oldX) + " , " + string(oldY) + " to (" +
+	string(newX) + " , " + string(newY) + ")" );
 		}
-	}
+	
 //  Now score the new boardState:  ****************
 // We FLIP the piece-square tables depending on seating:
 
@@ -210,6 +243,6 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	}
 	// show_debug_message("Index of best DEEP move was " + string(candidate) + " with score of " + string(maxScore));
 	// show_debug_message("List size was " + string(listSize) + " and listIndex was " + string(listIndex)); 
+	}
 }
-
 return maxScore;

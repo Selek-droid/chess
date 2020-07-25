@@ -30,7 +30,7 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0]  
 	show_debug_message("AI/black move: (" +  string(oldX) + " , " + string(oldY) + " to (" +
-	string(newX) + " , " + string(newY) + ")" );
+	string(newX) + " , " + string(newY) + ") ********************************************************" );
 
 // now, call Minmax to score that move.
 

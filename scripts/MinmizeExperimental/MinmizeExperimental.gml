@@ -34,15 +34,23 @@ else if moversSeat == SOUTH
 	var nonmoversSeat = SOUTH;
 }
 
+//int BlueValue(Board b, int depth) {
+//    if ((GameOver(b) or depth>MaxDepth)
+//        return Analysis(b)
+//    int max = -infinity
+//    for each legal move m in board b {
+//        copy b to c
+//        make move m in board c
+//        int x = RedValue(c, depth+1)
+//        if (x>max) max = x
+//    }
+//    return max
+
 // Got boardState from evaluate(), reflecting just one move.  Now generate all possible RESPONSES.
 
 possibleMoves = possibleMoves_scr(boardState, moversSeat, moversColor, true, true);  // generate ds_list of possible moves
 possibleMoves = avoidCheck_scr(possibleMoves, moversColor, moversSeat,boardState);   // prune them for check outside possMoves?
-
 listSize = (ds_list_size(possibleMoves)) - 4;
-// show_debug_message("Number of possible human responses was " + string(listSize));
-
-//  "make" each 4-element move in the pruned list; just save highest score?
 
 for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 {						
