@@ -22,18 +22,6 @@ else
 	friend = WHITE;
 }
 
-//if (oGame.state == "AI Turn") 
-//{
-//	enemy = WHITE;
-//	friend = BLACK;
-//}
-	
-//if (oGame.state == "Player Turn") 
-//{
-//	enemy = BLACK;
-//	friend = WHITE;
-//}
-
 // Check 1-square range first -- King and Pawns essentially, but others as warranted
 
 if (xx == 0) && (yy < 7) && (yy > 0) // LEFT EDGE but not corners
@@ -85,14 +73,11 @@ if (xx == 0) && (yy < 7) && (yy > 0) // LEFT EDGE but not corners
 		}
 	}
 	
-	
 	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
 	if (targetID[1] == enemy)
 	{
 		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
 	}
-	
-	// add cases for more distant QUEENS and BISHOPS here?
 }
 
 // ===============================================================================================
@@ -206,6 +191,77 @@ if (xx > 0) && (xx < 7 ) && (yy == 0)  // TOP EDGE, range 1
 	}
 
 }
+
+// TOP RIGHT CORNER ===========================================
+
+if (xx == 7 ) && (yy == 0)  
+{
+	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
+	if (targetID[1] == enemy)
+	{
+		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
+	}
+	
+	var targetID = boardState[xx - 1, yy];  // King, Q, R directly W
+	if (targetID[1] == enemy)
+	{
+		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
+	}
+	
+	var targetID = boardState[xx - 1, yy + 1];  // King, Q, B or P directly SW
+	if moversSeat == NORTH
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
+			|| (targetID[0] == PAWN) return true;
+		}
+	}
+	else if moversSeat == SOUTH
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		}
+	}
+}
+
+// TOP LEFT CORNER ===========================================
+
+if (xx == 0 ) && (yy == 0)  
+{
+	var targetID = boardState[xx, yy + 1];  // King, Q, R directly S
+	if (targetID[1] == enemy)
+	{
+		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
+	}
+
+	var targetID = boardState[xx + 1, yy];  // King, Q, R directly E
+	if (targetID[1] == enemy)
+	{
+		if (targetID[0] == KING) || (targetID[0] == ROOK) || (targetID[0] == QUEEN) return true;
+	}
+	
+	var targetID = boardState[xx + 1, yy + 1];  // King, Q, B, P directly SE
+	if moversSeat == NORTH
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN)
+			|| (targetID[0] == PAWN) return true;
+		}
+	}
+	else if moversSeat == SOUTH
+	{
+		if (targetID[1] == enemy)
+		{
+			if (targetID[0] == KING) || (targetID[0] == BISHOP) || (targetID[0] == QUEEN) return true;
+		}
+	}
+}
+
+
+
 
 // -------------------------------------------------------------------------
 

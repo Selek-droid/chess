@@ -234,8 +234,7 @@ for (xx = 0; xx < 8; xx += 1;)
 								!((threatenedSquare_scr(xx - 1, yy, boardState, AISeat, AIColor)) ) &&
 								!((threatenedSquare_scr(xx - 2, yy, boardState, AISeat, AIColor)) ) 
 								{
-									show_debug_message("AI adding kingside castle to possible moves");
-									ds_list_add(legalMoves, 3, yy, 1, yy);
+										ds_list_add(legalMoves, 3, yy, 1, yy);
 								}
 						}
 				

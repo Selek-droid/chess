@@ -166,10 +166,10 @@ if (oGame.turn == 5)
 	(ds_list_find_value(oGame.formattedHistory,3) == "Nc6") &&  // Black continued Ruy Lopez with 2..Nc6
 	(ds_list_find_value(oGame.formattedHistory,1) == "e5")
 	{
-		global.grid[3, 0] = [0, 0];   // White continues Ruy Lopez with 5. 0-0
-		global.grid[0, 0] = [0, 0];
-		global.grid[1, 0] = [KING, WHITE];
-		global.grid[2, 0] = [ROOK, WHITE];
+		board_object.grid[3, 0] = [0, 0];   // White continues Ruy Lopez with 5. 0-0
+		board_object.grid[0, 0] = [0, 0];
+		board_object.grid[1, 0] = [KING, WHITE];
+		board_object.grid[2, 0] = [ROOK, WHITE];
 		updateHistory_scr([BISHOP, WHITE], 6, 4, 7, 3, false);
 		oGame.turn += 1;
 		oGame.state = "Player Turn";
@@ -211,10 +211,10 @@ if (oGame.turn == 6)
 	(ds_list_find_value(oGame.formattedHistory,3) == "Nc6") &&  // Black continued Ruy Lopez with 2..Nc6
 	(ds_list_find_value(oGame.formattedHistory,1) == "e5")
 	{
-		global.grid[3, 0] = [0, 0];   // White continues Ruy Lopez with 6. 0-0
-		global.grid[0, 0] = [0, 0];
-		global.grid[1, 0] = [KING, WHITE];
-		global.grid[2, 0] = [ROOK, WHITE];
+		board_object.grid[3, 0] = [0, 0];   // White continues Ruy Lopez with 6. 0-0
+		board_object.grid[0, 0] = [0, 0];
+		board_object.grid[1, 0] = [KING, WHITE];
+		board_object.grid[2, 0] = [ROOK, WHITE];
 		updateHistory_scr([BISHOP, WHITE], 6, 4, 7, 3, false);
 		oGame.turn += 1;
 		oGame.state = "Player Turn";

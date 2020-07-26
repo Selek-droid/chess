@@ -46,12 +46,14 @@ if (searchDepth > 1)  // Reached bottom of tree. Report best score to "evaluate"
 //	else show_debug_message("Scoring color is WHITE");
 
 // For now will HARD CODE as BLACK, NORTH.  Older code tested side/seat, but removing as unnecessary for now.
+	
+	
 	for (var xx = 0; xx < 8; xx += 1;)
 	{
 		for (var yy = 0; yy < 8; yy += 1;)
 		{
 			var piece = boardState[xx, yy];
-			if piece[1] == HermioneColor // if piece[1] == moversColor   // old code checked color
+			if piece[1] == HermioneColor 
 			{
 				switch (piece[0])
 				{
@@ -91,7 +93,17 @@ if (searchDepth > 1)  // Reached bottom of tree. Report best score to "evaluate"
 						break;
 					}
 					case KING:
-					{
+					{ 
+						// STALEMATE check. If this board has 0 moves, return "0," an OK result.
+						//var stalemateCheck = ds_list_create();
+						//stalemateCheck = possibleMoves_scr(boardState, NORTH, HermioneColor, true, true);
+						//if ds_list_size(stalemateCheck) == 0
+						//{
+						//	ds_list_destroy(possibleMoves);
+						//	ds_list_destroy(stalemateCheck);
+						//	return 0;
+						//}
+						
 						// if moversSeat == NORTH
 						positionScore += (VKING + board_object.AIKingTable[xx, yy]);
 						// else positionScore += (VKING + board_object.HumanKingTable[xx, yy]);
@@ -100,7 +112,7 @@ if (searchDepth > 1)  // Reached bottom of tree. Report best score to "evaluate"
 				}
 			}
 				
-			if piece[1] != HermioneColor  // == nonmoversColor
+			if piece[1] != HermioneColor  
 			{
 				switch (piece[0])
 				{

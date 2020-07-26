@@ -1,7 +1,7 @@
 // Check each AI move to see whether AI king is in check. If so, remove move.
 
 var legalMoves = ds_list_create();
-var boardState = argument3;  // bug here -- was always looking at global.grid. Ugh.
+var boardState = argument3;  
 var proposedState = boardState;
 var numberOfMoves = floor( ( (ds_list_size(argument0)) / 4) );
 
@@ -62,6 +62,7 @@ for (var i = 0; i < numberOfMoves; i += 1;)
 }
 
 return legalMoves;
+ds_list_destroy(legalMoves);
 	
 
 

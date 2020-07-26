@@ -253,10 +253,10 @@ if (oGame.turn == 10)
 	{
 		ds_list_add(oGame.formattedHistory,"O-O");
 		show_debug_message("0-0");
-		global.grid[4, 0] = [0, 0];
-		global.grid[7, 0] = [0, 0];
-		global.grid[6, 0] = [KING, BLACK];
-		global.grid[5, 0] = [ROOK, BLACK];
+		board_object.grid[4, 0] = [0, 0];
+		board_object.grid[7, 0] = [0, 0];
+		board_object.grid[6, 0] = [KING, BLACK];
+		board_object.grid[5, 0] = [ROOK, BLACK];
 		board_object.NorthCanCastleLeft = false;
 		board_object.NorthCanCastleRight = false;
 		oGame.turn += 1;
@@ -276,10 +276,10 @@ if (oGame.turn == 10)
 	{
 		ds_list_add(oGame.formattedHistory,"O-O");
 		show_debug_message("0-0");
-		global.grid[4, 0] = [0, 0];
-		global.grid[7, 0] = [0, 0];
-		global.grid[6, 0] = [KING, BLACK];
-		global.grid[5, 0] = [ROOK, BLACK];
+		board_object.grid[4, 0] = [0, 0];
+		board_object.grid[7, 0] = [0, 0];
+		board_object.grid[6, 0] = [KING, BLACK];
+		board_object.grid[5, 0] = [ROOK, BLACK];
 		board_object.NorthCanCastleLeft = false;
 		board_object.NorthCanCastleRight = false;
 		oGame.turn += 1;

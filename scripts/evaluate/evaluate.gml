@@ -1,6 +1,6 @@
 // Called by parent node, AIscript, with AI sitting NORTH. 
 // Possible moves is legal set of moves for AI, averaging 30ish.
-// Boardstate is simply the current global.grid.
+// Boardstate is simply the current grid.
 
 var possibleMoves = argument0;
 var boardState = argument1;

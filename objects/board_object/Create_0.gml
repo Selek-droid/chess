@@ -47,7 +47,7 @@ for (xx = 0; xx < 8; xx += 1;)
 {
 	for (yy = 0; yy < 8; yy += 1;)
 	{
-		global.grid[xx, yy] = contents;  // initialize to zero
+		grid[xx, yy] = contents;  // initialize to zero
 	}
 }
 
@@ -57,31 +57,31 @@ if !(global.endgameSetup)
 	{
 		for (xx = 0; xx < 8; xx += 1;)
 		{
-			global.grid[xx, 1] = [PAWN, BLACK];
+			grid[xx, 1] = [PAWN, BLACK];
 		}
 
 		for (xx = 0; xx < 8; xx += 1;)
 		{
-			global.grid[xx, 6] = [PAWN, WHITE];
+			grid[xx, 6] = [PAWN, WHITE];
 		}
 
-		global.grid[0, 0] = [ROOK, BLACK];
-		global.grid[7, 0] = [ROOK, BLACK];
-		global.grid[1, 0] = [KNIGHT, BLACK];
-		global.grid[6, 0] = [KNIGHT, BLACK];
-		global.grid[2, 0] = [BISHOP, BLACK];
-		global.grid[5, 0] = [BISHOP, BLACK];
-		global.grid[3, 0] = [QUEEN, BLACK];
-		global.grid[4, 0] = [KING, BLACK];
+		grid[0, 0] = [ROOK, BLACK];
+		grid[7, 0] = [ROOK, BLACK];
+		grid[1, 0] = [KNIGHT, BLACK];
+		grid[6, 0] = [KNIGHT, BLACK];
+		grid[2, 0] = [BISHOP, BLACK];
+		grid[5, 0] = [BISHOP, BLACK];
+		grid[3, 0] = [QUEEN, BLACK];
+		grid[4, 0] = [KING, BLACK];
 
-		global.grid[0, 7] = [ROOK, WHITE];
-		global.grid[7, 7] = [ROOK, WHITE];
-		global.grid[1, 7] = [KNIGHT, WHITE];
-		global.grid[6, 7] = [KNIGHT, WHITE];
-		global.grid[2, 7] = [BISHOP, WHITE];
-		global.grid[5, 7] = [BISHOP, WHITE];
-		global.grid[3, 7] = [QUEEN, WHITE];
-		global.grid[4, 7] = [KING, WHITE];
+		grid[0, 7] = [ROOK, WHITE];
+		grid[7, 7] = [ROOK, WHITE];
+		grid[1, 7] = [KNIGHT, WHITE];
+		grid[6, 7] = [KNIGHT, WHITE];
+		grid[2, 7] = [BISHOP, WHITE];
+		grid[5, 7] = [BISHOP, WHITE];
+		grid[3, 7] = [QUEEN, WHITE];
+		grid[4, 7] = [KING, WHITE];
 
 	}
 
@@ -89,31 +89,31 @@ if !(global.endgameSetup)
 	{
 	for (xx = 0; xx < 8; xx += 1;)
 		{
-			global.grid[xx, 6] = [PAWN, BLACK];
+			grid[xx, 6] = [PAWN, BLACK];
 		}
 
 		for (xx = 0; xx < 8; xx += 1;)
 		{
-			global.grid[xx, 1] = [PAWN, WHITE];
+			grid[xx, 1] = [PAWN, WHITE];
 		}
 
-		global.grid[0, 7] = [ROOK, BLACK];
-		global.grid[7, 7] = [ROOK, BLACK];
-		global.grid[1, 7] = [KNIGHT, BLACK];
-		global.grid[6, 7] = [KNIGHT, BLACK];
-		global.grid[2, 7] = [BISHOP, BLACK];
-		global.grid[5, 7] = [BISHOP, BLACK];
-		global.grid[4, 7] = [QUEEN, BLACK];  // K and Q switched
-		global.grid[3, 7] = [KING, BLACK];
+		grid[0, 7] = [ROOK, BLACK];
+		grid[7, 7] = [ROOK, BLACK];
+		grid[1, 7] = [KNIGHT, BLACK];
+		grid[6, 7] = [KNIGHT, BLACK];
+		grid[2, 7] = [BISHOP, BLACK];
+		grid[5, 7] = [BISHOP, BLACK];
+		grid[4, 7] = [QUEEN, BLACK];  // K and Q switched
+		grid[3, 7] = [KING, BLACK];
 
-		global.grid[0, 0] = [ROOK, WHITE];
-		global.grid[7, 0] = [ROOK, WHITE];
-		global.grid[1, 0] = [KNIGHT, WHITE];
-		global.grid[6, 0] = [KNIGHT, WHITE];
-		global.grid[2, 0] = [BISHOP, WHITE];
-		global.grid[5, 0] = [BISHOP, WHITE];
-		global.grid[4, 0] = [QUEEN, WHITE];  // K and Q switched
-		global.grid[3, 0] = [KING, WHITE];
+		grid[0, 0] = [ROOK, WHITE];
+		grid[7, 0] = [ROOK, WHITE];
+		grid[1, 0] = [KNIGHT, WHITE];
+		grid[6, 0] = [KNIGHT, WHITE];
+		grid[2, 0] = [BISHOP, WHITE];
+		grid[5, 0] = [BISHOP, WHITE];
+		grid[4, 0] = [QUEEN, WHITE];  // K and Q switched
+		grid[3, 0] = [KING, WHITE];
 		show_debug_message("Er, why are pieces flipped?");
 	}
 }
@@ -121,18 +121,18 @@ if !(global.endgameSetup)
 if global.endgameSetup
 {
 	global.HermioneColor = BLACK;
-//	global.grid[7, 1] = [PAWN, BLACK];
-//	global.grid[6, 1] = [PAWN, BLACK];
-//	global.grid[5, 1] = [PAWN, BLACK];
-	global.grid[0, 0] = [KING, BLACK];
-	global.grid[0, 7] = [KING, WHITE];
-	global.grid[0, 2] = [PAWN, BLACK];
-	global.grid[1, 4] = [PAWN, WHITE];
-//	global.grid[0, 2] = [QUEEN, BLACK];
-//	global.grid[1, 6] = [PAWN, WHITE];
-//	global.grid[2, 2] = [ROOK, BLACK];
-//	global.grid[6, 7] = [ROOK, WHITE];
-//	global.grid[6, 6] = [ROOK, WHITE];
+//	grid[7, 1] = [PAWN, BLACK];
+//	grid[6, 1] = [PAWN, BLACK];
+//	grid[5, 1] = [PAWN, BLACK];
+	grid[2, 1] = [KING, BLACK];
+	grid[4, 5] = [KING, WHITE];
+	grid[1, 1] = [PAWN, WHITE];
+	grid[3, 1] = [BISHOP, WHITE];
+//	grid[0, 2] = [QUEEN, BLACK];
+//	grid[1, 6] = [PAWN, WHITE];
+//	grid[2, 2] = [ROOK, BLACK];
+//	grid[6, 7] = [ROOK, WHITE];
+//	grid[6, 6] = [ROOK, WHITE];
 	
 }
 
@@ -140,14 +140,14 @@ if global.endgameSetup
 	
 // Piece-square tables ============================================
 
-AIpawnTable [7, 7] = 0;  // AI back rank; pawns never here until promoted
-AIpawnTable [6, 7] = 0;
-AIpawnTable [5, 7] = 0;
-AIpawnTable [4, 7] = 0;
-AIpawnTable [3, 7] = 0;
-AIpawnTable [2, 7] = 0;
-AIpawnTable [1, 7] = 0;
-AIpawnTable [0, 7] = 0;
+AIpawnTable [7, 7] = 1000;  // AI back rank; pawns never here until promoted
+AIpawnTable [6, 7] = 1000;
+AIpawnTable [5, 7] = 1000;
+AIpawnTable [4, 7] = 1000;
+AIpawnTable [3, 7] = 1000;
+AIpawnTable [2, 7] = 1000;
+AIpawnTable [1, 7] = 1000;
+AIpawnTable [0, 7] = 1000;
 
 AIpawnTable [7, 6] = 50;  // AI on verge of promotion
 AIpawnTable [6, 6] = 50;
@@ -278,14 +278,14 @@ HumanPawnTable [2, 1] = 50;
 HumanPawnTable [1, 1] = 50;
 HumanPawnTable [0, 1] = 50;
 
-HumanPawnTable [7, 0] = 0; // row 8. Becomes different piece if promoted.
-HumanPawnTable [6, 0] = 0;
-HumanPawnTable [5, 0] = 0;
-HumanPawnTable [4, 0] = 0;
-HumanPawnTable [3, 0] = 0;
-HumanPawnTable [2, 0] = 0;
-HumanPawnTable [1, 0] = 0;
-HumanPawnTable [0, 0] = 0;
+HumanPawnTable [7, 0] = 1000; // row 8. Becomes different piece if promoted.
+HumanPawnTable [6, 0] = 1000;
+HumanPawnTable [5, 0] = 1000;
+HumanPawnTable [4, 0] = 1000;
+HumanPawnTable [3, 0] = 1000;
+HumanPawnTable [2, 0] = 1000;
+HumanPawnTable [1, 0] = 1000;
+HumanPawnTable [0, 0] = 1000;
 
 // ============== Rook tables
 

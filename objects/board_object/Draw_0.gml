@@ -4,14 +4,14 @@ if (animateSprite)
 {
 	if ! (spriteInMotion)
 	{
-		global.grid[oldX, oldY] = [0, 0];
+		grid[oldX, oldY] = [0, 0];
 		spriteInMotion = true;
 	}
 	draw_sprite(movingSprite,-1,(spriteX + ((loc * deltaX)/ 20)),(spriteY + ((loc * deltaY)/ 20)));
 	loc += 1;
 	if (loc > 19) 
 	{		
-		global.grid[newX, newY] = movingPiece;   // Sicilian defense		
+		board_object.grid[newX, newY] = movingPiece;   // Sicilian defense		
 		animateSprite = false;
 		spriteInMotion = false;
 		loc = 0;
@@ -24,7 +24,7 @@ if (animateSprite)
 //{
 //	if ! (spriteInMotion) && ! (kingDoneCastling)  // first king poofs
 //	{
-//		global.grid[oldX, oldY] = [0, 0];  // call this only once
+//		board_object.grid[oldX, oldY] = [0, 0];  // call this only once
 //		spriteInMotion = true;
 //	}
 //	if ! (kingDoneCastling)
@@ -33,7 +33,7 @@ if (animateSprite)
 //		loc += 1;
 //		if (loc > 19) 
 //		{		
-//			global.grid[newX, 0] = [KING, BLACK];   		
+//			board_object.grid[newX, 0] = [KING, BLACK];   		
 //			animateSprite = false;
 //			spriteInMotion = false;
 //			kingDoneCastling = true;
@@ -45,12 +45,12 @@ if (animateSprite)
 //	{
 //		if (deltaX > 0)  // rook is on right side; it poofs
 //		{
-//			global.grid[7, 0] = [0, 0];
+//			board_object.grid[7, 0] = [0, 0];
 //			spriteInMotion = true;
 //		}
 //		else
 //		{
-//			global.grid[0, 0] = [0, 0];  // rook on left
+//			board_object.grid[0, 0] = [0, 0];  // rook on left
 //			spriteInMotion = true;
 //		}
 		
@@ -64,11 +64,11 @@ if (animateSprite)
 //		{	
 //			if (deltaX > 0)  // rook is on right side; it moves left
 //			{
-//				global.grid[5, 0] = [ROOK, BLACK];
+//				board_object.grid[5, 0] = [ROOK, BLACK];
 //			}
 //			else
 //			{
-//				global.grid[3, 0] = [ROOK, BLACK];  // rook on left, moves right
+//				board_object.grid[3, 0] = [ROOK, BLACK];  // rook on left, moves right
 //			}
 		 		
 //			animateSprite = false;
@@ -89,84 +89,84 @@ for (xx = 0; xx <= 7; xx += 1;)
 	for (yy = 0; yy <= 7; yy += 1;)
 
 	{
-		if array_equals( global.grid[xx, yy] , [KNIGHT, WHITE] )
+		if array_equals( board_object.grid[xx, yy] , [KNIGHT, WHITE] )
 		{
 			draw_sprite(white_knight_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
 		
-		if array_equals( global.grid[xx, yy] , [BISHOP, WHITE] )
+		if array_equals( board_object.grid[xx, yy] , [BISHOP, WHITE] )
 		{
 			draw_sprite(white_bishop_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
 		
-		if array_equals( global.grid[xx, yy] , [ROOK, WHITE] )
+		if array_equals( board_object.grid[xx, yy] , [ROOK, WHITE] )
 		{
 			draw_sprite(white_rook_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
 		
-		if array_equals( global.grid[xx, yy] , [QUEEN, WHITE] )
+		if array_equals( board_object.grid[xx, yy] , [QUEEN, WHITE] )
 		{
 			draw_sprite(white_queen_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
 		
-		if array_equals( global.grid[xx, yy] , [KING, WHITE] )
+		if array_equals( board_object.grid[xx, yy] , [KING, WHITE] )
 		{
 			draw_sprite(white_king_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
 		
-		if array_equals( global.grid[xx, yy] , [PAWN, WHITE] )
+		if array_equals( board_object.grid[xx, yy] , [PAWN, WHITE] )
 		{
 			draw_sprite(white_pawn_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
 				
-		if array_equals( global.grid[xx, yy] , [KNIGHT, BLACK] )
+		if array_equals( board_object.grid[xx, yy] , [KNIGHT, BLACK] )
 		{
 			draw_sprite(black_knight_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
 		
-		if array_equals( global.grid[xx, yy] , [PAWN, BLACK] )
+		if array_equals( board_object.grid[xx, yy] , [PAWN, BLACK] )
 		{
 			draw_sprite(black_pawn_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
 		
-		if array_equals( global.grid[xx, yy] , [QUEEN, BLACK] )
+		if array_equals( board_object.grid[xx, yy] , [QUEEN, BLACK] )
 		{
 			draw_sprite(black_queen_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
 		
-		if array_equals( global.grid[xx, yy] , [BISHOP, BLACK] )
+		if array_equals( board_object.grid[xx, yy] , [BISHOP, BLACK] )
 		{
 			draw_sprite(black_bishop_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
 		
-		if array_equals( global.grid[xx, yy] , [ROOK, BLACK] )
+		if array_equals( board_object.grid[xx, yy] , [ROOK, BLACK] )
 		{
 			draw_sprite(black_rook_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
 				floor(y + (yy * SQUARE_SIZE)));
 		}
 		
-		if array_equals( global.grid[xx, yy] , [KING, BLACK] )
+		if array_equals( board_object.grid[xx, yy] , [KING, BLACK] )
 		{
 			draw_sprite(black_king_sprite, -1, 
 				floor(x + (xx * SQUARE_SIZE)), 
