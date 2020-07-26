@@ -1,5 +1,5 @@
 {
-    "id": "398fd2cf-84da-4819-8734-65bbfd843c6a",
+    "id": "77145bc4-7e02-4324-ab82-b069e9774fad",
     "modelName": "GMScript",
     "mvc": "1.0",
     "name": "Minimize",
