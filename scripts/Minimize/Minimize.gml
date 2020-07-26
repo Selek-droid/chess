@@ -150,7 +150,7 @@ if (searchDepth > 1)  // Reached bottom of tree. Report best score to "evaluate"
 			}
 		}
 	}
-show_debug_message("MIN scores a final leaf: " + string(positionScore));	
+// show_debug_message("MIN scores a final leaf: " + string(positionScore));	
 	
 ds_list_destroy(possibleMoves);	
 return positionScore;
@@ -175,16 +175,16 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0];
 	
-	show_debug_message("MIN sends this WHITE move to MAX: (" +  string(oldX) + " , " + string(oldY) + " to (" +
-	string(newX) + " , " + string(newY) + ")" + " , at depth :" + string(searchDepth) + "===========================================");
+	//show_debug_message("MIN sends this WHITE move to MAX: (" +  string(oldX) + " , " + string(oldY) + " to (" +
+	//string(newX) + " , " + string(newY) + ")" + " , at depth :" + string(searchDepth) + "===========================================");
 	
 		
 	var maximizedScore = Maximize(boardState, moversSeat, moversColor, searchDepth + 1);
-	show_debug_message("MIN receives this score from MAX: " +  string(maximizedScore));
-	show_debug_message("Old minscore in MIN was " + string(minScore));
+	//show_debug_message("MIN receives this score from MAX: " +  string(maximizedScore));
+	//show_debug_message("Old minscore in MIN was " + string(minScore));
 	if (maximizedScore < minScore) minScore = maximizedScore;
 
-	show_debug_message("MIN sets new minscore from MAX: (" +  string(minScore));
+//	show_debug_message("MIN sets new minscore from MAX: (" +  string(minScore));
 }
 searchDepth += 1;
 ds_list_destroy(possibleMoves);

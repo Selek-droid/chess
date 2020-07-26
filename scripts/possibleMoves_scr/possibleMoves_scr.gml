@@ -790,4 +790,5 @@ for (xx = 0; xx < 8; xx += 1;)
 	}
 }
 
-return legalMoves
+return legalMoves;
+ds_list_destroy(legalMoves);

@@ -142,7 +142,7 @@ if (searchDepth > 1)  // Reached bottom of tree. Report best score to "evaluate"
 			}
 		}
 	}
-show_debug_message("Unusual! NEWMAX scores a final leaf: " +  string(positionScore));
+// show_debug_message("Unusual! NEWMAX scores a final leaf: " +  string(positionScore));
 ds_list_destroy(possibleMoves);	
 return positionScore;
 }
@@ -166,14 +166,14 @@ for (listIndex = 0; listIndex <= listSize; listIndex += 4)
 	boardState[newX, newY] = selectedPiece;
 	boardState[oldX, oldY] = [0 , 0];
 	
-	show_debug_message("MAX sends back this BLACK REPLY to MIN: (" +  string(oldX) + " , " + string(oldY) + " to (" +
-	string(newX) + " , " + string(newY) + ")" + " , at depth :" + string(searchDepth) + " BBBBBBBBBBBBBBBBBBBBBBBBBBBB ");
+//	show_debug_message("MAX sends back this BLACK REPLY to MIN: (" +  string(oldX) + " , " + string(oldY) + " to (" +
+//	string(newX) + " , " + string(newY) + ")" + " , at depth :" + string(searchDepth) + " BBBBBBBBBBBBBBBBBBBBBBBBBBBB ");
 		
 	var minimizedScore = Minimize(boardState, moversSeat, moversColor, searchDepth + 1);
-	show_debug_message("MAX receives this maxscore from MIN: " +  string(minimizedScore));
-	show_debug_message("Old maxScore in MAX was: " + string(maxScore));
+	//show_debug_message("MAX receives this maxscore from MIN: " +  string(minimizedScore));
+	//show_debug_message("Old maxScore in MAX was: " + string(maxScore));
 	if (minimizedScore > maxScore)  maxScore = minimizedScore;
-	show_debug_message(" MAX sets this new maxScore: (" +  string(maxScore));
+//	show_debug_message(" MAX sets this new maxScore: (" +  string(maxScore));
 }
 searchDepth += 1;
 ds_list_destroy(possibleMoves);
